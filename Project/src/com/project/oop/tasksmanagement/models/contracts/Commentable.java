@@ -1,4 +1,7 @@
 package com.project.oop.tasksmanagement.models.contracts;
 
-public interface Commentable {
+import java.util.List;
+
+public interface Commentable extends Comment {
+    List<Comment> getComments();
 }
