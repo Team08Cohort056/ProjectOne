@@ -3,14 +3,16 @@ package com.project.oop.tasksmanagement.models;
 import com.project.oop.tasksmanagement.models.contracts.Board;
 import com.project.oop.tasksmanagement.models.contracts.Team;
 import com.project.oop.tasksmanagement.utils.EventLog;
+import com.project.oop.tasksmanagement.utils.ValidationHelpers;
 
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TeamImpl implements Team {
-    private final int MIN_NAME_LENGTH = 5;
-    private final int MAX_NAME_LENGTH = 15;
+    private static final String NAME_LENGTH_ERR = "Team name must be between %d and %d symbols.";
+    private static final int MIN_NAME_LENGTH = 5;
+    private static final int MAX_NAME_LENGTH = 15;
     private String teamName;
     private final ArrayList<Member> members = new ArrayList<>();
 
@@ -57,10 +59,11 @@ public class TeamImpl implements Team {
     //adds a board to the team
 
     public void setTeamName(String teamName) {
-        //TODO
+        ValidationHelpers.validateStringLength(teamName,MIN_NAME_LENGTH,MAX_NAME_LENGTH,
+                NAME_LENGTH_ERR.formatted(MIN_NAME_LENGTH,MAX_NAME_LENGTH));
         this.teamName = teamName;
     }
-    //sets name of team
+    //sets name of team if arguments are valid.
 
     @Override
     public List<EventLog> getActivityHistory() {
