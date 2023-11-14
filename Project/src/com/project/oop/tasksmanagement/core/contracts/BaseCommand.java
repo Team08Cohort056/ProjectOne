@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface BaseCommand {
 
-    void execute(List<String> commands);
+    String execute(List<String> commands);
 }
