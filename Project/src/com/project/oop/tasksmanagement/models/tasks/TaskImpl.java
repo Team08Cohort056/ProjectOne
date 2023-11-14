@@ -1,6 +1,7 @@
-package com.project.oop.tasksmanagement.models;
+package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.models.contracts.Comment;
+import com.project.oop.tasksmanagement.models.contracts.Member;
 import com.project.oop.tasksmanagement.models.contracts.Task;
 import com.project.oop.tasksmanagement.models.enums.TaskType;
 import com.project.oop.tasksmanagement.utils.EventLog;
@@ -20,7 +21,7 @@ public abstract class TaskImpl implements Task {
     private int id;
     private String title;
     private String description;
-    private List<EventLog> activityHistory;
+    protected List<EventLog> activityHistory;
     private List<Comment> comments;
     private TaskType taskType;
 
@@ -50,33 +51,9 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
-    public TaskType getTaskType() {
-        return taskType=TaskType.BUG;
-    }
-
-    @Override
-    public List<EventLog> getActivityHistory() {
-        return new ArrayList<>(activityHistory);
-    }
-
-    @Override
-    public List<Comment> getComments() {
-        return new ArrayList<>(comments);
-    }
-
     @Override
     public int getId() {
         return id;
-    }
-
-    @Override
-    public void addComment(Comment comment) {
-        comments.add(comment);
-    }
-
-    @Override
-    public void removeComment(Comment comment) {
-        comments.remove(comment);
     }
 
     @Override
@@ -91,7 +68,30 @@ public abstract class TaskImpl implements Task {
         return this.description;
     }
 
-
+    public TaskType getTaskType() {
+        return taskType=TaskType.BUG;
+    }
     @Override
     public abstract String getStatus();
+
+    @Override
+    public List<EventLog> getActivityHistory() {
+        return new ArrayList<>(activityHistory);
+    }
+
+    @Override
+    public List<Comment> getComments() {
+        return new ArrayList<>(comments);
+    }
+
+    @Override
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
+    @Override
+    public void removeComment(Comment comment) {
+        comments.remove(comment);
+    }
+
 }

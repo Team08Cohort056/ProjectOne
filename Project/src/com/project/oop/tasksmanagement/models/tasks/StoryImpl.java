@@ -1,4 +1,4 @@
-package com.project.oop.tasksmanagement.models;
+package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.models.contracts.Commentable;
 import com.project.oop.tasksmanagement.models.contracts.Story;
