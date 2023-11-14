@@ -1,5 +1,5 @@
 package com.project.oop.tasksmanagement.utils;
 
-public class UtilsTests {
-// TODO
+public class TaskBaseConstants {
+    // TODO
 }

@@ -20,13 +20,14 @@ public class MemberImpl implements Member {
 
     private String name;
     private final List<Task> tasks;
-    private final List<EventLog> activityHistories;
+    private final List<EventLog> activityHistory;
 
     public MemberImpl(String name) {
         setName(name);
         validateUniqueName(name);
         tasks = new ArrayList<>();
-        activityHistories = new ArrayList<>();
+        activityHistory = new ArrayList<>();
+        activityHistory.add(new EventLog("Member %s created".formatted(name)));
     }
 
 
@@ -75,7 +76,7 @@ public class MemberImpl implements Member {
     // TODO
     @Override
     public List<EventLog> getActivityHistory() {
-        return new ArrayList<>(activityHistories);
+        return new ArrayList<>(activityHistory);
     }
 
     private void validateNameLength(String name) {
