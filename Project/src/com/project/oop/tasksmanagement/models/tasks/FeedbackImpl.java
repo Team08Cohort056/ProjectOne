@@ -9,10 +9,10 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     //will store the rating of the task.
     private FeedbackStatus feedbackStatus;
     //will store the status of the task.
-    public FeedbackImpl(int id, String title, String description,FeedbackStatus status, int rating) {
+    public FeedbackImpl(int id, String title, String description, int rating) {
         super(id, title, description);
         setRating(rating);
-        setFeedbackStatus(status);
+        feedbackStatus = FeedbackStatus.NEW;
 
     }
     //Constructor creates a task with the addition of a rating and a custom status being set.

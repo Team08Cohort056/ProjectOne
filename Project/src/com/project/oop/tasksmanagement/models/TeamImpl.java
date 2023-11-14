@@ -14,13 +14,16 @@ public class TeamImpl implements Team {
     private static final int MIN_NAME_LENGTH = 5;
     private static final int MAX_NAME_LENGTH = 15;
     private String teamName;
-    private final ArrayList<Member> members = new ArrayList<>();
+    private final ArrayList<Member> members;
 
-    private final ArrayList<Board> boards = new ArrayList<>();
-    private final List<EventLog> activityHistory = new ArrayList<>();
+    private final ArrayList<Board> boards;
+    private final List<EventLog> activityHistory;
 
     public TeamImpl(String teamName) {
         setTeamName(teamName);
+        members = new ArrayList<>();
+        boards = new ArrayList<>();
+        activityHistory = new ArrayList<>();
         activityHistory.add(new EventLog(String.format("Team %s created.", teamName)));
     }
 

@@ -21,13 +21,13 @@ public class StoryImpl extends TaskImpl implements Story, Commentable {
     private TaskType taskType;
     private final List<EventLog> activityHistory;
 
-    public StoryImpl(int id, String title, String description) {
+    public StoryImpl(int id, String title, String description,Priority priority, StorySize storySize) {
         super(id, title, description);
         activityHistory = new ArrayList<>();
-        this.storyStatus = getStoryStatus();
+        this.storyStatus = StoryStatus.NOT_DONE;
         this.taskType = getTaskType();
-        this.priority = getPriority();
-        this.storySize = getStorySize();
+        this.priority = priority;
+        this.storySize = storySize;
         this.activityHistory.add(new EventLog("Story with %d is created".formatted(id)));
     }
 
