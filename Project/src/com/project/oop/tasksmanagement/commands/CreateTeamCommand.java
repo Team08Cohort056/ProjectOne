@@ -10,6 +10,7 @@ import java.util.List;
 
 public class CreateTeamCommand implements BaseCommand {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
+    public static final String TEAM_CREATED = "Team %s created";
     private final TaskManagementRepository repository;
 
     public CreateTeamCommand(TaskManagementRepository taskManagementRepository) {
@@ -23,12 +24,16 @@ public class CreateTeamCommand implements BaseCommand {
     }
 
     private String createTeam(String teamName){
-        //Validation for duplicate needed.
-        //TODO
+        for (Team t : repository.getTeams()) {
+            if (teamName.equals(t.getName())){
+                throw new IllegalArgumentException();
+                //TODO: Proper exception message needed.
+            }
+        }
         Team team = new TeamImpl(teamName);
         repository.createTeam(teamName);
-
-        return String.format("Team %s created",teamName);
+        repository.addTeam(team);
+        return String.format(TEAM_CREATED,teamName);
     }
 
 }
