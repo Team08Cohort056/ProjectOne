@@ -23,6 +23,7 @@ public interface TaskManagementRepository {
     Feedback findFeedbackById();
 
     Story findStoryById();
+    Team findTeamByName(String team);
 
     void addTeam(Team team);
 

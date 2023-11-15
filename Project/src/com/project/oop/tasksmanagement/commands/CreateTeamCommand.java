@@ -1,6 +1,6 @@
-package com.project.oop.tasksmanagement.core.commands;
+package com.project.oop.tasksmanagement.commands;
 
-import com.project.oop.tasksmanagement.core.contracts.BaseCommand;
+import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.models.TeamImpl;
 import com.project.oop.tasksmanagement.models.contracts.Team;
@@ -10,10 +10,10 @@ import java.util.List;
 
 public class CreateTeamCommand implements BaseCommand {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    private TaskManagementRepository repository;
+    private final TaskManagementRepository repository;
 
-    public CreateTeamCommand(TaskManagementRepository repository) {
-        this.repository = repository;
+    public CreateTeamCommand(TaskManagementRepository taskManagementRepository) {
+        this.repository = taskManagementRepository;
     }
 
     @Override

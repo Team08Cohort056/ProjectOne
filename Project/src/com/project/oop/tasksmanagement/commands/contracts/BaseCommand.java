@@ -1,4 +1,4 @@
-package com.project.oop.tasksmanagement.core.contracts;
+package com.project.oop.tasksmanagement.commands.contracts;
 
 import java.util.List;
 
