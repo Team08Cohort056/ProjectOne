@@ -1,9 +1,6 @@
 package com.project.oop.tasksmanagement.core;
 
-import com.project.oop.tasksmanagement.commands.AddBoardCommand;
-import com.project.oop.tasksmanagement.commands.AddMemberToTeam;
-import com.project.oop.tasksmanagement.commands.CreateMemberCommand;
-import com.project.oop.tasksmanagement.commands.CreateTeamCommand;
+import com.project.oop.tasksmanagement.commands.*;
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.commands.enums.CommandType;
 import com.project.oop.tasksmanagement.core.contracts.CommandFactory;
@@ -40,7 +37,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case ASSIGNTASK:
                 //TODO
             case UNASSIGNTASK:
-                //TODO
+                return new UnAssignTaskCommand(taskManagementRepository);
             case SHOWALL:
                 //TODO
             case SHOWACTIVITY:
