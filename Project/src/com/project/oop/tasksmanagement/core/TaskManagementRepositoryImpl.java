@@ -3,7 +3,7 @@ package com.project.oop.tasksmanagement.core;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.core.exceptions.InvalidUserInputException;
 import com.project.oop.tasksmanagement.models.BoardImpl;
-import com.project.oop.tasksmanagement.models.MemberImpl;
+import com.project.oop.tasksmanagement.models.DeveloperImpl;
 import com.project.oop.tasksmanagement.models.TeamImpl;
 import com.project.oop.tasksmanagement.models.contracts.*;
 import com.project.oop.tasksmanagement.models.enums.Priority;
@@ -19,9 +19,13 @@ import java.util.List;
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     int nextId;
-    private List<Team> teams;
-    private List<Member> members;
-    public TaskManagementRepositoryImpl(){ nextId = 0; }
+    private final List<Team> teams;
+    private final List<Developer> developers;
+    public TaskManagementRepositoryImpl(){
+        this.teams = new ArrayList<>();
+        this.developers = new ArrayList<>();
+        nextId = 0;
+    }
 
     @Override
     public List<Team> getTeams() {
@@ -29,16 +33,16 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public List<Member> getMembers() {
-        return new ArrayList<>(members);
+    public List<Developer> getMembers() {
+        return new ArrayList<>(developers);
     }
 
     @Override
     public boolean memberExists(String memberName) {
         boolean exists = false;
 
-        for (Member member : getMembers()) {
-            if (member.getName().equalsIgnoreCase(memberName)) {
+        for (Developer developer : getMembers()) {
+            if (developer.getName().equalsIgnoreCase(memberName)) {
                 exists = true;
                 break;
             }
@@ -53,8 +57,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Member createMember(String memberName) {
-        return new MemberImpl(memberName);
+    public Developer createMember(String memberName) {
+        return new DeveloperImpl(memberName);
     }
 
     @Override
@@ -63,7 +67,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Bug createBug(String title, String description, Priority priority, Severity severity, Member assignee) {
+    public Bug createBug(String title, String description, Priority priority, Severity severity, Developer assignee) {
         return new BugImpl(++nextId, title, description, priority, severity, assignee);
     }
 
@@ -113,10 +117,10 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Member findMemberByName(String memberName) {
-        for (Member member : getMembers()) {
-            if (member.getName().equals(memberName)) {
-                return member;
+    public Developer findMemberByName(String memberName) {
+        for (Developer developer : getMembers()) {
+            if (developer.getName().equals(memberName)) {
+                return developer;
             }
         }
 
@@ -130,8 +134,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public void addMember(Member member) {
-        members.add(member);
+    public void addMember(Developer developer) {
+        developers.add(developer);
     }
 
 }

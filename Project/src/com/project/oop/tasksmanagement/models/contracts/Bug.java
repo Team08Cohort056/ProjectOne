@@ -12,7 +12,7 @@ public interface Bug extends Task{
 
     Severity getSeverity();
 
-    Member getAssignee();
+    Developer getAssignee();
 
 
 }

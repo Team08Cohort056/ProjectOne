@@ -1,13 +1,12 @@
 package com.project.oop.tasksmanagement.models.contracts;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 public interface Team extends ActivityHistory{
     String getName();
-    List<Member> getMembers();
+    List<Developer> getDevelopers();
     List<Board> getBoards();
-    void addMember(Member member);
+    void addDeveloper(Developer developer);
 
     void addBoard(Board board);
 

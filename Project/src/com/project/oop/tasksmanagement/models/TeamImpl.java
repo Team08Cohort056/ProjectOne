@@ -1,11 +1,11 @@
 package com.project.oop.tasksmanagement.models;
 
 import com.project.oop.tasksmanagement.models.contracts.Board;
+import com.project.oop.tasksmanagement.models.contracts.Developer;
 import com.project.oop.tasksmanagement.models.contracts.Team;
 import com.project.oop.tasksmanagement.utils.EventLog;
 import com.project.oop.tasksmanagement.utils.ValidationHelpers;
 
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +14,14 @@ public class TeamImpl implements Team {
     private static final int MIN_NAME_LENGTH = 5;
     private static final int MAX_NAME_LENGTH = 15;
     private String teamName;
-    private final ArrayList<Member> members;
+    private final ArrayList<Developer> developers;
 
     private final ArrayList<Board> boards;
     private final List<EventLog> activityHistory;
 
     public TeamImpl(String teamName) {
         setTeamName(teamName);
-        members = new ArrayList<>();
+        developers = new ArrayList<>();
         boards = new ArrayList<>();
         activityHistory = new ArrayList<>();
         activityHistory.add(new EventLog(String.format("Team %s created.", teamName)));
@@ -35,8 +35,8 @@ public class TeamImpl implements Team {
     //returns team name
 
     @Override
-    public List<Member> getMembers() {
-        return new ArrayList<>(members);
+    public List<Developer> getDevelopers() {
+        return new ArrayList<>(developers);
     }
     //returns copy of all members in the team
 
@@ -48,9 +48,9 @@ public class TeamImpl implements Team {
 
 
     @Override
-    public void addMember(Member member) {
-        members.add(member);
-        activityHistory.add(new EventLog(String.format("Member %s added to team.", member.getName())));
+    public void addDeveloper(Developer developer) {
+        developers.add(developer);
+        activityHistory.add(new EventLog(String.format("Member %s added to team.", developer.getName())));
     }
     //adds a member to the team and logs it into eventHistory
 

@@ -1,7 +1,7 @@
 package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.models.contracts.Bug;
-import com.project.oop.tasksmanagement.models.contracts.Member;
+import com.project.oop.tasksmanagement.models.contracts.Developer;
 import com.project.oop.tasksmanagement.models.enums.BugStatus;
 import com.project.oop.tasksmanagement.models.enums.Priority;
 import com.project.oop.tasksmanagement.models.enums.Severity;
@@ -16,10 +16,10 @@ public class BugImpl extends TaskImpl implements Bug {
     private Priority priority;
     private Severity severity;
     private BugStatus status;
-    private Member assignee;
+    private Developer assignee;
 
 
-    public BugImpl(int id, String title, String description, Priority priority,Severity severity, Member assignee) {
+    public BugImpl(int id, String title, String description, Priority priority,Severity severity, Developer assignee) {
         super(id, title, description);
         setPriority(priority);
         setSeverity(severity);
@@ -52,11 +52,11 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
-    public Member getAssignee() {
+    public Developer getAssignee() {
         return this.assignee;
     }
 
-    public void setAssignee(Member assignee) {
+    public void setAssignee(Developer assignee) {
         this.assignee = assignee;
     }
 

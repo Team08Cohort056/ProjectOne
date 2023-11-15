@@ -1,7 +1,6 @@
 package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.models.contracts.Comment;
-import com.project.oop.tasksmanagement.models.contracts.Member;
 import com.project.oop.tasksmanagement.models.contracts.Task;
 import com.project.oop.tasksmanagement.models.enums.TaskType;
 import com.project.oop.tasksmanagement.utils.EventLog;

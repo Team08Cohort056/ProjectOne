@@ -1,7 +1,7 @@
 package com.project.oop.tasksmanagement.utils;
 
 public class    ParsingHelpers {
-    public static final String NO_SUCH_ENUM = "There is no %s in %ss.";
+    public static final String NO_SUCH_ENUM = "There is no such command %s in %ss.";
 
     public static int tryParseInt(String valueToParse, String errorMessage) {
     try {

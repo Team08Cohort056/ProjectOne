@@ -2,7 +2,7 @@ package com.project.oop.tasksmanagement.commands;
 
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
-import com.project.oop.tasksmanagement.models.contracts.Member;
+import com.project.oop.tasksmanagement.models.contracts.Developer;
 import com.project.oop.tasksmanagement.models.contracts.Team;
 import com.project.oop.tasksmanagement.utils.ValidationHelpers;
 
@@ -28,8 +28,8 @@ public class AddMemberToTeam implements BaseCommand {
 
 
         Team team = taskManagementRepository.findTeamByName(teamName);
-        Member member = taskManagementRepository.findMemberByName(memberName);
-        // team.addMember(member);
+        Developer developer = taskManagementRepository.findMemberByName(memberName);
+        team.addDeveloper(developer);
 
         return String.format(MEMBER_ADDED_TO_TEAM, memberName, teamName);
     }

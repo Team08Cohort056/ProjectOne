@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface TaskManagementRepository {
     List<Team> getTeams();
-    List<Member> getMembers();
+    List<Developer> getMembers();
     Team createTeam(String teamName);
     boolean memberExists(String memberName);
-    public Member findMemberByName(String memberName);
-    Member createMember(String memberName);
+    public Developer findMemberByName(String memberName);
+    Developer createMember(String memberName);
     Board createBoard(String boardName);
 
-    Bug createBug(String title, String description, Priority priority, Severity severity, Member assignee);
+    Bug createBug(String title, String description, Priority priority, Severity severity, Developer assignee);
 
     Feedback createFeedback(String title, String description, int rating);
 
@@ -29,6 +29,6 @@ public interface TaskManagementRepository {
 
     void addTeam(Team team);
 
-    void addMember(Member member);
+    void addMember(Developer developer);
 
 }

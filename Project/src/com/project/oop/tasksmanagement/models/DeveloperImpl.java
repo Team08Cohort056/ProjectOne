@@ -9,7 +9,7 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public class MemberImpl implements Member {
+public class DeveloperImpl implements Developer {
     private final static int MIN_NAME_LEN = 5;
     private final static int MAX_NAME_LEN = 15;
     private static final String INVALID_NAME_LEN = format(
@@ -21,7 +21,7 @@ public class MemberImpl implements Member {
     private final List<Task> tasks;
     private final List<EventLog> activityHistory;
 
-    public MemberImpl(String name) {
+    public DeveloperImpl(String name) {
         setName(name);
         tasks = new ArrayList<>();
         activityHistory = new ArrayList<>();

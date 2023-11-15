@@ -1,10 +1,12 @@
 package com.project.oop.tasksmanagement;
 
+import com.project.oop.tasksmanagement.core.TaskManagementEngineImpl;
+
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Hello world!");
-        System.out.println("Hello team! It is Saturday!");
+        TaskManagementEngineImpl managementEngine = new TaskManagementEngineImpl();
+        managementEngine.start();
     }
 
 }

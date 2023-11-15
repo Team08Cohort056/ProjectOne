@@ -3,7 +3,7 @@ package com.project.oop.tasksmanagement.commands;
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.core.exceptions.InvalidUserInputException;
-import com.project.oop.tasksmanagement.models.MemberImpl;
+import com.project.oop.tasksmanagement.models.DeveloperImpl;
 import com.project.oop.tasksmanagement.utils.ValidationHelpers;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class CreateMemberCommand implements BaseCommand {
         if (taskManagementRepository.memberExists(name)) {
             throw new InvalidUserInputException(String.format(USERNAME_ALREADY_EXIST, name));
         }
-        taskManagementRepository.addMember(new MemberImpl(name));
+        taskManagementRepository.addMember(new DeveloperImpl(name));
         return String.format(MEMBER_CREATED_SUCCESS, name);
     }
 }
