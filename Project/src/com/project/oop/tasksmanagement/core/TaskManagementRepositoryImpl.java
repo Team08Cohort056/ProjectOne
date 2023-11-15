@@ -21,10 +21,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     int nextId;
     private List<Team> teams;
     private List<Member> members;
-
-    public TaskManagementRepositoryImpl() {
-        nextId = 0;
-    }
+    public TaskManagementRepositoryImpl(){ nextId = 0; }
 
     @Override
     public List<Team> getTeams() {
@@ -96,16 +93,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         return null;
     }
 
-    @Override
-    public Team findTeamByName(String teamName) {
-        for (Team team : getTeams()) {
-            if (team.getName().equals(teamName)) {
-                return team;
-            }
-        }
-        throw new IllegalArgumentException(String.format("No team with name %s", teamName));
-    }
-
     private <T extends Identifiable> T findElementById(List<T> elements, int id) {
         for (T element : elements) {
             if (element.getId() == id) {
@@ -116,9 +103,13 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public void addTeam(Team team) {
-        //add validation
-        teams.add(team);
+    public Team findTeamByName(String teamName) {
+        for (Team team : getTeams()) {
+            if (team.getName().equals(teamName)) {
+                return team;
+            }
+        }
+        throw new IllegalArgumentException(String.format("No team with name %s", teamName));
     }
 
     @Override
@@ -130,6 +121,12 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         }
 
         throw new InvalidUserInputException(String.format("No record for this member name %s", memberName));
+    }
+
+    @Override
+    public void addTeam(Team team) {
+        //add validation
+        teams.add(team);
     }
 
     @Override
