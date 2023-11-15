@@ -16,7 +16,6 @@ public class MemberImpl implements Member {
             "Name length must be between %d and %d!",
             MIN_NAME_LEN,
             MAX_NAME_LEN);
-    private final static String USERNAME_ALREADY_EXIST = "Username is already taken. Please choose another username!";
 
     private String name;
     private final List<Task> tasks;
@@ -24,7 +23,6 @@ public class MemberImpl implements Member {
 
     public MemberImpl(String name) {
         setName(name);
-        validateUniqueName(name);
         tasks = new ArrayList<>();
         activityHistory = new ArrayList<>();
         activityHistory.add(new EventLog("Member %s created".formatted(name)));
@@ -33,11 +31,11 @@ public class MemberImpl implements Member {
 
     @Override
     public String getName() {
-        validateNameLength(name);
-        return null;
+        return name;
     }
 
     private void setName(String name) {
+        validateNameLength(name);
         this.name = name;
     }
 
@@ -81,9 +79,5 @@ public class MemberImpl implements Member {
 
     private void validateNameLength(String name) {
         ValidationHelpers.validateStringLength(name, MIN_NAME_LEN, MAX_NAME_LEN, INVALID_NAME_LEN);
-    }
-
-    private void validateUniqueName(String name) {
-        // TODO
     }
 }

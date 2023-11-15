@@ -9,6 +9,8 @@ public interface TaskManagementRepository {
     List<Team> getTeams();
     List<Member> getMembers();
     Team createTeam(String teamName);
+    boolean memberExists(String memberName);
+    public Member findMemberByName(String memberName);
     Member createMember(String memberName);
     Board createBoard(String boardName);
 
