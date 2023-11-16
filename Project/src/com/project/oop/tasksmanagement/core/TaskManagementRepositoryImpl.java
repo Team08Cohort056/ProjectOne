@@ -3,6 +3,7 @@ package com.project.oop.tasksmanagement.core;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.core.exceptions.InvalidUserInputException;
 import com.project.oop.tasksmanagement.models.BoardImpl;
+import com.project.oop.tasksmanagement.models.CommentImpl;
 import com.project.oop.tasksmanagement.models.DeveloperImpl;
 import com.project.oop.tasksmanagement.models.TeamImpl;
 import com.project.oop.tasksmanagement.models.contracts.*;
@@ -69,6 +70,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     @Override
     public Board createBoard(String boardName) {
         return new BoardImpl(boardName);
+    }
+
+    @Override
+    public Comment createComment(String content, String author) {
+        return new CommentImpl(content, author);
     }
 
     @Override

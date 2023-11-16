@@ -27,6 +27,11 @@ public class CommentImpl implements Comment {
     }
 
     @Override
+    public String commentsAsString() {
+        return String.format("\n%s\nDeveloper: %s\n", content, author);
+    }
+
+    @Override
     public String getContent() {
         return this.content;
     }

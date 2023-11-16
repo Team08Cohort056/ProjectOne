@@ -21,9 +21,9 @@ public class CommandFactoryImpl implements CommandFactory {
             case ADDBOARD:
                 return new AddBoardCommand(taskManagementRepository);
             case ADDCOMMENT:
-                //TODO
+                return new AddCommentCommand(taskManagementRepository);
             case REMOVECOMMENT:
-                //TODO
+                return new RemoveCommentCommand(taskManagementRepository);
             case ADDMEMBERTOTEAM:
                 return new AddMemberToTeam(taskManagementRepository);
             case CREATEMEMBER:

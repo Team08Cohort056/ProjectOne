@@ -13,6 +13,7 @@ public interface TaskManagementRepository {
     public Developer findMemberByName(String memberName);
     Developer createMember(String memberName);
     Board createBoard(String boardName);
+    Comment createComment(String content, String author);
     Board findBoardByName(String boardName);
 
     Bug createBug(String title, String description, Priority priority, Severity severity, Developer assignee);

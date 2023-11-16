@@ -5,4 +5,6 @@ public interface Comment {
 
     String getAuthor();
 
+    public String commentsAsString();
+
 }
