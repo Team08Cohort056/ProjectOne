@@ -30,8 +30,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new CreateMemberCommand(taskManagementRepository);
             case CREATETEAM:
                 return new CreateTeamCommand(taskManagementRepository);
-            case CREATETASK:
-                //TODO
+            case ADDTASK:
+                return new AddTaskCommand(taskManagementRepository);
             case CHANGETASK:
                 //TODO
             case ASSIGNTASK:

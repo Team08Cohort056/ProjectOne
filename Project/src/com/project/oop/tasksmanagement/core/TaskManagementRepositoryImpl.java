@@ -23,12 +23,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public static final String NO_DEVELOPERS_FOUND_HEADER = "No developers found.";
     public static final String NO_BOARDS_FOUND_HEADER = "No boards found.";
     int nextId;
-    private final List<Team> teams;
-    private final List<Developer> developers;
+    private final List<Team> teams = new ArrayList<>();
+    private final List<Developer> developers = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
+    private final List<Bug> bugs = new ArrayList<>();
+    private final List<Story> stories = new ArrayList<>();
+    private final List<Feedback> feedbacks = new ArrayList<>();
 
     public TaskManagementRepositoryImpl() {
-        this.teams = new ArrayList<>();
-        this.developers = new ArrayList<>();
         nextId = 0;
     }
 
@@ -42,6 +44,19 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public List<Developer> getMembers() {
         return new ArrayList<>(developers);
     }
+
+    @Override
+    public List<Task> getTasks() {return new ArrayList<>(tasks);
+    }
+
+    @Override
+    public List<Bug> getBugs() {return new ArrayList<>(bugs);}
+
+    @Override
+    public List<Story> getStories() {return new ArrayList<>(stories);}
+
+    @Override
+    public List<Feedback> getFeedbacks() {return new ArrayList<>(feedbacks);}
 
     @Override
     public boolean memberExists(String memberName) {
@@ -92,19 +107,25 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Bug createBug(String title, String description, Priority priority, Severity severity, Developer assignee) {
-        return new BugImpl(++nextId, title, description, priority, severity, assignee);
+    public Bug createBug(String title, String description, Severity severity) {
+        Bug bug = new BugImpl(++nextId, title, description, severity);
+        bugs.add(bug);
+        return bug;
     }
 
+
+    @Override
+    public Story createStory(String title, String description, StorySize storySize) {
+       Story story = new StoryImpl(++nextId, title, description, storySize);
+       stories.add(story);
+       return story;
+    }
 
     @Override
     public Feedback createFeedback(String title, String description, int rating) {
-        return new FeedbackImpl(++nextId, title, description, rating);
-    }
-
-    @Override
-    public Story createStory(String title, String description, Priority priority, StorySize storySize) {
-        return new StoryImpl(++nextId, title, description, priority, storySize);
+        Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
+        feedbacks.add(feedback);
+        return feedback;
     }
 
     @Override
@@ -160,6 +181,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public void addMember(Developer developer) {
+        //add validation
         developers.add(developer);
     }
 

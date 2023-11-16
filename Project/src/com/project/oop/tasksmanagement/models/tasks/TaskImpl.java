@@ -21,7 +21,7 @@ public abstract class TaskImpl implements Task {
     private String title;
     private String description;
     protected List<EventLog> activityHistory;
-    private List<Comment> comments;
+    private final List<Comment> comments;
     private TaskType taskType;
 
 

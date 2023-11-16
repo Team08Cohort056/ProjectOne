@@ -8,6 +8,10 @@ import java.util.List;
 public interface TaskManagementRepository {
     List<Team> getTeams();
     List<Developer> getMembers();
+    List<Task> getTasks();
+    List<Bug> getBugs();
+    List<Story> getStories();
+    List<Feedback> getFeedbacks();
     Team createTeam(String teamName);
     boolean memberExists(String memberName);
     public Developer findMemberByName(String memberName);
@@ -16,11 +20,11 @@ public interface TaskManagementRepository {
     Comment createComment(String content, String author);
     Board findBoardByName(String boardName);
 
-    Bug createBug(String title, String description, Priority priority, Severity severity, Developer assignee);
+    Bug createBug(String title, String description, Severity severity);
 
     Feedback createFeedback(String title, String description, int rating);
 
-    Story createStory(String title, String description, Priority priority, StorySize storySize);
+    Story createStory(String title, String description, StorySize storySize);
 
     Bug findBugById();
 

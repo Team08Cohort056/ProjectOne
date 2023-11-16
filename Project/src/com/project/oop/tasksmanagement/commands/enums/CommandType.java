@@ -7,7 +7,7 @@ public enum CommandType {
     ADDMEMBERTOTEAM,
     CREATEMEMBER,
     CREATETEAM,
-    CREATETASK,
+    ADDTASK,
     CHANGETASK,
     ASSIGNTASK,
     UNASSIGNTASK,

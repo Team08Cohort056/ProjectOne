@@ -16,30 +16,16 @@ public class BugImpl extends TaskImpl implements Bug {
     private Priority priority;
     private Severity severity;
     private BugStatus status;
-    private Developer assignee;
+    private String assignee;
 
 
-    public BugImpl(int id, String title, String description, Priority priority,Severity severity, Developer assignee) {
+    public BugImpl(int id, String title, String description, Severity severity) {
         super(id, title, description);
-        setPriority(priority);
-        setSeverity(severity);
+        this.severity = severity;
+        priority = Priority.LOW;
+        assignee = "Not assigned";
         status = BugStatus.ACTIVE;
-        setAssignee(assignee);
         stepsToReproduce = new ArrayList<>();
-    }
-
-    @Override
-    public List<String> getStepsToReproduce() {
-        return new ArrayList<>(stepsToReproduce);
-    }
-
-    @Override
-    public Priority getPriority() {
-        return this.priority;
-    }
-
-    private void setPriority(Priority priority) {
-        this.priority = priority;
     }
 
     @Override
@@ -47,17 +33,14 @@ public class BugImpl extends TaskImpl implements Bug {
         return this.severity;
     }
 
-    private void setSeverity(Severity severity) {
-        this.severity = severity;
+    @Override
+    public Priority getPriority() {
+        return this.priority;
     }
 
     @Override
-    public Developer getAssignee() {
+    public String getAssignee() {
         return this.assignee;
-    }
-
-    public void setAssignee(Developer assignee) {
-        this.assignee = assignee;
     }
 
     @Override
@@ -65,25 +48,35 @@ public class BugImpl extends TaskImpl implements Bug {
         return this.status.toString();
     }
 
-    private void setStatus(BugStatus status) {
-        this.status = status;
+    @Override
+    public List<String> getStepsToReproduce() {
+        return new ArrayList<>(stepsToReproduce);
     }
+
 
     public void addStepToReproduce(String step){
         stepsToReproduce.add(step);
         activityHistory.add(new EventLog("Step %d to reproduce the bug added".formatted(stepsToReproduce.size())));
     }
     public void changeBugPriority(Priority priority){
-        activityHistory.add(new EventLog("The priority of item with ID %d switched from %s to %s.".formatted(getId(),this.priority,priority)));
+        activityHistory.add(new EventLog("The priority of the bug with ID %d switched from %s to %s.".formatted(getId(),this.priority,priority)));
         this.priority = priority;
     }
     public void changeBugSeverity(Severity severity){
-        activityHistory.add(new EventLog("The severity of item with ID %d switched from %s to %s.".formatted(getId(),this.severity,severity)));
+        activityHistory.add(new EventLog("The severity of the bug with ID %d switched from %s to %s.".formatted(getId(),this.severity,severity)));
         this.severity = severity;
     }
     public void changeBugStatus(BugStatus status){
-        activityHistory.add(new EventLog("The status of item with ID %d switched from %s to %s.".formatted(getId(),this.status,status)));
+        activityHistory.add(new EventLog("The status of the bug with ID %d switched from %s to %s.".formatted(getId(),this.status,status)));
         this.status = status;
 
+    }
+    public void assignBugTo(Developer developer){
+        activityHistory.add(new EventLog("The bug with ID %d has been assigned to %s".formatted(getId(),developer.getName())));
+        this.assignee = developer.getName();
+    }
+    public void unAssignBug(){
+        activityHistory.add(new EventLog("The bug with ID %d has been unassigned".formatted(getId())));
+        this.assignee = "Not assigned";
     }
 }
