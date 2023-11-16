@@ -9,6 +9,8 @@ public interface Team extends ActivityHistory{
     void addDeveloper(Developer developer);
 
     void addBoard(Board board);
+    String printTeamDevelopers();
+    String printTeamBoards();
 
 
     /* OPTIONAL */

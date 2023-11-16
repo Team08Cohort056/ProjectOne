@@ -38,6 +38,10 @@ public class CommandFactoryImpl implements CommandFactory {
                 //TODO
             case UNASSIGNTASK:
                 return new UnAssignTaskCommand(taskManagementRepository);
+            case SHOWTEAMDEVELOPERS:
+                return new ShowTeamDevelopers(taskManagementRepository);
+            case SHOWTEAMBOARDS:
+                return new ShowTeamBoards(taskManagementRepository);
             case SHOWALL:
                 return new ShowAllCommand(taskManagementRepository);
             case SHOWACTIVITY:

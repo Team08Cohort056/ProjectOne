@@ -13,6 +13,8 @@ public class TeamImpl implements Team {
     private static final String NAME_LENGTH_ERR = "Team name must be between %d and %d symbols.";
     private static final int MIN_NAME_LENGTH = 5;
     private static final int MAX_NAME_LENGTH = 15;
+    public static final String NO_DEVELOPERS_FOUND_IN_TEAM_HEADER = "No developers found in team %s.";
+    public static final String NO_BOARDS_FOUND_IN_TEAM_HEADER = "No boards found in team %s.";
     private String teamName;
     private final ArrayList<Developer> developers;
 
@@ -73,6 +75,32 @@ public class TeamImpl implements Team {
         return new ArrayList<>(activityHistory);
     }
     //returns a copy of activityHistory
+    public String printTeamDevelopers() {
+        StringBuilder result = new StringBuilder();
+        int counter = 1;
+        if (developers.isEmpty()) {
+            return result.append(String.format(NO_DEVELOPERS_FOUND_IN_TEAM_HEADER,getName())).toString();
+        }
+        for (Developer developer : developers) {
+            result.append(counter).append(".").append(developer.getName()).append(System.lineSeparator());
+            counter++;
+        }
+        return result.toString();
+    }
+    //returns a customized list of all developers.
 
-
+    @Override
+    public String printTeamBoards() {
+        StringBuilder result = new StringBuilder();
+        int counter = 1;
+        if (boards.isEmpty()) {
+            return result.append(String.format(NO_BOARDS_FOUND_IN_TEAM_HEADER,getName())).toString();
+        }
+        for (Board board : boards) {
+            result.append(counter).append(".").append(board.getName()).append(System.lineSeparator());
+            counter++;
+        }
+        return result.toString();
+    }
+    //returns a customized list of all boards.
 }
