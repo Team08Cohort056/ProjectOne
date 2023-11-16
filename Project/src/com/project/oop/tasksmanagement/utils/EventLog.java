@@ -21,5 +21,9 @@ public final class EventLog {
         String date = timestamp.format(formatter);
         return "[%s] %s".formatted(date,getDescription());
     }
+    @Override
+    public String toString(){
+        return viewInfo()+System.lineSeparator();
+    }
 
 }

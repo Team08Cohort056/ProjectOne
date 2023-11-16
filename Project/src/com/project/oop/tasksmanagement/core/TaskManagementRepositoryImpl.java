@@ -72,6 +72,20 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
+    public Board findBoardByName(String boardName) {
+        for (Team team : teams) {
+            for (int i = 0; i < team.getBoards().size(); i++) {
+                if (boardName.equals(team.getBoards().get(i).getName())){
+                    return team.getBoards().get(i);
+                }
+
+            }
+        }
+        throw new IllegalArgumentException(String.format("No board with name %s", boardName));
+
+    }
+
+    @Override
     public Bug createBug(String title, String description, Priority priority, Severity severity, Developer assignee) {
         return new BugImpl(++nextId, title, description, priority, severity, assignee);
     }

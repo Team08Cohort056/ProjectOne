@@ -9,7 +9,7 @@ import java.util.List;
 public class ShowAllCommand implements BaseCommand {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    public static final String INVALID_COMMAND = "Invalid command.";
+    public static final String INVALID_COMMAND = "Invalid Type.";
 
     private final TaskManagementRepository repository;
 
