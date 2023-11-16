@@ -31,4 +31,7 @@ public interface TaskManagementRepository {
 
     void addMember(Developer developer);
 
+    String printTeams();
+    String printDevelopers();
+    String printBoards();
 }

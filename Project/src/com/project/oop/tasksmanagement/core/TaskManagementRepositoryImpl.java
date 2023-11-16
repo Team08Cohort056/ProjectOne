@@ -18,10 +18,14 @@ import java.util.List;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
+    public static final String NO_TEAMS_FOUND_HEADER = "No teams found.";
+    public static final String NO_DEVELOPERS_FOUND_HEADER = "No developers found.";
+    public static final String NO_BOARDS_FOUND_HEADER = "No boards found.";
     int nextId;
     private final List<Team> teams;
     private final List<Developer> developers;
-    public TaskManagementRepositoryImpl(){
+
+    public TaskManagementRepositoryImpl() {
         this.teams = new ArrayList<>();
         this.developers = new ArrayList<>();
         nextId = 0;
@@ -31,6 +35,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public List<Team> getTeams() {
         return new ArrayList<>(teams);
     }
+
 
     @Override
     public List<Developer> getMembers() {
@@ -137,5 +142,64 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public void addMember(Developer developer) {
         developers.add(developer);
     }
+
+    @Override
+    public String printTeams() {
+        StringBuilder result = new StringBuilder();
+        int counter = 0;
+        if (teams.isEmpty()) {
+            result.append(NO_TEAMS_FOUND_HEADER);
+            return result.toString();
+        }
+        for (Team team : teams) {
+            counter++;
+            result.append(counter).append(".").append(team.getName()).append(System.lineSeparator());
+        }
+        result.deleteCharAt(result.length() - 2);
+        return result.toString();
+    }
+
+    @Override
+    public String printDevelopers() {
+        StringBuilder result = new StringBuilder();
+        int counter = 1;
+        if (developers.isEmpty()) {
+            return result.append(NO_DEVELOPERS_FOUND_HEADER).toString();
+        }
+        for (Developer developer : developers) {
+            result.append(counter).append(".").append(developer.getName()).append(System.lineSeparator());
+            counter++;
+        }
+        return result.toString();
+    }
+
+    @Override
+    public String printBoards() {
+        StringBuilder result = new StringBuilder();
+        int counter = 1;
+        boolean hasBoard = false;
+        if (teams.isEmpty()) {
+            return result.append(NO_BOARDS_FOUND_HEADER).toString();
+        }
+        for (Team team : teams) {
+            if (!team.getBoards().isEmpty()) {
+                hasBoard = true;
+                break;
+            }
+        }
+        if (!hasBoard) {
+            return result.append(NO_BOARDS_FOUND_HEADER).toString();
+        }
+        for (Team team : teams) {
+            if (!team.getBoards().isEmpty()) {
+                for (Board board : team.getBoards()) {
+                    result.append(counter).append(".").append(board.getName()).append(System.lineSeparator());
+                    counter++;
+                }
+            }
+        }
+        return result.toString();
+    }
+
 
 }
