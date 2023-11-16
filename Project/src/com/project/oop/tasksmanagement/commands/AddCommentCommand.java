@@ -28,15 +28,16 @@ public class AddCommentCommand implements BaseCommand {
         String content = commands.get(0);
         String author = commands.get(1);
         int taskId = ParsingHelpers.tryParseInt(commands.get(2), INVALID_INPUT_MESSAGE) - 1;
-        return addComment(content, taskId, author);
+        return addComment(author, content, taskId);
     }
 
-    private String addComment(String content, int taskId, String author) {
+    private String addComment(String author, String content, int taskId) {
         Developer developer = taskManagementRepository.findMemberByName(author);
 
-        ValidationHelpers.validateIntRange(taskId, 0, developer.getTasks().size() - 1, TASK_DOES_NOT_EXIST);
+        ValidationHelpers.validateIntRange(taskId, 0, taskManagementRepository.getTasks().size() - 1, TASK_DOES_NOT_EXIST);
 
-        Task task = developer.getTasks().get(taskId);
+//        Task task = developer.getTasks().get(taskId);
+        Task task = taskManagementRepository.getTasks().get(taskId);
 
         Comment comment = taskManagementRepository.createComment(content, String.valueOf(developer));
 

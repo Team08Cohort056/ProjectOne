@@ -29,9 +29,10 @@ public class UnAssignTaskCommand implements BaseCommand {
     }
     public String unAssignTask(String developerName, int taskId){
         Developer developer = repository.findMemberByName(developerName);
-        ValidationHelpers.validateIntRange(taskId,0,developer.getTasks().size()-1, NO_TASK_ON_THIS_INDEX_ERR);
-        Task task = developer.getTasks().get(taskId);
+        ValidationHelpers.validateIntRange(taskId,1,developer.getTasks().size(), NO_TASK_ON_THIS_INDEX_ERR);
+        Task task = developer.getTasks().get(taskId-1);
         repository.findMemberByName(developerName).removeTask(task);
+        //TODO: Assignee must be set to "not assigned"
         return String.format(TASK_REMOVED_SUCCESSFULLY,taskId,developerName);
     }
 

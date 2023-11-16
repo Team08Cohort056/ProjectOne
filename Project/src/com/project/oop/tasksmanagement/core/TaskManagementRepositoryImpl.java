@@ -110,6 +110,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Bug createBug(String title, String description, Severity severity) {
         Bug bug = new BugImpl(++nextId, title, description, severity);
         bugs.add(bug);
+        tasks.add(bug);
         return bug;
     }
 
@@ -118,6 +119,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Story createStory(String title, String description, StorySize storySize) {
        Story story = new StoryImpl(++nextId, title, description, storySize);
        stories.add(story);
+       tasks.add(story);
        return story;
     }
 
@@ -125,6 +127,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Feedback createFeedback(String title, String description, int rating) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
         feedbacks.add(feedback);
+        tasks.add(feedback);
         return feedback;
     }
 
