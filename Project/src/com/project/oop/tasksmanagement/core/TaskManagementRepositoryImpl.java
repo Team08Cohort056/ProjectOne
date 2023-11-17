@@ -7,7 +7,6 @@ import com.project.oop.tasksmanagement.models.CommentImpl;
 import com.project.oop.tasksmanagement.models.DeveloperImpl;
 import com.project.oop.tasksmanagement.models.TeamImpl;
 import com.project.oop.tasksmanagement.models.contracts.*;
-import com.project.oop.tasksmanagement.models.enums.Priority;
 import com.project.oop.tasksmanagement.models.enums.Severity;
 import com.project.oop.tasksmanagement.models.enums.StorySize;
 import com.project.oop.tasksmanagement.models.tasks.BugImpl;
@@ -25,7 +24,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     int nextId;
     private final List<Team> teams = new ArrayList<>();
     private final List<Developer> developers = new ArrayList<>();
-    private final List<Task> tasks = new ArrayList<>();
+    private final List<Task> allTasks = new ArrayList<>();
     private final List<Bug> bugs = new ArrayList<>();
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
@@ -46,7 +45,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public List<Task> getTasks() {return new ArrayList<>(tasks);
+    public List<Task> getAllTasks() {return new ArrayList<>(allTasks);
     }
 
     @Override
@@ -110,7 +109,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Bug createBug(String title, String description, Severity severity) {
         Bug bug = new BugImpl(++nextId, title, description, severity);
         bugs.add(bug);
-        tasks.add(bug);
         return bug;
     }
 
@@ -119,7 +117,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Story createStory(String title, String description, StorySize storySize) {
        Story story = new StoryImpl(++nextId, title, description, storySize);
        stories.add(story);
-       tasks.add(story);
        return story;
     }
 
@@ -127,32 +124,24 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Feedback createFeedback(String title, String description, int rating) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
         feedbacks.add(feedback);
-        tasks.add(feedback);
         return feedback;
     }
 
-    @Override
-    public Bug findBugById() {
-        return null;
+    public Task findTaskById(int id){
+        for (Task task: allTasks) {
+            if (task.getId() == id){
+                return task;
+            }
+        }
+        throw new IllegalArgumentException(String.format("No task with ID %d", id));
     }
-
-    @Override
-    public Feedback findFeedbackById() {
-        return null;
-    }
-
-    @Override
-    public Story findStoryById() {
-        return null;
-    }
-
-    private <T extends Identifiable> T findElementById(List<T> elements, int id) {
+    public  <T extends Identifiable> T findElementById(List<T> elements, int id) {
         for (T element : elements) {
             if (element.getId() == id) {
                 return element;
             }
         }
-        throw new IllegalArgumentException(String.format("No record with ID %d", id));
+        throw new IllegalArgumentException(String.format("No task with ID %d", id));
     }
 
     @Override
@@ -178,14 +167,16 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public void addTeam(Team team) {
-        //add validation
         teams.add(team);
     }
 
     @Override
     public void addMember(Developer developer) {
-        //add validation
         developers.add(developer);
+    }
+
+    public void addTask(Task task){
+        allTasks.add(task);
     }
 
     @Override

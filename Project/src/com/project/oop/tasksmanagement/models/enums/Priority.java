@@ -12,7 +12,7 @@ public enum Priority {
             case LOW:
                 return "Low";
             default:
-                throw new UnsupportedOperationException("Can't convert Priority.");
+                throw new UnsupportedOperationException("Priority can be Low, Medium or High.");
 
         }
     }

@@ -11,12 +11,12 @@ import java.util.List;
 
 public abstract class TaskImpl implements Task {
 
-    public static final int MIN_TITLE_LENGTH = 10;
-    public static final int MAX_TITLE_LENGTH = 100;
-    public static final String TITLE_LENGTH_ERR = "Title should be between %d and %d symbols.";
-    public static final int MIN_DESC_LENGTH = 10;
-    public static final int MAX_DESC_LENGTH = 500;
-    public static final String DESC_LENGTH_ERR = "Description should be between %d and %d symbols.";
+    private static final int MIN_TITLE_LENGTH = 10;
+    private static final int MAX_TITLE_LENGTH = 100;
+    private static final String TITLE_LENGTH_ERR = "Title should be between %d and %d symbols.";
+    private static final int MIN_DESC_LENGTH = 10;
+    private static final int MAX_DESC_LENGTH = 500;
+    private static final String DESC_LENGTH_ERR = "Description should be between %d and %d symbols.";
     private int id;
     private String title;
     private String description;
@@ -26,28 +26,13 @@ public abstract class TaskImpl implements Task {
 
 
     public TaskImpl(int id,String title, String description) {
-        setId(id);
+        this.id = id;
         setTitle(title);
         setDescription(description);
         activityHistory=new ArrayList<>();
         comments=new ArrayList<>();
         activityHistory.add(new EventLog("New %s created.".formatted(getTaskType())));
 
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        ValidationHelpers.validateStringLength(title, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH,
-                String.format(TITLE_LENGTH_ERR,MIN_TITLE_LENGTH,MAX_TITLE_LENGTH));
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        ValidationHelpers.validateStringLength(description, MIN_DESC_LENGTH, MAX_DESC_LENGTH,DESC_LENGTH_ERR.formatted(MIN_DESC_LENGTH,MAX_DESC_LENGTH));
-        this.description = description;
     }
 
     @Override
@@ -57,20 +42,16 @@ public abstract class TaskImpl implements Task {
 
     @Override
     public String getTitle() {
-
         return this.title;
     }
 
-
     @Override
     public String getDescription() {
-
         return this.description;
     }
 
-    public TaskType getTaskType() {
-        return taskType=TaskType.BUG;
-    }
+    public abstract TaskType getTaskType();
+
     @Override
     public abstract String getStatus();
 
@@ -94,4 +75,15 @@ public abstract class TaskImpl implements Task {
         comments.remove(comment);
     }
 
+    private void setTitle(String title) {
+        ValidationHelpers.validateStringLength(title, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH,
+                String.format(TITLE_LENGTH_ERR,MIN_TITLE_LENGTH,MAX_TITLE_LENGTH));
+        this.title = title;
+    }
+
+    private void setDescription(String description) {
+        ValidationHelpers.validateStringLength(description, MIN_DESC_LENGTH, MAX_DESC_LENGTH,DESC_LENGTH_ERR.formatted(MIN_DESC_LENGTH,MAX_DESC_LENGTH));
+        this.description = description;
+    }
 }
+

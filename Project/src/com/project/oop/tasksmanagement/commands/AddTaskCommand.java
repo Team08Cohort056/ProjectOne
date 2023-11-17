@@ -12,9 +12,9 @@ import com.project.oop.tasksmanagement.utils.ValidationHelpers;
 import java.util.List;
 
 public class AddTaskCommand implements BaseCommand {
-    public static final int NUMBER_OF_PARAMETERS = 5;
-    public static final String CANNOT_CREATE_THIS_TYPE_OF_TASK = "Cannot create this type of task.";
-    public static final String TASK_ADDED_SUCCESSFULLY = "%s with ID %d added successfully to Team %s Board %s!";
+    private static final int NUMBER_OF_PARAMETERS = 5;
+    private static final String CANNOT_CREATE_THIS_TYPE_OF_TASK = "Cannot create this type of task.";
+    private static final String TASK_ADDED_SUCCESSFULLY = "%s with ID %d added successfully to Team %s Board %s!";
     private final TaskManagementRepository taskManagementRepository;
     public AddTaskCommand(TaskManagementRepository taskManagementRepository){
         this.taskManagementRepository = taskManagementRepository;
@@ -29,14 +29,14 @@ public class AddTaskCommand implements BaseCommand {
         String description = commands.get(4);
         String additionalParam = commands.get(5);
 
-        createTask(taskType,title,description,additionalParam);
         return addTask(teamName,boardName,taskType,title,description,additionalParam);
     }
 
     private String addTask(String teamName, String boardName, TaskType taskType, String title, String description,String additionalParam){
        Task task = createTask(taskType,title,description,additionalParam);
-       taskManagementRepository.findTeamByName(teamName).findTeamBoardByName(boardName).addTask(task);
-        return TASK_ADDED_SUCCESSFULLY.formatted(taskType.toString(),taskManagementRepository.getTasks().size(),teamName,boardName);
+       taskManagementRepository.findTeamByName(teamName).findTeamBoardByName(boardName).addBoardTask(task);
+       taskManagementRepository.addTask(task);
+        return TASK_ADDED_SUCCESSFULLY.formatted(taskType.toString(),task.getId(),teamName,boardName);
     }
 
     private Task createTask(TaskType taskType, String title, String description,String additionalParam){

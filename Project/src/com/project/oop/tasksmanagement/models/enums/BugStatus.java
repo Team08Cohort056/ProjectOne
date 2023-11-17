@@ -10,7 +10,7 @@ public enum BugStatus {
             case DONE:
                 return "Done";
             default:
-                throw new UnsupportedOperationException("Cannot convert Status type.");
+                throw new UnsupportedOperationException("Bug status can be Active or Done.");
 
         }
     }

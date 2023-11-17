@@ -12,7 +12,7 @@ public enum StorySize {
             case SMALL:
                 return "Small";
             default:
-                throw new UnsupportedOperationException("Can't convert Status size.");
+                throw new UnsupportedOperationException("Story size can be Small, Medium or Large.");
 
         }
     }

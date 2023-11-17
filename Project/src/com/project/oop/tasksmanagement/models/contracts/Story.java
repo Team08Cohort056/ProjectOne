@@ -9,4 +9,10 @@ public interface Story extends Task {
     StorySize getStorySize();
     Priority getPriority();
     StoryStatus getStoryStatus();
+
+    void changeStorySize(StorySize storySize);
+
+    void changeStoryPriority(Priority priority);
+
+    void changeStoryStatus(StoryStatus status);
 }

@@ -33,7 +33,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case ADDTASK:
                 return new AddTaskCommand(taskManagementRepository);
             case CHANGETASK:
-                //TODO
+                return new ChangeTaskCommand(taskManagementRepository);
             case ASSIGNTASK:
                 //TODO
             case UNASSIGNTASK:

@@ -5,6 +5,7 @@ import com.project.oop.tasksmanagement.models.contracts.Developer;
 import com.project.oop.tasksmanagement.models.enums.BugStatus;
 import com.project.oop.tasksmanagement.models.enums.Priority;
 import com.project.oop.tasksmanagement.models.enums.Severity;
+import com.project.oop.tasksmanagement.models.enums.TaskType;
 import com.project.oop.tasksmanagement.utils.EventLog;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class BugImpl extends TaskImpl implements Bug {
     private Severity severity;
     private BugStatus status;
     private String assignee;
+    TaskType taskType;
 
 
     public BugImpl(int id, String title, String description, Severity severity) {
@@ -44,6 +46,11 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
+    public TaskType getTaskType() {
+      return taskType  = TaskType.BUG;
+    }
+
+    @Override
     public String getStatus() {
         return this.status.toString();
     }
@@ -58,23 +65,27 @@ public class BugImpl extends TaskImpl implements Bug {
         stepsToReproduce.add(step);
         activityHistory.add(new EventLog("Step %d to reproduce the bug added".formatted(stepsToReproduce.size())));
     }
+
     public void changeBugPriority(Priority priority){
         activityHistory.add(new EventLog("The priority of the bug with ID %d switched from %s to %s.".formatted(getId(),this.priority,priority)));
         this.priority = priority;
     }
+
     public void changeBugSeverity(Severity severity){
         activityHistory.add(new EventLog("The severity of the bug with ID %d switched from %s to %s.".formatted(getId(),this.severity,severity)));
         this.severity = severity;
     }
+
     public void changeBugStatus(BugStatus status){
         activityHistory.add(new EventLog("The status of the bug with ID %d switched from %s to %s.".formatted(getId(),this.status,status)));
         this.status = status;
-
     }
+
     public void assignBugTo(Developer developer){
         activityHistory.add(new EventLog("The bug with ID %d has been assigned to %s".formatted(getId(),developer.getName())));
         this.assignee = developer.getName();
     }
+
     public void unAssignBug(){
         activityHistory.add(new EventLog("The bug with ID %d has been unassigned".formatted(getId())));
         this.assignee = "Not assigned";

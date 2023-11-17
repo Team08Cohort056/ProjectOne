@@ -12,7 +12,7 @@ public enum TaskType {
             case FEEDBACK:
                 return "Feedback";
             default:
-                throw new UnsupportedOperationException("Can't convert type.");
+                throw new UnsupportedOperationException("Task type can be Bug, Story or Feedback.");
         }
     }
 

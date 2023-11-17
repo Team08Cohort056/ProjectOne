@@ -34,10 +34,10 @@ public class AddCommentCommand implements BaseCommand {
     private String addComment(String author, String content, int taskId) {
         Developer developer = taskManagementRepository.findMemberByName(author);
 
-        ValidationHelpers.validateIntRange(taskId, 0, taskManagementRepository.getTasks().size() - 1, TASK_DOES_NOT_EXIST);
+        ValidationHelpers.validateIntRange(taskId, 0, taskManagementRepository.getAllTasks().size() - 1, TASK_DOES_NOT_EXIST);
 
 //        Task task = developer.getTasks().get(taskId);
-        Task task = taskManagementRepository.getTasks().get(taskId);
+        Task task = taskManagementRepository.getAllTasks().get(taskId);
 
         Comment comment = taskManagementRepository.createComment(content, String.valueOf(developer));
 

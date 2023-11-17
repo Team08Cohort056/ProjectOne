@@ -41,12 +41,12 @@ public class RemoveCommentCommand implements BaseCommand {
     private String removeComment(String author,int taskId, int commentIndex) {
         Developer developer = taskManagementRepository.findMemberByName(author);
 
-        ValidationHelpers.validateIntRange(taskId, 0, taskManagementRepository.getTasks().size() - 1, TASK_ID_OUT_OF_BOUNDS);
+        ValidationHelpers.validateIntRange(taskId, 0, taskManagementRepository.getAllTasks().size() - 1, TASK_ID_OUT_OF_BOUNDS);
         ValidationHelpers.validateIntRange(commentIndex, 0,
-                taskManagementRepository.getTasks().get(taskId).getComments().size() - 1, COMMENT_INDEX_OUT_OF_BOUNDS);
+                taskManagementRepository.getAllTasks().get(taskId).getComments().size() - 1, COMMENT_INDEX_OUT_OF_BOUNDS);
 
-        Task task = taskManagementRepository.getTasks().get(taskId);
-        Comment comment = taskManagementRepository.getTasks().get(taskId).getComments().get(commentIndex);
+        Task task = taskManagementRepository.getAllTasks().get(taskId);
+        Comment comment = taskManagementRepository.getAllTasks().get(taskId).getComments().get(commentIndex);
 
         developer.removeComment(comment, task);
 

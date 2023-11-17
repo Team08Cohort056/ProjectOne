@@ -2,22 +2,19 @@ package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.models.contracts.Commentable;
 import com.project.oop.tasksmanagement.models.contracts.Story;
-import com.project.oop.tasksmanagement.models.enums.Priority;
-import com.project.oop.tasksmanagement.models.enums.StorySize;
-import com.project.oop.tasksmanagement.models.enums.StoryStatus;
-import com.project.oop.tasksmanagement.models.enums.TaskType;
+import com.project.oop.tasksmanagement.models.enums.*;
 import com.project.oop.tasksmanagement.utils.EventLog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class StoryImpl extends TaskImpl implements Story, Commentable {
+public class StoryImpl extends TaskImpl implements Story {
 
 
-    private final StoryStatus storyStatus;
-    private final Priority priority;
-    private final StorySize storySize;
+    private StorySize storySize;
+    private Priority priority;
+    private StoryStatus storyStatus;
     private String assignee;
     private TaskType taskType;
 
@@ -32,9 +29,8 @@ public class StoryImpl extends TaskImpl implements Story, Commentable {
 
     @Override
     public String getStatus() {
-        return null;
+        return this.storyStatus.toString();
     }
-
 
     @Override
     public StorySize getStorySize() {
@@ -61,4 +57,18 @@ public class StoryImpl extends TaskImpl implements Story, Commentable {
         return taskType = TaskType.STORY;
     }
 
+    public void changeStorySize(StorySize storySize){
+        activityHistory.add(new EventLog("The size of the story with ID %d switched from %s to %s.".formatted(getId(),this.storySize,storySize)));
+        this.storySize = storySize;
+    }
+
+    public void changeStoryPriority(Priority priority){
+        activityHistory.add(new EventLog("The priority of the story with ID %d switched from %s to %s.".formatted(getId(),this.priority,priority)));
+        this.priority = priority;
+    }
+
+    public void changeStoryStatus(StoryStatus status){
+        activityHistory.add(new EventLog("The status of the story with ID %d switched from %s to %s.".formatted(getId(),this.storyStatus,status)));
+        this.storyStatus = status;
+    }
 }

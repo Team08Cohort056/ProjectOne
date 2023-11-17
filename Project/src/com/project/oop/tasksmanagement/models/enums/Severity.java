@@ -13,7 +13,7 @@ public enum Severity {
             case MINOR:
                 return "Minor";
             default:
-                throw new UnsupportedOperationException("Cannot convert Severity type.");
+                throw new UnsupportedOperationException("Severity can be Minor, Major or Critical.");
 
         }
     }

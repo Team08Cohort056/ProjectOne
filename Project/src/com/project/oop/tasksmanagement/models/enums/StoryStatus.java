@@ -7,11 +7,11 @@ NOT_DONE,IN_PROGRESS,DONE;
             case NOT_DONE:
                 return "Not done";
             case IN_PROGRESS:
-                return "InProgress";
+                return "In Progress";
             case DONE:
                 return "Done";
             default:
-                throw new UnsupportedOperationException("Cannot convert Status type.");
+                throw new UnsupportedOperationException("Story status can be Not done, In progress or Done");
 
         }
     }

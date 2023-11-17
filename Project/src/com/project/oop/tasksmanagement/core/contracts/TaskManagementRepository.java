@@ -6,19 +6,26 @@ import com.project.oop.tasksmanagement.models.enums.*;
 import java.util.List;
 
 public interface TaskManagementRepository {
+
     List<Team> getTeams();
+
     List<Developer> getMembers();
-    List<Task> getTasks();
+
+    List<Task> getAllTasks();
+
     List<Bug> getBugs();
+
     List<Story> getStories();
+
     List<Feedback> getFeedbacks();
+
     Team createTeam(String teamName);
-    boolean memberExists(String memberName);
-    public Developer findMemberByName(String memberName);
+
     Developer createMember(String memberName);
+
     Board createBoard(String boardName);
+
     Comment createComment(String content, String author);
-    Board findBoardByName(String boardName);
 
     Bug createBug(String title, String description, Severity severity);
 
@@ -26,17 +33,23 @@ public interface TaskManagementRepository {
 
     Story createStory(String title, String description, StorySize storySize);
 
-    Bug findBugById();
+    boolean memberExists(String memberName);
 
-    Feedback findFeedbackById();
+    Developer findMemberByName(String memberName);
 
-    Story findStoryById();
+    Board findBoardByName(String boardName);
+
+    Task findTaskById(int id);
+
+    <T extends Identifiable> T findElementById(List<T> elements, int id);
+
     Team findTeamByName(String team);
-
 
     void addTeam(Team team);
 
     void addMember(Developer developer);
+
+    void addTask(Task task);
 
     String printTeams();
     String printDevelopers();

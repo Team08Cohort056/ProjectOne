@@ -14,7 +14,7 @@ public enum FeedbackStatus {
             case DONE:
                 return "Done";
             default:
-                throw new UnsupportedOperationException("Cannot convert Status type.");
+                throw new UnsupportedOperationException("Feedback status can be New, Unscheduled, Scheduled or Done.");
 
         }
 }}

@@ -5,7 +5,7 @@ import java.util.List;
 public interface Board extends ActivityHistory {
     String getName();
 
-    List<Task> getTasks();
+    List<Task> getBoardTasks();
 
-    void addTask(Task task);
+    void addBoardTask(Task task);
 }
