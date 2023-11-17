@@ -16,8 +16,8 @@ public class RemoveCommentCommand implements BaseCommand {
     private final static String COMMENT_INDEX_OUT_OF_BOUNDS = "There is no comment on this index.";
     public final static String INVALID_COMMENT_INDEX = "Invalid comment index. Expected a number.";
     public final static String COMMENT_REMOVED_SUCCESSFULLY = "%s removed comment successfully!";
-    private final static String INVALID_TASK_ID = "Invalid vehicle index. Expected a number.";
-    private final static String TASK_ID_OUT_OF_BOUNDS = "There is no vehicle on this index.";
+    private final static String INVALID_TASK_ID = "Invalid task id. Expected a number.";
+    private final static String TASK_ID_OUT_OF_BOUNDS = "There is no such task";
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
 

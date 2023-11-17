@@ -58,11 +58,13 @@ public class DeveloperImpl implements Developer {
     @Override
     public void addComment(Comment commentToAdd, Task taskToAddComment) {
         taskToAddComment.addComment(commentToAdd);
+        activityHistory.add(new EventLog("Comment [%s] added".formatted(commentToAdd.getContent())));
     }
 
     @Override
     public void removeComment(Comment commentToRemove, Task taskToRemoveComment) {
         taskToRemoveComment.removeComment(commentToRemove);
+        activityHistory.add(new EventLog("Comment [%s] removed".formatted(commentToRemove)));
     }
 
     // TODO
