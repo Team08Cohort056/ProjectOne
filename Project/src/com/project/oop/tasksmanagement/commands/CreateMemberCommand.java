@@ -11,10 +11,9 @@ import java.util.List;
 public class CreateMemberCommand implements BaseCommand {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private final static String USERNAME_ALREADY_EXIST = "Username %s is already taken. Please choose another username!";
-    public final static String MEMBER_CREATED_SUCCESS = "%s created successfully!";
+    public final static String MEMBER_CREATED_SUCCESS = "%s successfully joins our company!";
 
     private final TaskManagementRepository taskManagementRepository;
-
 
 
     public CreateMemberCommand(TaskManagementRepository taskManagementRepository) {

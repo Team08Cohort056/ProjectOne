@@ -76,21 +76,21 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
         int indexOfFirstSeparator = fullCommand.indexOf(MAIN_SPLIT_SYMBOL);
         List<String> parameters = new ArrayList<>();
         while (fullCommand.contains("[[") || fullCommand.contains("]]")) {
-            int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
-            int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
-            if (indexOfOpenComment >= 0) {
-                parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
-                fullCommand = fullCommand.replace(fullCommand.substring(indexOfOpenComment,indexOfCloseComment+1), "");
+            int indexOfOpenSentence = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
+            int indexOfCloseSentence = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
+            if (indexOfOpenSentence >= 0) {
+                parameters.add(fullCommand.substring(indexOfOpenSentence + COMMENT_OPEN_SYMBOL.length(), indexOfCloseSentence));
+                fullCommand = fullCommand.replace(fullCommand.substring(indexOfOpenSentence,indexOfCloseSentence+1), "");
             }
         }
-        List<String> result = new ArrayList<>(Arrays.asList(fullCommand.substring(indexOfFirstSeparator + 1).split(MAIN_SPLIT_SYMBOL)));
+        List<String> result = new ArrayList<>(Arrays.asList(fullCommand.substring(indexOfFirstSeparator + 1)
+                .split(MAIN_SPLIT_SYMBOL)));
         for (int i = 0; i < parameters.size(); i++) {
             result.add(result.indexOf("]"),parameters.get(i));
             result.remove("]");
         }
         return result;
     }
-
 
     private void print(String result) {
         System.out.println(result);

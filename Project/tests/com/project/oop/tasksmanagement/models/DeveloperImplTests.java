@@ -2,19 +2,21 @@ package com.project.oop.tasksmanagement.models;
 
 import com.project.oop.tasksmanagement.models.tasks.BugImpl;
 import com.project.oop.tasksmanagement.utils.UtilsTests;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class DeveloperImplTests {
     public static final int DEVELOPER_NAME_LEN_MIN = 5;
 
     public static final String VALID_DEVELOPER_NAME = UtilsTests.getString(DEVELOPER_NAME_LEN_MIN + 1);
     public static final String INVALID_DEVELOPER_NAME = UtilsTests.getString(DEVELOPER_NAME_LEN_MIN - 1);
+    public static final int BOARD_NAME_LEN_MIN = 5;
 
+    public static final String VALID_BOARD_NAME = UtilsTests.getString(BOARD_NAME_LEN_MIN + 1);
     @Test
     public void constructor_Should_ThrowException_When_DeveloperNameLengthOutOfBounds() {
         // Arrange, Act, Assert
-        Assert.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
                 new DeveloperImpl(
                         INVALID_DEVELOPER_NAME));
     }
@@ -26,7 +28,7 @@ public class DeveloperImplTests {
         DeveloperImpl developer = initializeTestDeveloper();
 
         // Assert
-        Assert.assertEquals(VALID_DEVELOPER_NAME, developer.getName());
+        Assertions.assertEquals(VALID_DEVELOPER_NAME, developer.getName());
     }
 
     @Test
@@ -38,7 +40,7 @@ public class DeveloperImplTests {
         // developer.getTasks().add(TaskImplTests.initializeTestTask());
 
         // Assert
-        Assert.assertEquals(0, developer.getTasks().size());
+        Assertions.assertEquals(0, developer.getTasks().size());
     }
 
     @Test

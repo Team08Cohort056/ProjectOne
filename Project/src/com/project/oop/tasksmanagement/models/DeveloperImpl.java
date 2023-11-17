@@ -1,5 +1,6 @@
 package com.project.oop.tasksmanagement.models;
 
+import com.project.oop.tasksmanagement.core.exceptions.InvalidUserInputException;
 import com.project.oop.tasksmanagement.models.contracts.*;
 import com.project.oop.tasksmanagement.utils.EventLog;
 import com.project.oop.tasksmanagement.utils.ValidationHelpers;
@@ -12,6 +13,7 @@ import static java.lang.String.format;
 public class DeveloperImpl implements Developer {
     private final static int MIN_NAME_LEN = 5;
     private final static int MAX_NAME_LEN = 15;
+    private final static String NO_TASKS_FOR_THE_DEVELOPER = "There are no tasks assigned to the developer %s!";
     private static final String INVALID_NAME_LEN = format(
             "Name length must be between %d and %d!",
             MIN_NAME_LEN,
@@ -28,7 +30,6 @@ public class DeveloperImpl implements Developer {
         activityHistory.add(new EventLog("Member %s created".formatted(name)));
     }
 
-
     @Override
     public String getName() {
         return name;
@@ -38,7 +39,6 @@ public class DeveloperImpl implements Developer {
         validateNameLength(name);
         this.name = name;
     }
-
 
     @Override
     public List<Task> getTasks() {
@@ -67,13 +67,21 @@ public class DeveloperImpl implements Developer {
         activityHistory.add(new EventLog("Comment [%s] removed".formatted(commentToRemove)));
     }
 
-    // TODO
     @Override
     public String printTasks() {
-        return null;
+        StringBuilder result = new StringBuilder();
+        int counter = 1;
+        if (tasks.isEmpty()) {
+            throw new InvalidUserInputException(String.format(NO_TASKS_FOR_THE_DEVELOPER, getName()));
+        }
+        for (Task task : tasks) {
+            result.append(counter).append(".").append(task.getId()).append(task.getTaskType()).append(task.getStatus())
+                    .append(System.lineSeparator());
+            counter++;
+        }
+        return result.toString();
     }
 
-    // TODO
     @Override
     public List<EventLog> getActivityHistory() {
         return new ArrayList<>(activityHistory);

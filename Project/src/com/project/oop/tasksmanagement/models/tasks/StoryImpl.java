@@ -8,9 +8,7 @@ import com.project.oop.tasksmanagement.utils.EventLog;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class StoryImpl extends TaskImpl implements Story {
-
 
     private StorySize storySize;
     private Priority priority;
@@ -57,18 +55,21 @@ public class StoryImpl extends TaskImpl implements Story {
         return taskType = TaskType.STORY;
     }
 
-    public void changeStorySize(StorySize storySize){
-        activityHistory.add(new EventLog("The size of the story with ID %d switched from %s to %s.".formatted(getId(),this.storySize,storySize)));
+    public void changeStorySize(StorySize storySize) {
+        activityHistory.add(new EventLog("The size of the story with ID %d switched from %s to %s."
+                .formatted(getId(), this.storySize, storySize)));
         this.storySize = storySize;
     }
 
-    public void changeStoryPriority(Priority priority){
-        activityHistory.add(new EventLog("The priority of the story with ID %d switched from %s to %s.".formatted(getId(),this.priority,priority)));
+    public void changeStoryPriority(Priority priority) {
+        activityHistory.add(new EventLog("The priority of the story with ID %d switched from %s to %s."
+                .formatted(getId(), this.priority, priority)));
         this.priority = priority;
     }
 
-    public void changeStoryStatus(StoryStatus status){
-        activityHistory.add(new EventLog("The status of the story with ID %d switched from %s to %s.".formatted(getId(),this.storyStatus,status)));
+    public void changeStoryStatus(StoryStatus status) {
+        activityHistory.add(new EventLog("The status of the story with ID %d switched from %s to %s."
+                .formatted(getId(), this.storyStatus, status)));
         this.storyStatus = status;
     }
 }
