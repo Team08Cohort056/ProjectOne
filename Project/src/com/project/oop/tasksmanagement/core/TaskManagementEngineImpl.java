@@ -74,18 +74,21 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
     }
     public List<String> extractSentenceParameters(String fullCommand) {
         int indexOfFirstSeparator = fullCommand.indexOf(MAIN_SPLIT_SYMBOL);
-        int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
-        int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
         List<String> parameters = new ArrayList<>();
-        if (indexOfOpenComment >= 0) {
-            parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
-            fullCommand = fullCommand.replaceAll("\\[\\[.+(?=]])]]", "");
+        while (fullCommand.contains("[[") || fullCommand.contains("]]")) {
+            int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
+            int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
+            if (indexOfOpenComment >= 0) {
+                parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
+                fullCommand = fullCommand.replace(fullCommand.substring(indexOfOpenComment,indexOfCloseComment+1), "");
+            }
         }
-
         List<String> result = new ArrayList<>(Arrays.asList(fullCommand.substring(indexOfFirstSeparator + 1).split(MAIN_SPLIT_SYMBOL)));
-        result.removeAll(Arrays.asList(" ", "", null));
-        parameters.addAll(result);
-        return parameters;
+        for (int i = 0; i < parameters.size(); i++) {
+            result.add(result.indexOf("]"),parameters.get(i));
+            result.remove("]");
+        }
+        return result;
     }
 
 

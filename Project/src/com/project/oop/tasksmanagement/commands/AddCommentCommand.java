@@ -25,8 +25,8 @@ public class AddCommentCommand implements BaseCommand {
     @Override
     public String execute(List<String> commands) {
         ValidationHelpers.validateArgumentsCount(commands, EXPECTED_NUMBER_OF_ARGUMENTS);
-        String content = commands.get(0);
-        String author = commands.get(1);
+        String author = commands.get(0);
+        String content = commands.get(1);
         int taskId = ParsingHelpers.tryParseInt(commands.get(2), INVALID_INPUT_MESSAGE) - 1;
         return addComment(author, content, taskId);
     }
