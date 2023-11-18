@@ -85,8 +85,8 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
         }
         List<String> result = new ArrayList<>(Arrays.asList(fullCommand.substring(indexOfFirstSeparator + 1)
                 .split(MAIN_SPLIT_SYMBOL)));
-        for (int i = 0; i < parameters.size(); i++) {
-            result.add(result.indexOf("]"),parameters.get(i));
+        for (String parameter : parameters) {
+            result.add(result.indexOf("]"), parameter);
             result.remove("]");
         }
         return result;

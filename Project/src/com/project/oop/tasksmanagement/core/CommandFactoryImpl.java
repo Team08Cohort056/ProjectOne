@@ -35,7 +35,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case CHANGETASK:
                 return new ChangeTaskCommand(taskManagementRepository);
             case ASSIGNTASK:
-                //TODO
+                return new AssignTaskCommand(taskManagementRepository);
             case UNASSIGNTASK:
                 return new UnAssignTaskCommand(taskManagementRepository);
             case SHOWTEAMDEVELOPERS:

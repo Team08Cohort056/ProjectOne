@@ -13,20 +13,24 @@ import com.project.oop.tasksmanagement.models.tasks.BugImpl;
 import com.project.oop.tasksmanagement.models.tasks.FeedbackImpl;
 import com.project.oop.tasksmanagement.models.tasks.StoryImpl;
 
-import java.awt.desktop.PreferencesEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
-    public static final String NO_TEAMS_FOUND_HEADER = "No teams found.";
-    public static final String NO_DEVELOPERS_FOUND_HEADER = "No developers found.";
-    public static final String NO_BOARDS_FOUND_HEADER = "No boards found.";
-    public static final String NO_TASKS_FOUND_HEADER = "No tasks found.";
+    private static final String NO_TEAMS_FOUND_HEADER = "No teams found.";
+    private static final String NO_DEVELOPERS_FOUND_HEADER = "No developers found.";
+    private static final String NO_BOARDS_FOUND_HEADER = "No boards found.";
+    private static final String NO_TASKS_FOUND_HEADER = "No tasks found.";
+    private static final String NO_TASK_WITH_ID_ERR = "No task with ID %d";
+    public static final String NO_TEAM_WITH_NAME = "No team with name %s is found";
+    public static final String NO_MEMBER_WITH_NAME_ERR = "No member with name %s is found";
+    public static final String NO_BOARD_WITH_NAME_ERR = "No board with name %s is found";
     int nextId;
     private final List<Team> teams = new ArrayList<>();
     private final List<Developer> developers = new ArrayList<>();
     private final List<Task> allTasks = new ArrayList<>();
+    private final List<AssignabelTask> allAssignableTasks = new ArrayList<>();
     private final List<Bug> bugs = new ArrayList<>();
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
@@ -94,20 +98,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Board findBoardByName(String boardName) {
-        for (Team team : teams) {
-            for (int i = 0; i < team.getBoards().size(); i++) {
-                if (boardName.equals(team.getBoards().get(i).getName())){
-                    return team.getBoards().get(i);
-                }
-
-            }
-        }
-        throw new IllegalArgumentException(String.format("No board with name %s", boardName));
-
-    }
-
-    @Override
     public Bug createBug(String title, String description, Severity severity) {
         Bug bug = new BugImpl(++nextId, title, description, severity);
         bugs.add(bug);
@@ -130,22 +120,21 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     public Task findTaskById(int id){
-        for (Task task: allTasks) {
-            if (task.getId() == id){
-                return task;
-            }
-        }
-        throw new IllegalArgumentException(String.format("No task with ID %d", id));
+        return findElementById(allTasks,id);
     }
-    public  <T extends Identifiable> T findElementById(List<T> elements, int id) {
+
+    public AssignabelTask findAssignableTaskById(int id){
+       return findElementById(allAssignableTasks,id);
+    }
+
+    private   <T extends Identifiable> T findElementById(List<T> elements, int id) {
         for (T element : elements) {
             if (element.getId() == id) {
                 return element;
             }
         }
-        throw new IllegalArgumentException(String.format("No task with ID %d", id));
+        throw new IllegalArgumentException(NO_TASK_WITH_ID_ERR.formatted(id));
     }
-
     @Override
     public Team findTeamByName(String teamName) {
         for (Team team : getTeams()) {
@@ -153,7 +142,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 return team;
             }
         }
-        throw new IllegalArgumentException(String.format("No team with name %s", teamName));
+        throw new IllegalArgumentException(String.format(NO_TEAM_WITH_NAME, teamName));
     }
 
     @Override
@@ -164,7 +153,21 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
             }
         }
 
-        throw new InvalidUserInputException(String.format("No record for this member name %s", memberName));
+        throw new InvalidUserInputException(String.format(NO_MEMBER_WITH_NAME_ERR, memberName));
+    }
+
+    @Override
+    public Board findBoardByName(String boardName) {
+        for (Team team : teams) {
+            for (int i = 0; i < team.getBoards().size(); i++) {
+                if (boardName.equals(team.getBoards().get(i).getName())){
+                    return team.getBoards().get(i);
+                }
+
+            }
+        }
+        throw new IllegalArgumentException(String.format(NO_BOARD_WITH_NAME_ERR, boardName));
+
     }
 
     @Override

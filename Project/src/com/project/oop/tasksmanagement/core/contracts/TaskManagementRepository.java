@@ -35,13 +35,13 @@ public interface TaskManagementRepository {
 
     boolean memberExists(String memberName);
 
+    Task findTaskById(int id);
+
+    AssignabelTask findAssignableTaskById(int id);
+
     Developer findMemberByName(String memberName);
 
     Board findBoardByName(String boardName);
-
-    Task findTaskById(int id);
-
-    <T extends Identifiable> T findElementById(List<T> elements, int id);
 
     Team findTeamByName(String team);
 

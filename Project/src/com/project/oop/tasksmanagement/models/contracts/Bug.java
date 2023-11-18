@@ -5,25 +5,16 @@ import com.project.oop.tasksmanagement.models.enums.Severity;
 
 import java.util.List;
 
-public interface Bug extends Task{
+public interface Bug extends AssignabelTask{
 
     List<String> getStepsToReproduce();
 
-    Priority getPriority();
-
     Severity getSeverity();
 
-    String getAssignee();
-
     void addStepToReproduce(String step);
-
-    void changeBugPriority(Priority priority);
 
     void changeBugSeverity(Severity severity);
 
     void changeBugStatus(BugStatus status);
 
-    void assignBugTo(Developer developer);
-
-    void unAssignBug();
 }

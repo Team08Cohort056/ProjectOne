@@ -4,15 +4,11 @@ import com.project.oop.tasksmanagement.models.enums.Priority;
 import com.project.oop.tasksmanagement.models.enums.StorySize;
 import com.project.oop.tasksmanagement.models.enums.StoryStatus;
 
-public interface Story extends Task {
+public interface Story extends AssignabelTask {
 
     StorySize getStorySize();
-    Priority getPriority();
-    StoryStatus getStoryStatus();
 
     void changeStorySize(StorySize storySize);
-
-    void changeStoryPriority(Priority priority);
 
     void changeStoryStatus(StoryStatus status);
 }

@@ -20,7 +20,7 @@ public class ChangeTaskCommand implements BaseCommand {
 
     private static final String FEEDBACK_ERR_MESSAGE = "Feedback tasks can have only Rating or Status changed.";
 
-    private static final String CHANGE_COMPLETED_SUCCESSFULLY = "%s change completed successfully !";
+    private static final String CHANGE_COMPLETED_SUCCESSFULLY = "Task with ID %d %s change completed successfully !";
 
     private static final String ERR_MESSAGE_IF_ID_NOT_INTEGER = "First argument is the ID and should be integer.";
 
@@ -40,7 +40,7 @@ public class ChangeTaskCommand implements BaseCommand {
         String newValue = commands.get(2);
 
         changeEnumValue(id,enumToBeChanged,newValue);
-        return CHANGE_COMPLETED_SUCCESSFULLY.formatted(enumToBeChanged);
+        return CHANGE_COMPLETED_SUCCESSFULLY.formatted(id,enumToBeChanged.toLowerCase());
     }
 
     private void changeEnumValue(int id, String enumToBeChanged, String newValue){
@@ -49,7 +49,7 @@ public class ChangeTaskCommand implements BaseCommand {
             case BUG -> {
                 Bug bug = (Bug) task;
                 switch (enumToBeChanged.toLowerCase()) {
-                    case "priority" -> bug.changeBugPriority(ParsingHelpers.tryParseEnum(newValue, Priority.class));
+                    case "priority" -> bug.changePriority(ParsingHelpers.tryParseEnum(newValue, Priority.class));
                     case "severity" -> bug.changeBugSeverity(ParsingHelpers.tryParseEnum(newValue, Severity.class));
                     case "status" -> bug.changeBugStatus(ParsingHelpers.tryParseEnum(newValue, BugStatus.class));
                     default -> throw new IllegalArgumentException(BUG_ERR_MESSAGE);
@@ -58,7 +58,7 @@ public class ChangeTaskCommand implements BaseCommand {
             case STORY -> {
                 Story story = (Story) task;
                 switch (enumToBeChanged.toLowerCase()) {
-                    case "priority" -> story.changeStoryPriority(ParsingHelpers.tryParseEnum(newValue, Priority.class));
+                    case "priority" -> story.changePriority(ParsingHelpers.tryParseEnum(newValue, Priority.class));
                     case "size" -> story.changeStorySize(ParsingHelpers.tryParseEnum(newValue, StorySize.class));
                     case "status" -> story.changeStoryStatus(ParsingHelpers.tryParseEnum(newValue, StoryStatus.class));
                     default -> throw new IllegalArgumentException(STORY_ERR_MESSAGE);
