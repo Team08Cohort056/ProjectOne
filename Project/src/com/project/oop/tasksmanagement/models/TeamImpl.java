@@ -15,7 +15,7 @@ public class TeamImpl implements Team {
     private static final int MAX_NAME_LENGTH = 15;
     public static final String NO_DEVELOPERS_FOUND_IN_TEAM_HEADER = "No developers found in team %s.";
     public static final String NO_BOARDS_FOUND_IN_TEAM_HEADER = "No boards found in team %s.";
-    public static final String BOARD__DOES_NOT_EXIST = "Board with name %s does not exist in Team %s";
+    public static final String BOARD_DOES_NOT_EXIST = "Board with name %s does not exist in Team %s";
     private String teamName;
     private final ArrayList<Developer> developers;
 
@@ -96,7 +96,7 @@ public class TeamImpl implements Team {
                 return board;
             }
         }
-        throw new IllegalArgumentException(BOARD__DOES_NOT_EXIST.formatted(boardName,getName()));
+        throw new IllegalArgumentException(BOARD_DOES_NOT_EXIST.formatted(boardName,getName()));
     }
     @Override
     public String printTeamBoards() {
