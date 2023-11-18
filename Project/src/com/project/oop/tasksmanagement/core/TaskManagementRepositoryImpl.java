@@ -13,6 +13,7 @@ import com.project.oop.tasksmanagement.models.tasks.BugImpl;
 import com.project.oop.tasksmanagement.models.tasks.FeedbackImpl;
 import com.project.oop.tasksmanagement.models.tasks.StoryImpl;
 
+import java.awt.desktop.PreferencesEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public static final String NO_TEAMS_FOUND_HEADER = "No teams found.";
     public static final String NO_DEVELOPERS_FOUND_HEADER = "No developers found.";
     public static final String NO_BOARDS_FOUND_HEADER = "No boards found.";
+    public static final String NO_TASKS_FOUND_HEADER = "No tasks found.";
     int nextId;
     private final List<Team> teams = new ArrayList<>();
     private final List<Developer> developers = new ArrayList<>();
@@ -233,6 +235,20 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                     counter++;
                 }
             }
+        }
+        return result.toString();
+    }
+
+    @Override
+    public String printTasks() {
+        int counter = 1;
+        StringBuilder result = new StringBuilder();
+        if (allTasks.isEmpty()){
+            return result.append(NO_TASKS_FOUND_HEADER).toString();
+        }
+        for (Task task : allTasks) {
+            result.append(counter).append(".").append(task.getTitle()).append(System.lineSeparator());
+            counter++;
         }
         return result.toString();
     }

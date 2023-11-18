@@ -32,6 +32,8 @@ public class ShowAllCommand implements BaseCommand {
                 return repository.printDevelopers();
             case "BOARDS":
                 return repository.printBoards();
+            case "TASKS":
+                return repository.printTasks();
             default:
                 return INVALID_COMMAND;
         }
