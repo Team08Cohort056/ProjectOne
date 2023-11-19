@@ -45,6 +45,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ShowAllCommand(taskManagementRepository);
             case SHOWACTIVITY:
                 return new ShowActivityCommand(taskManagementRepository);
+            case HELP:
+                return new HelpCommand(taskManagementRepository);
             case LISTALL:
                 //TODO
             case LISTASSIGNEDTASKS:

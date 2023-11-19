@@ -42,16 +42,16 @@ public class ShowActivityCommand implements BaseCommand {
                 }
 
                 return teamResult.toString();
-            case "DEVELOPER":
-                List<EventLog> developerActivityHistory = repository.findMemberByName(target).getActivityHistory();
-                StringBuilder developerResult = new StringBuilder();
-                if (developerActivityHistory.isEmpty()){
+            case "MEMBER":
+                List<EventLog> memberActivityHistory = repository.findMemberByName(target).getActivityHistory();
+                StringBuilder memberResult = new StringBuilder();
+                if (memberActivityHistory.isEmpty()){
                     return String.format(NO_ACTIVITY_FOUND_ERR,type,target);
                 }
-                for (EventLog eventLog: developerActivityHistory) {
-                    developerResult.append(eventLog);
+                for (EventLog eventLog: memberActivityHistory) {
+                    memberResult.append(eventLog);
                 }
-                return developerResult.toString();
+                return memberResult.toString();
             case "BOARD":
                 List<EventLog> boardActivityHistory = repository.findBoardByName(target).getActivityHistory();
                 StringBuilder boardResult = new StringBuilder();

@@ -23,17 +23,17 @@ public class UnAssignTaskCommand implements BaseCommand {
     @Override
     public String execute(List<String> commands) {
         ValidationHelpers.validateArgumentsCount(commands,EXPECTED_NUMBER_OF_ARGUMENTS);
-        String developerName = commands.get(0);
+        String memberName = commands.get(0);
         int taskId = ParsingHelpers.tryParseInt(commands.get(1), INVALID_ID_ERR);
-        return unAssignTask(developerName,taskId);
+        return unAssignTask(memberName,taskId);
     }
-    public String unAssignTask(String developerName, int taskId){
-        Member member = repository.findMemberByName(developerName);
+    public String unAssignTask(String memberName, int taskId){
+        Member member = repository.findMemberByName(memberName);
         ValidationHelpers.validateIntRange(taskId,1, member.getTasks().size(), NO_TASK_ON_THIS_INDEX_ERR);
         Task task = member.getTasks().get(taskId-1);
-        repository.findMemberByName(developerName).removeTask(task);
+        repository.findMemberByName(memberName).removeTask(task);
         //TODO: Assignee must be set to "not assigned"
-        return String.format(TASK_REMOVED_SUCCESSFULLY,taskId,developerName);
+        return String.format(TASK_REMOVED_SUCCESSFULLY,taskId,memberName);
     }
 
 

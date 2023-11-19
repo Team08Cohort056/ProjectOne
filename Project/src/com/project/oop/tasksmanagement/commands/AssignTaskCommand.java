@@ -23,18 +23,18 @@ public class AssignTaskCommand implements BaseCommand {
     @Override
     public String execute(List<String> commands) {
         ValidationHelpers.validateArgumentsCount(commands,NUMBER_OF_PARAMETERS);
-        String developerName = commands.get(0);
+        String memberName = commands.get(0);
         int id = ParsingHelpers.tryParseInt(commands.get(1), INVALID_ID_ERR);
-        return assignTask(developerName,id);
+        return assignTask(memberName,id);
     }
-    private String assignTask(String developerName, int id){
-        if (taskIsAssignable(id) && taskManagementRepository.memberExists(developerName)){
+    private String assignTask(String memberName, int id){
+        if (taskIsAssignable(id) && taskManagementRepository.memberExists(memberName)){
             AssignabelTask assignableTask = taskManagementRepository.findAssignableTaskById(id);
-            taskManagementRepository.findMemberByName(developerName).addTask(assignableTask);
-            assignableTask.assignTaskTo(developerName);
+            taskManagementRepository.findMemberByName(memberName).addTask(assignableTask);
+            assignableTask.assignTaskTo(memberName);
             //TODO put the task in the list with assigned tasks
         }
-        return TASK_ASSIGNED_MESSAGE.formatted(id,developerName);
+        return TASK_ASSIGNED_MESSAGE.formatted(id,memberName);
     }
 
     private boolean taskIsAssignable(int id){

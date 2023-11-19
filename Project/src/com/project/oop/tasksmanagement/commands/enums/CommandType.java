@@ -16,5 +16,8 @@ public enum CommandType {
     SHOWTEAMMEMBERS,
     SHOWTEAMBOARDS,
     LISTALL,
-    LISTASSIGNEDTASKS
+    LISTASSIGNEDTASKS,
+    HELP
+
+
 }
