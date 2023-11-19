@@ -30,7 +30,7 @@ public enum CommandTypeHelper {
                 return "";
 
             case ADDMEMBERTOTEAM:
-                return "";
+                return "Welcomes a new member of the team. To register a new member enter name and then team name!";
             case ADDBUGREPRODUCESTEPS:
                 return "";
 
@@ -41,13 +41,14 @@ public enum CommandTypeHelper {
                 return "";
 
             case ADDCOMMENT:
-                return "";
+                return "Tell us what you think! If you want to leave a comment tell us your name, enter a comment" +
+                        "and don't forget the ID of the task for which is the comment";
 
             case REMOVECOMMENT:
-                return "";
+                return "If you want to remove a comment enter your name, the task ID and the index of the comment";
 
             case CREATEMEMBER:
-                return "";
+                return "To be registered you have to enter your name!";
 
             case CREATETEAM:
                 return "";
