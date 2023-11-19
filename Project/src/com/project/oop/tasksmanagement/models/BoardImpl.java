@@ -10,6 +10,8 @@ import java.util.List;
 
 public class BoardImpl implements Board {
     private static final String BOARD_NAME_ERR = "Board name should be between %d and %d symbols.";
+    public static final String BOARD_CREATED_MESSAGE = "Board %s created";
+    public static final String TASK_ADDED_TO_THE_BOARD_MESSAGE = "%s with ID %d added to the board";
     private final int MIN_NAME_LENGTH = 5;
     private final int MAX_NAME_LENGTH = 10;
     private String name;
@@ -20,7 +22,7 @@ public class BoardImpl implements Board {
         setName(name);
         this.boardTasks = new ArrayList<>();
         this.activityHistory = new ArrayList<>();
-        activityHistory.add(new EventLog("Board %s created".formatted(name)));
+        activityHistory.add(new EventLog(BOARD_CREATED_MESSAGE.formatted(name)));
     }
 
     @Override
@@ -46,6 +48,6 @@ public class BoardImpl implements Board {
     @Override
     public void addBoardTask(Task task) {
         boardTasks.add(task);
-        activityHistory.add(new EventLog("%s with ID %d added to the board".formatted(task.getTaskType(),task.getId())));
+        activityHistory.add(new EventLog(TASK_ADDED_TO_THE_BOARD_MESSAGE.formatted(task.getTaskType(),task.getId())));
     }
 }

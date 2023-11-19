@@ -2,6 +2,7 @@ package com.project.oop.tasksmanagement.core;
 
 import com.project.oop.tasksmanagement.commands.*;
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
+import com.project.oop.tasksmanagement.commands.AddBugReproduceStepsCommand;
 import com.project.oop.tasksmanagement.commands.enums.CommandType;
 import com.project.oop.tasksmanagement.core.contracts.CommandFactory;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
@@ -21,6 +22,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new AddBoardCommand(taskManagementRepository);
             case ADDCOMMENT:
                 return new AddCommentCommand(taskManagementRepository);
+            case ADDBUGREPRODUCESTEPS:
+                return new AddBugReproduceStepsCommand(taskManagementRepository);
             case REMOVECOMMENT:
                 return new RemoveCommentCommand(taskManagementRepository);
             case ADDMEMBERTOTEAM:

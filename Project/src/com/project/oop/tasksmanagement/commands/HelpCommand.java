@@ -48,6 +48,8 @@ public class HelpCommand implements BaseCommand {
                 result.append(CommandTypeHelper.ADDTASK);
             case "ADDMEMBERTOTEAM":
                 result.append(CommandTypeHelper.ADDMEMBERTOTEAM);
+            case "ADDBUGREPRODUCESTEPS":
+                result.append(CommandTypeHelper.ADDBUGREPRODUCESTEPS);
             case "ASSIGNTASK":
                 result.append(CommandTypeHelper.ASSIGNTASK);
             case "UNASSIGNTASK":

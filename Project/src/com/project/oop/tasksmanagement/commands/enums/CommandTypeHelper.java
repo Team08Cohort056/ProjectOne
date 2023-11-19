@@ -4,6 +4,7 @@ public enum CommandTypeHelper {
     ADDBOARD,
     ADDTASK,
     ADDMEMBERTOTEAM,
+    ADDBUGREPRODUCESTEPS,
     ASSIGNTASK,
     UNASSIGNTASK,
     ADDCOMMENT,
@@ -29,6 +30,8 @@ public enum CommandTypeHelper {
                 return "";
 
             case ADDMEMBERTOTEAM:
+                return "";
+            case ADDBUGREPRODUCESTEPS:
                 return "";
 
             case ASSIGNTASK:

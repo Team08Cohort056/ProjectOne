@@ -22,10 +22,10 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     private static final String NO_MEMBERS_FOUND_HEADER = "No members found.";
     private static final String NO_BOARDS_FOUND_HEADER = "No boards found.";
     private static final String NO_TASKS_FOUND_HEADER = "No tasks found.";
-    private static final String NO_TASK_WITH_ID_ERR = "No task with ID %d";
-    public static final String NO_TEAM_WITH_NAME = "No team with name %s is found";
-    public static final String NO_MEMBER_WITH_NAME_ERR = "No member with name %s is found";
-    public static final String NO_BOARD_WITH_NAME_ERR = "No board with name %s is found";
+    private static final String NO_TASK_WITH_ID_ERR = "No %s with ID %d";
+    private static final String NO_TEAM_WITH_NAME = "No team with name %s is found";
+    private static final String NO_MEMBER_WITH_NAME_ERR = "No member with name %s is found";
+    private static final String NO_BOARD_WITH_NAME_ERR = "No board with name %s is found";
     private int nextId;
     private final List<Team> teams = new ArrayList<>();
     private final List<Member> members = new ArrayList<>();
@@ -106,6 +106,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Bug createBug(String title, String description, Severity severity) {
         Bug bug = new BugImpl(++nextId, title, description, severity);
         bugs.add(bug);
+        allAssignableTasks.add(bug);
         return bug;
     }
 
@@ -114,6 +115,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Story createStory(String title, String description, StorySize storySize) {
        Story story = new StoryImpl(++nextId, title, description, storySize);
        stories.add(story);
+       allAssignableTasks.add(story);
        return story;
     }
 
@@ -132,13 +134,17 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
        return findElementById(allAssignableTasks,id);
     }
 
+    public Bug findBugById(int id){
+        return findElementById(bugs,id);
+    }
+
     private   <T extends Identifiable> T findElementById(List<T> elements, int id) {
         for (T element : elements) {
             if (element.getId() == id) {
                 return element;
             }
         }
-        throw new IllegalArgumentException(NO_TASK_WITH_ID_ERR.formatted(id));
+        throw new IllegalArgumentException(NO_TASK_WITH_ID_ERR.formatted(elements.getClass(),id));
     }
     @Override
     public Team findTeamByName(String teamName) {

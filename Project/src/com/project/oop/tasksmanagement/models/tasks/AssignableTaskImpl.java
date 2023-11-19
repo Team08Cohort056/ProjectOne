@@ -1,6 +1,7 @@
 package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.models.contracts.AssignabelTask;
+import com.project.oop.tasksmanagement.models.enums.BugStatus;
 import com.project.oop.tasksmanagement.models.enums.Priority;
 import com.project.oop.tasksmanagement.utils.EventLog;
 
@@ -32,6 +33,7 @@ public abstract class AssignableTaskImpl extends TaskImpl implements AssignabelT
         activityHistory.add(new EventLog(PRIORITY_SWITCHED_MESSAGE.formatted(getTaskType(),getId(),this.priority,priority)));
         this.priority = priority;
     }
+
     public void assignTaskTo(String developer){
         activityHistory.add(new EventLog(ASSIGNED_EVENT.formatted(getTaskType(),getId(),developer)));
         this.assignee = developer ;
@@ -41,4 +43,5 @@ public abstract class AssignableTaskImpl extends TaskImpl implements AssignabelT
         activityHistory.add(new EventLog(UNASSIGNED_EVENT.formatted(getTaskType(),getId())));
         this.assignee = NOT_ASSIGNED;
     }
+
 }

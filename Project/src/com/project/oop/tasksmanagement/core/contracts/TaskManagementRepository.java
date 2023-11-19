@@ -37,6 +37,8 @@ public interface TaskManagementRepository {
 
     Task findTaskById(int id);
 
+    Bug findBugById(int id);
+
     AssignabelTask findAssignableTaskById(int id);
 
     Member findMemberByName(String memberName);
