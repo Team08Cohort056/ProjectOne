@@ -10,7 +10,6 @@ import com.project.oop.tasksmanagement.utils.ParsingHelpers;
 public class CommandFactoryImpl implements CommandFactory {
 
     private static final String INVALID_COMMAND = "Invalid command name: %s!";
-
     @Override
     public BaseCommand createCommandFromCommandName(String commandTypeAsString,
                                                     TaskManagementRepository taskManagementRepository) {
@@ -38,8 +37,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new AssignTaskCommand(taskManagementRepository);
             case UNASSIGNTASK:
                 return new UnAssignTaskCommand(taskManagementRepository);
-            case SHOWTEAMDEVELOPERS:
-                return new ShowTeamDevelopers(taskManagementRepository);
+            case SHOWTEAMMEMBERS:
+                return new ShowTeamMembers(taskManagementRepository);
             case SHOWTEAMBOARDS:
                 return new ShowTeamBoards(taskManagementRepository);
             case SHOWALL:

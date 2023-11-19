@@ -1,14 +1,12 @@
 package com.project.oop.tasksmanagement.models;
 
 import com.project.oop.tasksmanagement.models.contracts.Board;
-import com.project.oop.tasksmanagement.models.contracts.Developer;
+import com.project.oop.tasksmanagement.models.contracts.Member;
 import com.project.oop.tasksmanagement.models.contracts.Team;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class TeamTests {
+public class TeamImplTests {
 
     public static final String INVALID_NAME = "TEST";
     public static final String VALID_NAME = "VALIDTEST";
@@ -30,11 +28,11 @@ public class TeamTests {
         Assertions.assertEquals(1,team.getActivityHistory().size());
     }
     @Test
-    public void addDeveloper_ShouldAdd_Developer_To_ListOfDevelopers(){
+    public void addMember_ShouldAdd_Member_To_ListOfMembers(){
         Team team = initializeTestTeam();
-        Developer developer =initializeTestDeveloper();
-        team.addDeveloper(developer);
-        Assertions.assertEquals(team.getDevelopers().get(0),developer);
+        Member member = initializeTestMember();
+        team.addMember(member);
+        Assertions.assertEquals(team.getMembers().get(0), member);
     }
     @Test
     public void addBoard_ShouldAdd_Board_To_ListOfBoards(){
@@ -54,13 +52,13 @@ public class TeamTests {
     @Test
     public void findTeamBoardByName_Should_ThrowException_When_BoardDoesNotExist(){
         Team team = initializeTestTeam();
-        Assertions.assertThrows(IllegalArgumentException.class,()->team.findTeamBoardByName(TeamTests.VALID_NAME));
+        Assertions.assertThrows(IllegalArgumentException.class,()->team.findTeamBoardByName(TeamImplTests.VALID_NAME));
     }
     public Team initializeTestTeam(){
         return new TeamImpl(VALID_NAME);
     }
-    public Developer initializeTestDeveloper(){
-        return new DeveloperImpl(VALID_NAME);
+    public Member initializeTestMember(){
+        return new MemberImpl(VALID_NAME);
     }
     public Board initializeTestBoard(){
         return new BoardImpl(VALID_NAME);

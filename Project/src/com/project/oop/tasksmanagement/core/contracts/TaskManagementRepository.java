@@ -9,7 +9,7 @@ public interface TaskManagementRepository {
 
     List<Team> getTeams();
 
-    List<Developer> getMembers();
+    List<Member> getMembers();
 
     List<Task> getAllTasks();
 
@@ -21,7 +21,7 @@ public interface TaskManagementRepository {
 
     Team createTeam(String teamName);
 
-    Developer createMember(String memberName);
+    Member createMember(String memberName);
 
     Board createBoard(String boardName);
 
@@ -39,7 +39,7 @@ public interface TaskManagementRepository {
 
     AssignabelTask findAssignableTaskById(int id);
 
-    Developer findMemberByName(String memberName);
+    Member findMemberByName(String memberName);
 
     Board findBoardByName(String boardName);
 
@@ -47,12 +47,12 @@ public interface TaskManagementRepository {
 
     void addTeam(Team team);
 
-    void addMember(Developer developer);
+    void addMember(Member member);
 
     void addTask(Task task);
 
     String printTeams();
-    String printDevelopers();
+    String printMembers();
     String printBoards();
     String printTasks();
 }

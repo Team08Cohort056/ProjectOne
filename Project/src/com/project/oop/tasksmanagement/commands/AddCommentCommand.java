@@ -3,7 +3,7 @@ package com.project.oop.tasksmanagement.commands;
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.models.contracts.Comment;
-import com.project.oop.tasksmanagement.models.contracts.Developer;
+import com.project.oop.tasksmanagement.models.contracts.Member;
 import com.project.oop.tasksmanagement.models.contracts.Task;
 import com.project.oop.tasksmanagement.utils.ParsingHelpers;
 import com.project.oop.tasksmanagement.utils.ValidationHelpers;
@@ -32,16 +32,16 @@ public class AddCommentCommand implements BaseCommand {
     }
 
     private String addComment(String author, String content, int taskId) {
-        Developer developer = taskManagementRepository.findMemberByName(author);
+        Member member = taskManagementRepository.findMemberByName(author);
 
         ValidationHelpers.validateIntRange(taskId, 0, taskManagementRepository.getAllTasks().size() - 1, TASK_DOES_NOT_EXIST);
 
 //        Task task = developer.getTasks().get(taskId);
         Task task = taskManagementRepository.getAllTasks().get(taskId);
 
-        Comment comment = taskManagementRepository.createComment(content, String.valueOf(developer));
+        Comment comment = taskManagementRepository.createComment(content, String.valueOf(member));
 
-        developer.addComment(comment, task);
+        member.addComment(comment, task);
 
         return String.format(COMMENT_ADDED_SUCCESSFULLY, author);
     }

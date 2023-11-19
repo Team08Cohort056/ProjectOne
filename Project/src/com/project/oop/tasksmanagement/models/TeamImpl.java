@@ -1,7 +1,7 @@
 package com.project.oop.tasksmanagement.models;
 
 import com.project.oop.tasksmanagement.models.contracts.Board;
-import com.project.oop.tasksmanagement.models.contracts.Developer;
+import com.project.oop.tasksmanagement.models.contracts.Member;
 import com.project.oop.tasksmanagement.models.contracts.Team;
 import com.project.oop.tasksmanagement.utils.EventLog;
 import com.project.oop.tasksmanagement.utils.ValidationHelpers;
@@ -13,18 +13,18 @@ public class TeamImpl implements Team {
     private static final String NAME_LENGTH_ERR = "Team name must be between %d and %d symbols.";
     private static final int MIN_NAME_LENGTH = 5;
     private static final int MAX_NAME_LENGTH = 15;
-    public static final String NO_DEVELOPERS_FOUND_IN_TEAM_HEADER = "No developers found in team %s.";
+    public static final String NO_MEMBERS_FOUND_IN_TEAM_HEADER = "No members found in team %s.";
     public static final String NO_BOARDS_FOUND_IN_TEAM_HEADER = "No boards found in team %s.";
     public static final String BOARD_DOES_NOT_EXIST = "Board with name %s does not exist in Team %s";
     private String teamName;
-    private final ArrayList<Developer> developers;
+    private final ArrayList<Member> members;
 
     private final ArrayList<Board> boards;
     private final List<EventLog> activityHistory;
 
     public TeamImpl(String teamName) {
         setTeamName(teamName);
-        developers = new ArrayList<>();
+        members = new ArrayList<>();
         boards = new ArrayList<>();
         activityHistory = new ArrayList<>();
         activityHistory.add(new EventLog(String.format("Team %s created.", teamName)));
@@ -38,8 +38,8 @@ public class TeamImpl implements Team {
     //returns team name
 
     @Override
-    public List<Developer> getDevelopers() {
-        return new ArrayList<>(developers);
+    public List<Member> getMembers() {
+        return new ArrayList<>(members);
     }
     //returns copy of all members in the team
 
@@ -51,9 +51,9 @@ public class TeamImpl implements Team {
 
 
     @Override
-    public void addDeveloper(Developer developer) {
-        developers.add(developer);
-        activityHistory.add(new EventLog(String.format("Member %s added to team.", developer.getName())));
+    public void addMember(Member member) {
+        members.add(member);
+        activityHistory.add(new EventLog(String.format("Member %s added to team.", member.getName())));
     }
     //adds a member to the team and logs it into eventHistory
 
@@ -76,19 +76,19 @@ public class TeamImpl implements Team {
         return new ArrayList<>(activityHistory);
     }
     //returns a copy of activityHistory
-    public String printTeamDevelopers() {
+    public String printTeamMembers() {
         StringBuilder result = new StringBuilder();
         int counter = 1;
-        if (developers.isEmpty()) {
-            return result.append(String.format(NO_DEVELOPERS_FOUND_IN_TEAM_HEADER,getName())).toString();
+        if (members.isEmpty()) {
+            return result.append(String.format(NO_MEMBERS_FOUND_IN_TEAM_HEADER,getName())).toString();
         }
-        for (Developer developer : developers) {
-            result.append(counter).append(".").append(developer.getName()).append(System.lineSeparator());
+        for (Member member : members) {
+            result.append(counter).append(".").append(member.getName()).append(System.lineSeparator());
             counter++;
         }
         return result.toString();
     }
-    //returns a customized list of all developers.
+    //returns a customized list of all member.
 
     public Board findTeamBoardByName(String boardName){
         for (Board board: boards) {

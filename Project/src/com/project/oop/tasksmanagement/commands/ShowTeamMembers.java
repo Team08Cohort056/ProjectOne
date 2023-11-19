@@ -6,12 +6,12 @@ import com.project.oop.tasksmanagement.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class ShowTeamDevelopers implements BaseCommand {
+public class ShowTeamMembers implements BaseCommand {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
 
     private final TaskManagementRepository repository;
 
-    public ShowTeamDevelopers(TaskManagementRepository taskManagementRepository) {
+    public ShowTeamMembers(TaskManagementRepository taskManagementRepository) {
         this.repository = taskManagementRepository;
     }
 
@@ -19,7 +19,7 @@ public class ShowTeamDevelopers implements BaseCommand {
     public String execute(List<String> commands) {
         ValidationHelpers.validateArgumentsCount(commands,EXPECTED_NUMBER_OF_ARGUMENTS);
         String targetTeam = commands.get(0);
-        return repository.findTeamByName(targetTeam).printTeamDevelopers();
+        return repository.findTeamByName(targetTeam).printTeamMembers();
     }
 
 }

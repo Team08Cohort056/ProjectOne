@@ -10,10 +10,10 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public class DeveloperImpl implements Developer {
+public class MemberImpl implements Member {
     private final static int MIN_NAME_LEN = 5;
     private final static int MAX_NAME_LEN = 15;
-    private final static String NO_TASKS_FOR_THE_DEVELOPER = "There are no tasks assigned to the developer %s!";
+    private final static String NO_TASKS_FOR_THE_MEMBER = "There are no tasks assigned to the member %s!";
     private static final String INVALID_NAME_LEN = format(
             "Name length must be between %d and %d!",
             MIN_NAME_LEN,
@@ -23,7 +23,7 @@ public class DeveloperImpl implements Developer {
     private final List<Task> tasks;
     private final List<EventLog> activityHistory;
 
-    public DeveloperImpl(String name) {
+    public MemberImpl(String name) {
         setName(name);
         tasks = new ArrayList<>();
         activityHistory = new ArrayList<>();
@@ -72,7 +72,7 @@ public class DeveloperImpl implements Developer {
         StringBuilder result = new StringBuilder();
         int counter = 1;
         if (tasks.isEmpty()) {
-            throw new InvalidUserInputException(String.format(NO_TASKS_FOR_THE_DEVELOPER, getName()));
+            throw new InvalidUserInputException(String.format(NO_TASKS_FOR_THE_MEMBER, getName()));
         }
         for (Task task : tasks) {
             result.append(counter).append(".").append(task.getId()).append(task.getTaskType()).append(task.getStatus())

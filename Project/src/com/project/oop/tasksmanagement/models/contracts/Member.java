@@ -2,7 +2,7 @@ package com.project.oop.tasksmanagement.models.contracts;
 
 import java.util.List;
 
-public interface Developer extends ActivityHistory {
+public interface Member extends ActivityHistory {
     String getName();
 
 

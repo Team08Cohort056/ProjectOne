@@ -3,7 +3,7 @@ package com.project.oop.tasksmanagement.commands;
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.models.contracts.Comment;
-import com.project.oop.tasksmanagement.models.contracts.Developer;
+import com.project.oop.tasksmanagement.models.contracts.Member;
 import com.project.oop.tasksmanagement.models.contracts.Task;
 import com.project.oop.tasksmanagement.utils.ParsingHelpers;
 import com.project.oop.tasksmanagement.utils.ValidationHelpers;
@@ -39,7 +39,7 @@ public class RemoveCommentCommand implements BaseCommand {
     }
 
     private String removeComment(String author,int taskId, int commentIndex) {
-        Developer developer = taskManagementRepository.findMemberByName(author);
+        Member member = taskManagementRepository.findMemberByName(author);
 
         ValidationHelpers.validateIntRange(taskId, 0, taskManagementRepository.getAllTasks().size() - 1, TASK_ID_OUT_OF_BOUNDS);
         ValidationHelpers.validateIntRange(commentIndex, 0,
@@ -48,7 +48,7 @@ public class RemoveCommentCommand implements BaseCommand {
         Task task = taskManagementRepository.getAllTasks().get(taskId);
         Comment comment = taskManagementRepository.getAllTasks().get(taskId).getComments().get(commentIndex);
 
-        developer.removeComment(comment, task);
+        member.removeComment(comment, task);
 
         return String.format(COMMENT_REMOVED_SUCCESSFULLY, author);
     }

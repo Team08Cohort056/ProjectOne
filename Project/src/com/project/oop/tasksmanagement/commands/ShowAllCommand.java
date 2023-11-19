@@ -28,8 +28,8 @@ public class ShowAllCommand implements BaseCommand {
         switch (collectionToPrint){
             case "TEAMS":
                 return repository.printTeams();
-            case "DEVELOPERS":
-                return repository.printDevelopers();
+            case "MEMBERS":
+                return repository.printMembers();
             case "BOARDS":
                 return repository.printBoards();
             case "TASKS":

@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface Team extends ActivityHistory{
     String getName();
-    List<Developer> getDevelopers();
+    List<Member> getMembers();
     List<Board> getBoards();
-    void addDeveloper(Developer developer);
+    void addMember(Member member);
 
     void addBoard(Board board);
      Board findTeamBoardByName(String boardName);
-    String printTeamDevelopers();
+    String printTeamMembers();
     String printTeamBoards();
 
 

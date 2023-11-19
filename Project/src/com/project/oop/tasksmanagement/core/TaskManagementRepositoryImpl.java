@@ -4,7 +4,7 @@ import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.core.exceptions.InvalidUserInputException;
 import com.project.oop.tasksmanagement.models.BoardImpl;
 import com.project.oop.tasksmanagement.models.CommentImpl;
-import com.project.oop.tasksmanagement.models.DeveloperImpl;
+import com.project.oop.tasksmanagement.models.MemberImpl;
 import com.project.oop.tasksmanagement.models.TeamImpl;
 import com.project.oop.tasksmanagement.models.contracts.*;
 import com.project.oop.tasksmanagement.models.enums.Severity;
@@ -19,7 +19,7 @@ import java.util.List;
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     private static final String NO_TEAMS_FOUND_HEADER = "No teams found.";
-    private static final String NO_DEVELOPERS_FOUND_HEADER = "No developers found.";
+    private static final String NO_MEMBERS_FOUND_HEADER = "No members found.";
     private static final String NO_BOARDS_FOUND_HEADER = "No boards found.";
     private static final String NO_TASKS_FOUND_HEADER = "No tasks found.";
     private static final String NO_TASK_WITH_ID_ERR = "No task with ID %d";
@@ -28,7 +28,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public static final String NO_BOARD_WITH_NAME_ERR = "No board with name %s is found";
     int nextId;
     private final List<Team> teams = new ArrayList<>();
-    private final List<Developer> developers = new ArrayList<>();
+    private final List<Member> members = new ArrayList<>();
     private final List<Task> allTasks = new ArrayList<>();
     private final List<AssignabelTask> allAssignableTasks = new ArrayList<>();
     private final List<Bug> bugs = new ArrayList<>();
@@ -46,8 +46,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
 
     @Override
-    public List<Developer> getMembers() {
-        return new ArrayList<>(developers);
+    public List<Member> getMembers() {
+        return new ArrayList<>(members);
     }
 
     @Override
@@ -67,8 +67,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public boolean memberExists(String memberName) {
         boolean exists = false;
 
-        for (Developer developer : getMembers()) {
-            if (developer.getName().equalsIgnoreCase(memberName)) {
+        for (Member member : getMembers()) {
+            if (member.getName().equalsIgnoreCase(memberName)) {
                 exists = true;
                 break;
             }
@@ -83,8 +83,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Developer createMember(String memberName) {
-        return new DeveloperImpl(memberName);
+    public Member createMember(String memberName) {
+        return new MemberImpl(memberName);
     }
 
     @Override
@@ -146,10 +146,10 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Developer findMemberByName(String memberName) {
-        for (Developer developer : getMembers()) {
-            if (developer.getName().equals(memberName)) {
-                return developer;
+    public Member findMemberByName(String memberName) {
+        for (Member member : getMembers()) {
+            if (member.getName().equals(memberName)) {
+                return member;
             }
         }
 
@@ -176,8 +176,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public void addMember(Developer developer) {
-        developers.add(developer);
+    public void addMember(Member member) {
+        members.add(member);
     }
 
     public void addTask(Task task){
@@ -201,14 +201,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public String printDevelopers() {
+    public String printMembers() {
         StringBuilder result = new StringBuilder();
         int counter = 1;
-        if (developers.isEmpty()) {
-            return result.append(NO_DEVELOPERS_FOUND_HEADER).toString();
+        if (members.isEmpty()) {
+            return result.append(NO_MEMBERS_FOUND_HEADER).toString();
         }
-        for (Developer developer : developers) {
-            result.append(counter).append(".").append(developer.getName()).append(System.lineSeparator());
+        for (Member member : members) {
+            result.append(counter).append(".").append(member.getName()).append(System.lineSeparator());
             counter++;
         }
         return result.toString();

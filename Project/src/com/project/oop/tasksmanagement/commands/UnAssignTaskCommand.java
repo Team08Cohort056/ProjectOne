@@ -2,7 +2,7 @@ package com.project.oop.tasksmanagement.commands;
 
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
-import com.project.oop.tasksmanagement.models.contracts.Developer;
+import com.project.oop.tasksmanagement.models.contracts.Member;
 import com.project.oop.tasksmanagement.models.contracts.Task;
 import com.project.oop.tasksmanagement.utils.ParsingHelpers;
 import com.project.oop.tasksmanagement.utils.ValidationHelpers;
@@ -28,9 +28,9 @@ public class UnAssignTaskCommand implements BaseCommand {
         return unAssignTask(developerName,taskId);
     }
     public String unAssignTask(String developerName, int taskId){
-        Developer developer = repository.findMemberByName(developerName);
-        ValidationHelpers.validateIntRange(taskId,1,developer.getTasks().size(), NO_TASK_ON_THIS_INDEX_ERR);
-        Task task = developer.getTasks().get(taskId-1);
+        Member member = repository.findMemberByName(developerName);
+        ValidationHelpers.validateIntRange(taskId,1, member.getTasks().size(), NO_TASK_ON_THIS_INDEX_ERR);
+        Task task = member.getTasks().get(taskId-1);
         repository.findMemberByName(developerName).removeTask(task);
         //TODO: Assignee must be set to "not assigned"
         return String.format(TASK_REMOVED_SUCCESSFULLY,taskId,developerName);
