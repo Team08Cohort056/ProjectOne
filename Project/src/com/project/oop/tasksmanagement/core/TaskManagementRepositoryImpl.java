@@ -26,7 +26,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public static final String NO_TEAM_WITH_NAME = "No team with name %s is found";
     public static final String NO_MEMBER_WITH_NAME_ERR = "No member with name %s is found";
     public static final String NO_BOARD_WITH_NAME_ERR = "No board with name %s is found";
-    int nextId;
+    private int nextId;
     private final List<Team> teams = new ArrayList<>();
     private final List<Member> members = new ArrayList<>();
     private final List<Task> allTasks = new ArrayList<>();
@@ -62,6 +62,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public List<Feedback> getFeedbacks() {return new ArrayList<>(feedbacks);}
+
+    @Override
+    public int getId() {
+        return nextId;
+    }
 
     @Override
     public boolean memberExists(String memberName) {

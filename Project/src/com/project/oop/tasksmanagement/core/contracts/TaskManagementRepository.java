@@ -55,4 +55,5 @@ public interface TaskManagementRepository {
     String printMembers();
     String printBoards();
     String printTasks();
+    int getId();
 }
