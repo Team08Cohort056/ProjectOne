@@ -1,6 +1,8 @@
 package com.project.oop.tasksmanagement.models;
 
+import com.project.oop.tasksmanagement.models.tasks.StoryImpl;
 import com.project.oop.tasksmanagement.utils.UtilsTests;
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -46,16 +48,16 @@ public class MemberImplTests {
     public void addComment_Should_AddCommentToTheCollection() {
         // Arrange
         MemberImpl member = initializeTestMember();
-        //  BugImpl bug = BugImplTests.initializeTestBug();
-        //  member.addTask(bug);
+        StoryImpl story = StoryImplTests.initializeTestStory();
+          member.addTask(story);
 
         // Act
-        //  member.addComment(new CommentImpl(
-        //     CommentImplTests.VALID_CONTENT,
-        //   CommentImplTests.VALID_AUTHOR), bug);
+          member.addComment(new CommentImpl(
+             CommentImplTests.VALID_CONTENT,
+           CommentImplTests.VALID_AUTHOR), story);
 
         // Assert
-        //   Assert.assertEquals(1, bug.getComments().size());
+           Assertions.assertEquals(1, story.getComments().size());
     }
 
 
