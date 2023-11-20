@@ -48,8 +48,11 @@ public enum CommandTypeHelper {
                         [2]Name of member.
                         """;
             case ADDBUGREPRODUCESTEPS:
-                return "Helper not implemented yet.";//TODO
-
+                return """
+                        Add steps to reproduce the bug. Command takes 2 parameters:
+                        [1]ID of task.
+                        [2]One string that describes the steps for reproducing the bug.
+                        """;
             case ASSIGNTASK:
                 return """
                         Assigns a task to a member. Command takes 2 parameters:
