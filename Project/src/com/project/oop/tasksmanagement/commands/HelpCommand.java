@@ -6,11 +6,10 @@ import com.project.oop.tasksmanagement.commands.enums.CommandTypeHelper;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.utils.ValidationHelpers;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class HelpCommand implements BaseCommand {
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
+    private static final int MAXIMUM_NUMBER_OF_ARGUMENTS = 1;
     public static final String DEFAULT_HELP_MESSAGE = String.format(
             "help commandlist - Shows a list of all available commands.%n" +
                     "help {COMMANDNAME} - Shows instructions on how to use the specified command.%n" +
@@ -27,7 +26,7 @@ public class HelpCommand implements BaseCommand {
     @Override
     public String execute(List<String> commands) {
         if (commands.size()==0){return DEFAULT_HELP_MESSAGE;}
-        ValidationHelpers.validateArgumentsCount(commands,EXPECTED_NUMBER_OF_ARGUMENTS);
+        ValidationHelpers.validateArgumentsCount(commands, MAXIMUM_NUMBER_OF_ARGUMENTS);
         String helpWithCommand = commands.get(0).toUpperCase();
         return helper(helpWithCommand);
     }
@@ -98,9 +97,7 @@ public class HelpCommand implements BaseCommand {
                 result.append(CommandTypeHelper.HELP);
                 break;
             default:
-                result.append(String.format(COMMAND_NOT_FOUND_ERR,helpWithCommand));
-                break;
-
+                throw new IllegalArgumentException(String.format(COMMAND_NOT_FOUND_ERR,helpWithCommand));
         }
         return result.toString();
     }
