@@ -88,7 +88,7 @@ public class TeamImpl implements Team {
         }
         return result.toString();
     }
-    //returns a customized list of all member.
+    //returns a customized list of all members.
 
     public Board findTeamBoardByName(String boardName){
         for (Board board: boards) {

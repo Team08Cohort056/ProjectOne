@@ -42,44 +42,64 @@ public class HelpCommand implements BaseCommand {
                     result.append(counter).append(".").append(type.toString().toLowerCase()).append(System.lineSeparator());
                     counter++;
                 }
+                break;
             case "ADDBOARD":
                 result.append(CommandTypeHelper.ADDBOARD);
+                break;
             case "ADDTASK":
                 result.append(CommandTypeHelper.ADDTASK);
+                break;
             case "ADDMEMBERTOTEAM":
                 result.append(CommandTypeHelper.ADDMEMBERTOTEAM);
+                break;
             case "ADDBUGREPRODUCESTEPS":
                 result.append(CommandTypeHelper.ADDBUGREPRODUCESTEPS);
+                break;
             case "ASSIGNTASK":
                 result.append(CommandTypeHelper.ASSIGNTASK);
+                break;
             case "UNASSIGNTASK":
                 result.append(CommandTypeHelper.UNASSIGNTASK);
+                break;
             case "ADDCOMMENT":
                 result.append(CommandTypeHelper.ADDCOMMENT);
+                break;
             case "REMOVECOMMENT":
                 result.append(CommandTypeHelper.REMOVECOMMENT);
+                break;
             case "CREATEMEMBER":
                 result.append(CommandTypeHelper.CREATEMEMBER);
+                break;
             case "CREATETEAM":
                 result.append(CommandTypeHelper.CREATETEAM);
+                break;
             case "CHANGETASK":
                 result.append(CommandTypeHelper.CHANGETASK);
+                break;
             case "SHOWALL":
                 result.append(CommandTypeHelper.SHOWALL);
+                break;
             case "SHOWACTIVITY":
                 result.append(CommandTypeHelper.SHOWACTIVITY);
+                break;
             case "SHOWTEAMMEMBERS":
                 result.append(CommandTypeHelper.SHOWTEAMMEMBERS);
+                break;
             case "SHOWTEAMBOARDS":
                 result.append(CommandTypeHelper.SHOWTEAMBOARDS);
+                break;
             case "LISTALL":
                 result.append(CommandTypeHelper.LISTALL);
+                break;
             case "LISTASSIGNEDTASKS":
                 result.append(CommandTypeHelper.LISTASSIGNEDTASKS);
+                break;
             case "HELP":
                 result.append(CommandTypeHelper.HELP);
+                break;
             default:
                 result.append(String.format(COMMAND_NOT_FOUND_ERR,helpWithCommand));
+                break;
 
         }
         return result.toString();

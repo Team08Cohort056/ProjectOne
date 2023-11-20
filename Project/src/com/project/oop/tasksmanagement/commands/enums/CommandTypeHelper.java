@@ -24,54 +24,115 @@ public enum CommandTypeHelper {
     public String toString() {
         switch (this) {
             case ADDBOARD:
-                return "Creates and adds a board to a team. Command takes 2 parameters - " +
-                        "The name of the board you wish to create and the team that will contain the board.";
+                return """
+                       
+                        "Creates and adds a board to a team. Command takes 2 parameters:
+                        [1]The name of the board you wish to create.
+                        [2]The team that will contain the board.
+                        """;
             case ADDTASK:
-                return "";
+                return """
+                        Creates and adds a task to a board. Command takes 6 parameters:
+                        [1]Name of receiving team.
+                        [2]Name of receiving board.
+                        [3]Type of task you wish to create.
+                        [4]Title of task.
+                        [5]Description of task.
+                        [6]severity, size or rating.
+                        """;
 
             case ADDMEMBERTOTEAM:
-                return "";
+                return """
+                        Adds a member to a team. Command takes 2 parameters:
+                        [1]Name of receiving team.
+                        [2]Name of member.
+                        """;
             case ADDBUGREPRODUCESTEPS:
-                return "";
+                return "Helper not implemented yet.";//TODO
 
             case ASSIGNTASK:
-                return "";
+                return """
+                        Assigns a task to a member. Command takes 2 parameters:
+                        [1]Name of receiving member.
+                        [2]ID of task.
+                        You can see all tasks and their IDs with {SHOWALL TASKS}.
+                        """;
 
             case UNASSIGNTASK:
-                return "";
+                return """
+                        UnAssigns a task from a member. Command takes 2 parameters:
+                        [1]Name of member.
+                        [2]ID of task to be removed.
+                        You can see all tasks and their IDs with {SHOWALL TASKS}.
+                        """;
 
             case ADDCOMMENT:
-                return "";
+                return """
+                        Adds a comment to a task with an author. Command takes 3 parameters:
+                        [1]Name of author(member).
+                        [2]Content of the comment.
+                        [3]ID of task to receive a comment.
+                        """;
 
             case REMOVECOMMENT:
-                return "";
+                return """
+                        Removes a comment from a task. Command takes 3 parameters:
+                        [1]Name of author(member).
+                        [2]ID of task to have comment removed.
+                        [3]Index of comment.
+                        """;
 
             case CREATEMEMBER:
-                return "";
+                return """
+                        Creates a member and adds them to the repository. Command takes 1 parameter:
+                        [1]Name of member.
+                        """;
 
             case CREATETEAM:
-                return "";
+                return """
+                        Creates a team and adds it to the repository. Command takes 1 parameter:
+                        [1]Name of team.
+                        """;
 
             case CHANGETASK:
-                return "";
+                return """
+                        Changes the attributes of an existing task. Command takes 3 parameters:
+                        [1]ID of the task to be changed.
+                        [2]Attribute to be changed.
+                        [3]New value of attribute.
+                        You can see all tasks and their IDs with {SHOWALL TASKS}.
+                        """;
 
             case SHOWALL:
-                return "";
+                return """
+                        Shows all teams, members, boards or tasks. Command takes 1 parameter:
+                        [1]Collection to be shown.
+                        """;
 
             case SHOWACTIVITY:
-                return "";
+                return """
+                        Shows all activity of a team, member, board or task. Command takes 2 parameters:
+                        [1]Type to query for activity.
+                        [2]Name or ID of specific item.
+                        """;
 
             case SHOWTEAMMEMBERS:
-                return "";
+                return """
+                        Shows all members in a team. Command takes 1 parameter:
+                        [1]Team name.
+                        """;
 
             case LISTALL:
-                return "";
+                return "Helper not implemented yet."; //TODO
 
             case LISTASSIGNEDTASKS:
-                return "";
+                return "Helper not implemented yet."; //TODO
 
             case HELP:
-                return "";
+                return """
+                        Shows the user instructions on using the application. Command takes no parameters or 1 parameter:
+                        [1]Name of command to receive instructions on.
+                        """;
 
             default:
                 return "";

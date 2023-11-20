@@ -61,7 +61,7 @@ public class ShowActivityCommand implements BaseCommand {
                 for (EventLog eventLog: boardActivityHistory) {
                     boardResult.append(eventLog);
                 }
-
+                //TODO: case "TASK"
                 return boardResult.toString();
             default:
                 return INVALID_COMMAND;
