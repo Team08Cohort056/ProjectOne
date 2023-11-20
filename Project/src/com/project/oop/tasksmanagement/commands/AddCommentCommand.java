@@ -36,7 +36,7 @@ public class AddCommentCommand implements BaseCommand {
 
         ValidationHelpers.validateIntRange(taskId, 0, taskManagementRepository.getAllTasks().size() - 1, TASK_DOES_NOT_EXIST);
 
-//        Task task = developer.getTasks().get(taskId);
+
         Task task = taskManagementRepository.getAllTasks().get(taskId);
 
         Comment comment = taskManagementRepository.createComment(content, String.valueOf(member));
