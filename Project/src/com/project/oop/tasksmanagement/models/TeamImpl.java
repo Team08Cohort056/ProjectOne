@@ -13,9 +13,12 @@ public class TeamImpl implements Team {
     private static final String NAME_LENGTH_ERR = "Team name must be between %d and %d symbols.";
     private static final int MIN_NAME_LENGTH = 5;
     private static final int MAX_NAME_LENGTH = 15;
-    public static final String NO_MEMBERS_FOUND_IN_TEAM_HEADER = "No members found in team %s.";
-    public static final String NO_BOARDS_FOUND_IN_TEAM_HEADER = "No boards found in team %s.";
-    public static final String BOARD_DOES_NOT_EXIST = "Board with name %s does not exist in Team %s";
+    private static final String NO_MEMBERS_FOUND_IN_TEAM_HEADER = "No members found in team %s.";
+    private static final String NO_BOARDS_FOUND_IN_TEAM_HEADER = "No boards found in team %s.";
+    private static final String BOARD_DOES_NOT_EXIST = "Board with name %s does not exist in Team %s";
+    private static final String TEAM_CREATED_HEADER = "Team %s created.";
+    private static final String MEMBER_ADDED_TO_TEAM_HEADER = "Member %s added to team.";
+    private static final String BOARD_ADDED_TO_TEAM_HEADER = "Board %s added to team.";
     private String teamName;
     private final ArrayList<Member> members;
 
@@ -27,7 +30,7 @@ public class TeamImpl implements Team {
         members = new ArrayList<>();
         boards = new ArrayList<>();
         activityHistory = new ArrayList<>();
-        activityHistory.add(new EventLog(String.format("Team %s created.", teamName)));
+        activityHistory.add(new EventLog(String.format(TEAM_CREATED_HEADER, teamName)));
     }
 
 
@@ -53,18 +56,18 @@ public class TeamImpl implements Team {
     @Override
     public void addMember(Member member) {
         members.add(member);
-        activityHistory.add(new EventLog(String.format("Member %s added to team.", member.getName())));
+        activityHistory.add(new EventLog(String.format(MEMBER_ADDED_TO_TEAM_HEADER, member.getName())));
     }
     //adds a member to the team and logs it into eventHistory
 
     @Override
     public void addBoard(Board board) {
         boards.add(board);
-        activityHistory.add(new EventLog(String.format("Board %s added to team.", board.getName())));
+        activityHistory.add(new EventLog(String.format(BOARD_ADDED_TO_TEAM_HEADER, board.getName())));
     }
     //adds a board to the team
 
-    public void setTeamName(String teamName) {
+    private void setTeamName(String teamName) {
         ValidationHelpers.validateStringLength(teamName,MIN_NAME_LENGTH,MAX_NAME_LENGTH,
                 NAME_LENGTH_ERR.formatted(MIN_NAME_LENGTH,MAX_NAME_LENGTH));
         this.teamName = teamName;

@@ -9,6 +9,8 @@ import com.project.oop.tasksmanagement.utils.EventLog;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
 
+    private static final String FEEDBACK_RATING_CHANGED_SUCCESSFULLY = "The rating of the feedback with ID %d switched from %d to %d.";
+    private static final String FEEDBACK_STATUS_CHANGED_SUCCESSFULLY = "The status of the feedback with ID %d switched from %s to %s.";
     private TaskType taskType;
     private int rating;
     //will store the rating of the task.
@@ -21,12 +23,12 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 
     }
     //Constructor creates a task with the addition of a rating and a custom status being set.
-    public void setFeedbackStatus(FeedbackStatus status) {
+    private void setFeedbackStatus(FeedbackStatus status) {
         this.feedbackStatus = status;
     }
     //sets status of the Feedback.
 
-    public void setRating(int rating) {
+    private void setRating(int rating) {
         this.rating = rating;
     }
     //sets rating of the Feedback.
@@ -56,12 +58,12 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     //TODO
 
     public void changeFeedbackRating(int rating){
-        activityHistory.add(new EventLog("The rating of the feedback with ID %d switched from %d to %d.".formatted(getId(),this.rating,rating)));
-        this.rating = rating;
+        activityHistory.add(new EventLog(FEEDBACK_RATING_CHANGED_SUCCESSFULLY.formatted(getId(),this.rating,rating)));
+        setRating(rating);
     }
 
     public void changeFeedbackStatus(FeedbackStatus status){
-        activityHistory.add(new EventLog("The status of the feedback with ID %d switched from %s to %s.".formatted(getId(),this.feedbackStatus,status)));
-        this.feedbackStatus = status;
+        activityHistory.add(new EventLog(FEEDBACK_STATUS_CHANGED_SUCCESSFULLY.formatted(getId(),this.feedbackStatus,status)));
+        setFeedbackStatus(status);
     }
 }
