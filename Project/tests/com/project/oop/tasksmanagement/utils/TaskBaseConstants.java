@@ -11,6 +11,8 @@ public class TaskBaseConstants {
     public static final String VALID_DESCRIPTION = UtilsTests.getString(STORY_DESCRIPTION_MIN_LENGTH + 1);
 
     public static final String INVALID_DESCRIPTION = UtilsTests.getString(STORY_DESCRIPTION_MIN_LENGTH - 1);
+    public static final int FEEDBACK_MIN_ID = 1;
+
 
 
 }
