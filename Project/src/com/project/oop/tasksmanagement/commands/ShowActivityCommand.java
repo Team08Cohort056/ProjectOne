@@ -76,7 +76,7 @@ public class ShowActivityCommand implements BaseCommand {
 
                 return taskResult.toString();
             default:
-                return INVALID_COMMAND;
+                throw new IllegalArgumentException(INVALID_COMMAND);
         }
     }
 }
