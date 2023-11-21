@@ -35,7 +35,7 @@ public class ShowAllCommand implements BaseCommand {
             case "TASKS":
                 return repository.printTasks();
             default:
-                return INVALID_COMMAND;
+                throw new IllegalArgumentException(INVALID_COMMAND);
         }
     }
 
