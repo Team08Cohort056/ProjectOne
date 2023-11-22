@@ -1,5 +1,6 @@
 package com.project.oop.tasksmanagement.models.tasks;
 
+import com.project.oop.tasksmanagement.models.contracts.Comment;
 import com.project.oop.tasksmanagement.models.contracts.Commentable;
 import com.project.oop.tasksmanagement.models.contracts.Story;
 import com.project.oop.tasksmanagement.models.enums.*;
@@ -46,6 +47,23 @@ public class StoryImpl extends AssignableTaskImpl implements Story {
         activityHistory.add(new EventLog("The status of the story with ID %d switched from %s to %s."
                 .formatted(getId(), this.storyStatus, status)));
         this.storyStatus = status;
+    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(super.toString());
+        sb.append("Size: %s".formatted(getStorySize().toString())).append(System.lineSeparator());
+        sb.append("Status: %s".formatted(getStatus())).append(System.lineSeparator());
+        sb.append("Comments:").append(System.lineSeparator());
+        if (getComments().isEmpty()){
+            sb.append("No comments has been added to this %s yet.".formatted(getTaskType().toString()));
+        } else {
+            int counter = 1;
+            for (Comment comment:getComments()) {
+                sb.append("%d. %s".formatted(counter,comment.commentsAsString())).append(System.lineSeparator());
+                counter++;
+            }
+        }
+        return sb.toString();
     }
 
 }

@@ -50,4 +50,21 @@ public class BoardImpl implements Board {
         boardTasks.add(task);
         activityHistory.add(new EventLog(TASK_ADDED_TO_THE_BOARD_MESSAGE.formatted(task.getTaskType(),task.getId())));
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Board: %s".formatted(getName())).append(System.lineSeparator());
+        sb.append("Tasks:").append(System.lineSeparator());
+        if (getBoardTasks().isEmpty()){
+            sb.append("No tasks has been added on this board yet.").append(System.lineSeparator());
+        } else {
+            int counter = 1;
+            for (Task task: getBoardTasks()) {
+                sb.append("%d. %s".formatted(counter,task.toString())).append(System.lineSeparator());
+                counter++;
+            }
+        }
+        return sb.toString();
+    }
 }

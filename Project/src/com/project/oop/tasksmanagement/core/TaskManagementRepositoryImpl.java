@@ -137,6 +137,10 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Bug findBugById(int id){
         return findElementById(bugs,id);
     }
+    public Story findStoryById(int id){
+        return findElementById(stories,id);
+    }
+    public Feedback findFeedbackById(int id){return findElementById(feedbacks,id);}
 
     private   <T extends Identifiable> T findElementById(List<T> elements, int id) {
         for (T element : elements) {

@@ -17,7 +17,7 @@ public abstract class TaskImpl implements Task {
     private static final int MIN_DESC_LENGTH = 10;
     private static final int MAX_DESC_LENGTH = 500;
     private static final String DESC_LENGTH_ERR = "Description should be between %d and %d symbols.";
-    private int id;
+    private final int id;
     private String title;
     private String description;
     protected List<EventLog> activityHistory;
@@ -65,6 +65,17 @@ public abstract class TaskImpl implements Task {
         return new ArrayList<>(comments);
     }
 
+    private void setTitle(String title) {
+        ValidationHelpers.validateStringLength(title, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH,
+                String.format(TITLE_LENGTH_ERR,MIN_TITLE_LENGTH,MAX_TITLE_LENGTH));
+        this.title = title;
+    }
+
+    private void setDescription(String description) {
+        ValidationHelpers.validateStringLength(description, MIN_DESC_LENGTH, MAX_DESC_LENGTH,DESC_LENGTH_ERR.formatted(MIN_DESC_LENGTH,MAX_DESC_LENGTH));
+        this.description = description;
+    }
+
     @Override
     public void addComment(Comment comment) {
         comments.add(comment);
@@ -75,15 +86,14 @@ public abstract class TaskImpl implements Task {
         comments.remove(comment);
     }
 
-    private void setTitle(String title) {
-        ValidationHelpers.validateStringLength(title, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH,
-                String.format(TITLE_LENGTH_ERR,MIN_TITLE_LENGTH,MAX_TITLE_LENGTH));
-        this.title = title;
-    }
-
-    private void setDescription(String description) {
-        ValidationHelpers.validateStringLength(description, MIN_DESC_LENGTH, MAX_DESC_LENGTH,DESC_LENGTH_ERR.formatted(MIN_DESC_LENGTH,MAX_DESC_LENGTH));
-        this.description = description;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getTaskType().toString()).append(System.lineSeparator());
+        sb.append("ID %d".formatted(getId())).append(System.lineSeparator());
+        sb.append("Title: %s".formatted(getTitle())).append(System.lineSeparator());
+        sb.append("Description: %s".formatted(getDescription())).append(System.lineSeparator());
+        return sb.toString();
     }
 }
 

@@ -1,17 +1,11 @@
 package com.project.oop.tasksmanagement.commands;
 
-import com.project.oop.tasksmanagement.commands.enums.CommandType;
+import com.project.oop.tasksmanagement.commands.showcommands.ShowActivityCommand;
 import com.project.oop.tasksmanagement.core.TaskManagementRepositoryImpl;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
-import com.project.oop.tasksmanagement.models.BoardImpl;
-import com.project.oop.tasksmanagement.models.MemberImpl;
 import com.project.oop.tasksmanagement.models.TeamImpl;
-import com.project.oop.tasksmanagement.models.TeamImplTests;
-import com.project.oop.tasksmanagement.models.contracts.Board;
-import com.project.oop.tasksmanagement.models.contracts.Member;
 import com.project.oop.tasksmanagement.models.contracts.Team;
 import com.project.oop.tasksmanagement.utils.TaskBaseConstants;
-import com.project.oop.tasksmanagement.utils.ValidationHelpers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

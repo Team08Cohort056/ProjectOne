@@ -47,7 +47,7 @@ public class ChangeTaskCommand implements BaseCommand {
         Task task = taskManagementRepository.findTaskById(id);
         switch (task.getTaskType()) {
             case BUG -> {
-                Bug bug = (Bug) task;
+                Bug bug = taskManagementRepository.findBugById(id);
                 switch (enumToBeChanged.toLowerCase()) {
                     case "priority" -> bug.changePriority(ParsingHelpers.tryParseEnum(newValue, Priority.class));
                     case "severity" -> bug.changeBugSeverity(ParsingHelpers.tryParseEnum(newValue, Severity.class));
@@ -56,7 +56,7 @@ public class ChangeTaskCommand implements BaseCommand {
                 }
             }
             case STORY -> {
-                Story story = (Story) task;
+                Story story = taskManagementRepository.findStoryById(id);
                 switch (enumToBeChanged.toLowerCase()) {
                     case "priority" -> story.changePriority(ParsingHelpers.tryParseEnum(newValue, Priority.class));
                     case "size" -> story.changeStorySize(ParsingHelpers.tryParseEnum(newValue, StorySize.class));
@@ -65,7 +65,7 @@ public class ChangeTaskCommand implements BaseCommand {
                 }
             }
             case FEEDBACK -> {
-                Feedback feedback = (Feedback) task;
+                Feedback feedback = taskManagementRepository.findFeedbackById(id);
                 switch (enumToBeChanged.toLowerCase()) {
                     case "rating" ->
                             feedback.changeFeedbackRating(ParsingHelpers.tryParseInt(newValue, FEEDBACK_RATING_SHOULD_BE_INTEGER_ERR));

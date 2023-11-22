@@ -1,4 +1,4 @@
-package com.project.oop.tasksmanagement.commands;
+package com.project.oop.tasksmanagement.commands.showcommands;
 
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
@@ -6,12 +6,12 @@ import com.project.oop.tasksmanagement.utils.ValidationHelpers;
 
 import java.util.List;
 
-public class ShowTeamMembers implements BaseCommand {
+public class ShowTeamBoardsCommand implements BaseCommand {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
 
     private final TaskManagementRepository repository;
 
-    public ShowTeamMembers(TaskManagementRepository taskManagementRepository) {
+    public ShowTeamBoardsCommand(TaskManagementRepository taskManagementRepository) {
         this.repository = taskManagementRepository;
     }
 
@@ -19,7 +19,6 @@ public class ShowTeamMembers implements BaseCommand {
     public String execute(List<String> commands) {
         ValidationHelpers.validateArgumentsCount(commands,EXPECTED_NUMBER_OF_ARGUMENTS);
         String targetTeam = commands.get(0);
-        return repository.findTeamByName(targetTeam).printTeamMembers();
+        return repository.findTeamByName(targetTeam).printTeamBoards();
     }
-
 }

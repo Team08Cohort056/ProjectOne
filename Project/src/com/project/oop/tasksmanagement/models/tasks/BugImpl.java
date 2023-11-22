@@ -1,6 +1,7 @@
 package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.models.contracts.Bug;
+import com.project.oop.tasksmanagement.models.contracts.Comment;
 import com.project.oop.tasksmanagement.models.enums.BugStatus;
 import com.project.oop.tasksmanagement.models.enums.Severity;
 import com.project.oop.tasksmanagement.models.enums.TaskType;
@@ -62,4 +63,23 @@ public class BugImpl extends AssignableTaskImpl implements Bug {
         this.status = status;
     }
 
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(super.toString());
+        sb.append("Severity: %s".formatted(getSeverity().toString())).append(System.lineSeparator());
+        sb.append("Status: %s".formatted(getStatus())).append(System.lineSeparator());
+        sb.append("Steps to reproduce the bug: %s".formatted(getStepsToReproduce())).append(System.lineSeparator());
+        sb.append("Comments:").append(System.lineSeparator());
+        if (getComments().isEmpty()){
+            sb.append("No comments has been added to this %s yet.".formatted(getTaskType().toString()));
+        } else {
+            int counter = 1;
+            for (Comment comment:getComments()) {
+                sb.append("%d. %s".formatted(counter,comment.commentsAsString())).append(System.lineSeparator());
+                counter++;
+            }
+        }
+        return sb.toString();
+    }
 }

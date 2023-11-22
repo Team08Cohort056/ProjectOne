@@ -38,6 +38,8 @@ public interface TaskManagementRepository {
     Task findTaskById(int id);
 
     Bug findBugById(int id);
+    Story findStoryById(int id);
+    Feedback findFeedbackById(int id);
 
     AssignabelTask findAssignableTaskById(int id);
 

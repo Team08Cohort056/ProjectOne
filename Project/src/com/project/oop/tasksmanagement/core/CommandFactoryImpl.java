@@ -1,9 +1,13 @@
 package com.project.oop.tasksmanagement.core;
 
 import com.project.oop.tasksmanagement.commands.*;
+import com.project.oop.tasksmanagement.commands.addcreatecommands.*;
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
-import com.project.oop.tasksmanagement.commands.AddBugReproduceStepsCommand;
 import com.project.oop.tasksmanagement.commands.enums.CommandType;
+import com.project.oop.tasksmanagement.commands.showcommands.ShowActivityCommand;
+import com.project.oop.tasksmanagement.commands.showcommands.ShowAllCommand;
+import com.project.oop.tasksmanagement.commands.showcommands.ShowTeamBoardsCommand;
+import com.project.oop.tasksmanagement.commands.showcommands.ShowTeamMembersCommand;
 import com.project.oop.tasksmanagement.core.contracts.CommandFactory;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.utils.ParsingHelpers;
@@ -27,7 +31,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case REMOVECOMMENT:
                 return new RemoveCommentCommand(taskManagementRepository);
             case ADDMEMBERTOTEAM:
-                return new AddMemberToTeam(taskManagementRepository);
+                return new AddMemberToTeamCommand(taskManagementRepository);
             case CREATEMEMBER:
                 return new CreateMemberCommand(taskManagementRepository);
             case CREATETEAM:
@@ -41,9 +45,9 @@ public class CommandFactoryImpl implements CommandFactory {
             case UNASSIGNTASK:
                 return new UnAssignTaskCommand(taskManagementRepository);
             case SHOWTEAMMEMBERS:
-                return new ShowTeamMembers(taskManagementRepository);
+                return new ShowTeamMembersCommand(taskManagementRepository);
             case SHOWTEAMBOARDS:
-                return new ShowTeamBoards(taskManagementRepository);
+                return new ShowTeamBoardsCommand(taskManagementRepository);
             case SHOWALL:
                 return new ShowAllCommand(taskManagementRepository);
             case SHOWACTIVITY:

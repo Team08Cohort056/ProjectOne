@@ -1,7 +1,6 @@
 package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.models.contracts.AssignabelTask;
-import com.project.oop.tasksmanagement.models.enums.BugStatus;
 import com.project.oop.tasksmanagement.models.enums.Priority;
 import com.project.oop.tasksmanagement.utils.EventLog;
 
@@ -44,4 +43,11 @@ public abstract class AssignableTaskImpl extends TaskImpl implements AssignabelT
         this.assignee = NOT_ASSIGNED;
     }
 
+    @Override
+    public String toString() {
+       StringBuilder sb = new StringBuilder(super.toString());
+       sb.append("Priority: %s".formatted(getPriority().toString())).append(System.lineSeparator());
+       sb.append("Assignee: %s".formatted(getAssignee())).append(System.lineSeparator());
+       return sb.toString();
+    }
 }

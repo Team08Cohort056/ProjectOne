@@ -28,7 +28,7 @@ public class AssignTaskCommand implements BaseCommand {
         return assignTask(memberName,id);
     }
     private String assignTask(String memberName, int id){
-        if (taskIsAssignable(id) && taskManagementRepository.memberExists(memberName)){
+        if (taskIsAssignable(id)){
             AssignabelTask assignableTask = taskManagementRepository.findAssignableTaskById(id);
             taskManagementRepository.findMemberByName(memberName).addTask(assignableTask);
             assignableTask.assignTaskTo(memberName);

@@ -1,11 +1,11 @@
 package com.project.oop.tasksmanagement.commands;
 
+import com.project.oop.tasksmanagement.commands.addcreatecommands.AddCommentCommand;
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.core.TaskManagementRepositoryImpl;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.models.*;
 import com.project.oop.tasksmanagement.models.contracts.Board;
-import com.project.oop.tasksmanagement.models.contracts.Comment;
 import com.project.oop.tasksmanagement.models.contracts.Member;
 import com.project.oop.tasksmanagement.utils.UtilsTests;
 import org.junit.jupiter.api.Assertions;

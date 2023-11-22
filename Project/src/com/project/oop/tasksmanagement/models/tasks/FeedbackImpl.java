@@ -1,5 +1,6 @@
 package com.project.oop.tasksmanagement.models.tasks;
 
+import com.project.oop.tasksmanagement.models.contracts.Comment;
 import com.project.oop.tasksmanagement.models.contracts.Feedback;
 import com.project.oop.tasksmanagement.models.enums.BugStatus;
 import com.project.oop.tasksmanagement.models.enums.FeedbackStatus;
@@ -65,5 +66,22 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     public void changeFeedbackStatus(FeedbackStatus status){
         activityHistory.add(new EventLog(FEEDBACK_STATUS_CHANGED_SUCCESSFULLY.formatted(getId(),this.feedbackStatus,status)));
         setFeedbackStatus(status);
+    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(super.toString());
+        sb.append("Rating: %d".formatted(getRating())).append(System.lineSeparator());
+        sb.append("Status: %s".formatted(getStatus())).append(System.lineSeparator());
+        sb.append("Comments:").append(System.lineSeparator());
+        if (getComments().isEmpty()){
+            sb.append("No comments has been added to this %s yet.".formatted(getTaskType().toString()));
+        } else {
+            int counter = 1;
+            for (Comment comment:getComments()) {
+                sb.append("%d. %s".formatted(counter,comment.commentsAsString())).append(System.lineSeparator());
+                counter++;
+            }
+        }
+        return sb.toString();
     }
 }

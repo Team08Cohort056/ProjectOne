@@ -28,7 +28,7 @@ public class CommentImpl implements Comment {
 
     @Override
     public String commentsAsString() {
-        return String.format("\n%s\nMember: %s\n", content, author);
+        return String.format("%s\nMember: %s\n", content, author);
     }
 
     @Override

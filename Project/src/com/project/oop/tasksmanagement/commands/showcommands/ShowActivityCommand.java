@@ -1,4 +1,4 @@
-package com.project.oop.tasksmanagement.commands;
+package com.project.oop.tasksmanagement.commands.showcommands;
 
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
