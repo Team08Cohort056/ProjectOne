@@ -16,6 +16,9 @@ public interface TaskManagementRepository {
     List<Bug> getBugs();
 
     List<Story> getStories();
+    Story findStoryByFilter(StoryStatus status);
+    Story findStoryByFilter(StoryStatus status, String assignee);
+    Story findStoryByFilter(String assignee);
 
     List<Feedback> getFeedbacks();
 

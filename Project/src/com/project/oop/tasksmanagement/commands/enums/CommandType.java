@@ -18,7 +18,8 @@ public enum CommandType {
     SHOWTEAMBOARDS,
     LISTALL,
     LISTASSIGNEDTASKS,
-    HELP
+    HELP,
+    LISTALLSTORIES
 
 
 }

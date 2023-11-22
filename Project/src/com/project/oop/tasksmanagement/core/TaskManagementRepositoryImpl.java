@@ -9,6 +9,7 @@ import com.project.oop.tasksmanagement.models.TeamImpl;
 import com.project.oop.tasksmanagement.models.contracts.*;
 import com.project.oop.tasksmanagement.models.enums.Severity;
 import com.project.oop.tasksmanagement.models.enums.StorySize;
+import com.project.oop.tasksmanagement.models.enums.StoryStatus;
 import com.project.oop.tasksmanagement.models.tasks.BugImpl;
 import com.project.oop.tasksmanagement.models.tasks.FeedbackImpl;
 import com.project.oop.tasksmanagement.models.tasks.StoryImpl;
@@ -26,6 +27,9 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     private static final String NO_TEAM_WITH_NAME = "No team with name %s is found";
     private static final String NO_MEMBER_WITH_NAME_ERR = "No member with name %s is found";
     private static final String NO_BOARD_WITH_NAME_ERR = "No board with name %s is found";
+    private static final String NO_STORIES_WITH_THAT_STATUS = "There are no stories with status %s";
+    private static final String NO_STORIES_WITH_THAT_CRITERIA = "There are no stories with that criteria";
+    private static final String NO_STORIES_WITH_THAT_ASSIGNEE = "There are no stories for that assignee %s";
     private int nextId;
     private final List<Team> teams = new ArrayList<>();
     private final List<Member> members = new ArrayList<>();
@@ -51,17 +55,55 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public List<Task> getAllTasks() {return new ArrayList<>(allTasks);
+    public List<Task> getAllTasks() {
+        return new ArrayList<>(allTasks);
     }
 
     @Override
-    public List<Bug> getBugs() {return new ArrayList<>(bugs);}
+    public List<Bug> getBugs() {
+        return new ArrayList<>(bugs);
+    }
 
     @Override
-    public List<Story> getStories() {return new ArrayList<>(stories);}
+    public List<Story> getStories() {
+        return new ArrayList<>(stories);
+    }
 
     @Override
-    public List<Feedback> getFeedbacks() {return new ArrayList<>(feedbacks);}
+    public Story findStoryByFilter(StoryStatus status) {
+        Story story = stories
+                .stream()
+                .filter(u -> u.getStatus().equalsIgnoreCase(String.valueOf(status)))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_STORIES_WITH_THAT_STATUS, status)));
+        return story;
+    }
+
+    @Override
+    public Story findStoryByFilter(StoryStatus status, String assignee) {
+        Story story = stories
+                .stream()
+                .filter(u -> u.getStatus().equalsIgnoreCase(String.valueOf(status)))
+                .filter(u -> u.getAssignee().equalsIgnoreCase(assignee))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(NO_STORIES_WITH_THAT_CRITERIA));
+        return story;
+    }
+
+    @Override
+    public Story findStoryByFilter(String assignee) {
+        Story story = stories
+                .stream()
+                .filter(u -> u.getAssignee().equalsIgnoreCase(assignee))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_STORIES_WITH_THAT_ASSIGNEE, assignee)));
+        return story;
+    }
+
+    @Override
+    public List<Feedback> getFeedbacks() {
+        return new ArrayList<>(feedbacks);
+    }
 
     @Override
     public int getId() {
@@ -113,10 +155,10 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Story createStory(String title, String description, StorySize storySize) {
-       Story story = new StoryImpl(++nextId, title, description, storySize);
-       stories.add(story);
-       allAssignableTasks.add(story);
-       return story;
+        Story story = new StoryImpl(++nextId, title, description, storySize);
+        stories.add(story);
+        allAssignableTasks.add(story);
+        return story;
     }
 
     @Override
@@ -126,30 +168,35 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         return feedback;
     }
 
-    public Task findTaskById(int id){
-        return findElementById(allTasks,id);
+    public Task findTaskById(int id) {
+        return findElementById(allTasks, id);
     }
 
-    public AssignabelTask findAssignableTaskById(int id){
-       return findElementById(allAssignableTasks,id);
+    public AssignabelTask findAssignableTaskById(int id) {
+        return findElementById(allAssignableTasks, id);
     }
 
-    public Bug findBugById(int id){
-        return findElementById(bugs,id);
+    public Bug findBugById(int id) {
+        return findElementById(bugs, id);
     }
-    public Story findStoryById(int id){
-        return findElementById(stories,id);
-    }
-    public Feedback findFeedbackById(int id){return findElementById(feedbacks,id);}
 
-    private   <T extends Identifiable> T findElementById(List<T> elements, int id) {
+    public Story findStoryById(int id) {
+        return findElementById(stories, id);
+    }
+
+    public Feedback findFeedbackById(int id) {
+        return findElementById(feedbacks, id);
+    }
+
+    private <T extends Identifiable> T findElementById(List<T> elements, int id) {
         for (T element : elements) {
             if (element.getId() == id) {
                 return element;
             }
         }
-        throw new IllegalArgumentException(NO_TASK_WITH_ID_ERR.formatted(elements.getClass(),id));
+        throw new IllegalArgumentException(NO_TASK_WITH_ID_ERR.formatted(elements.getClass(), id));
     }
+
     @Override
     public Team findTeamByName(String teamName) {
         for (Team team : getTeams()) {
@@ -175,7 +222,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Board findBoardByName(String boardName) {
         for (Team team : teams) {
             for (int i = 0; i < team.getBoards().size(); i++) {
-                if (boardName.equals(team.getBoards().get(i).getName())){
+                if (boardName.equals(team.getBoards().get(i).getName())) {
                     return team.getBoards().get(i);
                 }
 
@@ -195,7 +242,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         members.add(member);
     }
 
-    public void addTask(Task task){
+    public void addTask(Task task) {
         allTasks.add(task);
     }
 
@@ -261,7 +308,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public String printTasks() {
         int counter = 1;
         StringBuilder result = new StringBuilder();
-        if (allTasks.isEmpty()){
+        if (allTasks.isEmpty()) {
             return result.append(NO_TASKS_FOUND_HEADER).toString();
         }
         for (Task task : allTasks) {
