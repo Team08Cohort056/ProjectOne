@@ -6,6 +6,7 @@ import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.commands.enums.CommandType;
 import com.project.oop.tasksmanagement.commands.listing.ListAllAssignedTasksCommand;
 import com.project.oop.tasksmanagement.commands.listing.ListAllStoriesCommand;
+import com.project.oop.tasksmanagement.commands.listing.ListAllTasksCommand;
 import com.project.oop.tasksmanagement.commands.showcommands.ShowActivityCommand;
 import com.project.oop.tasksmanagement.commands.showcommands.ShowAllCommand;
 import com.project.oop.tasksmanagement.commands.showcommands.ShowTeamBoardsCommand;
@@ -58,8 +59,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new HelpCommand(taskManagementRepository);
             case LISTALLSTORIES:
                 return new ListAllStoriesCommand(taskManagementRepository);
-            case LISTALL:
-                //TODO
+            case LISTALLTASKS:
+                return new ListAllTasksCommand(taskManagementRepository);
             case LISTASSIGNEDTASKS:
                 return new ListAllAssignedTasksCommand(taskManagementRepository);
         }
