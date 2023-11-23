@@ -15,6 +15,7 @@ import com.project.oop.tasksmanagement.models.tasks.FeedbackImpl;
 import com.project.oop.tasksmanagement.models.tasks.StoryImpl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
@@ -93,6 +94,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         Story story = stories
                 .stream()
                 .filter(u -> u.getStatus().equals(status))
+                .sorted(comparator)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format(NO_STORIES_WITH_THAT_STATUS, status)));
         return story;
@@ -104,6 +106,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 .stream()
                 .filter(u -> u.getStatus().equals(status))
                 .filter(u -> u.getAssignee().equalsIgnoreCase(assignee))
+                .sorted(comparator)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(NO_STORIES_WITH_THAT_CRITERIA));
         return story;
@@ -114,12 +117,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         Story story = stories
                 .stream()
                 .filter(u -> u.getAssignee().equalsIgnoreCase(assignee))
+                .sorted(comparator)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format(NO_STORIES_WITH_THAT_ASSIGNEE, assignee)));
         return story;
 
     }
-
+    Comparator<Story> comparator = Comparator.comparing(Story::getTitle).thenComparing(Story::getPriority)
+            .thenComparing(Story::getStorySize);
     @Override
     public boolean memberExists(String memberName) {
         for (Member member : getMembers()) {

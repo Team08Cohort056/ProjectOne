@@ -25,7 +25,7 @@ public class ListAllStoriesCommand implements BaseCommand {
             String assignee = commands.get(1);
             return listStoriesByAssignee(assignee);
         } else {
-            Status status = ParsingHelpers.tryParseEnum(commands.get(1),Status.class);
+            Status status = ParsingHelpers.tryParseEnum(commands.get(0),Status.class);
             String assignee = commands.get(1);
             return listStoriesByStatusAndAssignee(status, assignee);
         }
