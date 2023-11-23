@@ -3,8 +3,8 @@ package com.project.oop.tasksmanagement.commands.listing;
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.models.contracts.Story;
-import com.project.oop.tasksmanagement.models.enums.StoryStatus;
-import com.project.oop.tasksmanagement.utils.ValidationHelpers;
+import com.project.oop.tasksmanagement.models.enums.Status;
+import com.project.oop.tasksmanagement.utils.ParsingHelpers;
 
 import java.util.List;
 
@@ -18,26 +18,26 @@ public class ListAllStoriesCommand implements BaseCommand {
     @Override
     public String execute(List<String> commands) {
         if (commands.get(0).equals("status")) {
-            StoryStatus status = StoryStatus.valueOf(commands.get(1));
+            Status status = ParsingHelpers.tryParseEnum(commands.get(1),Status.class);
             return listStoriesByStatus(status);
         }
         if (commands.get(0).equals("assignee")) {
             String assignee = commands.get(1);
             return listStoriesByAssignee(assignee);
         } else {
-            StoryStatus status = StoryStatus.valueOf(commands.get(0));
+            Status status = ParsingHelpers.tryParseEnum(commands.get(1),Status.class);
             String assignee = commands.get(1);
             return listStoriesByStatusAndAssignee(status, assignee);
         }
     }
 
-    private String listStoriesByStatus(StoryStatus status) {
+    private String listStoriesByStatus(Status status) {
         Story story = taskManagementRepository.findStoryByFilter(status);
 
         return String.format("--STORIES--\n" + story.toString());
     }
 
-    private String listStoriesByStatusAndAssignee(StoryStatus status, String assignee) {
+    private String listStoriesByStatusAndAssignee(Status status, String assignee) {
         Story story = taskManagementRepository.findStoryByFilter(status, assignee);
 
         return String.format("--STORIES--\n" + story.toString());

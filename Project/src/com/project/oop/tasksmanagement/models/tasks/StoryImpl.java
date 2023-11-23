@@ -11,20 +11,21 @@ import java.util.List;
 
 public class StoryImpl extends AssignableTaskImpl implements Story {
 
+    public static final String CHECK_STATUS_MESSAGE = "This status is not suitable for task type Story";
     private StorySize storySize;
-    private StoryStatus storyStatus;
+    private Status status;
     private TaskType taskType;
 
     public StoryImpl(int id, String title, String description, StorySize storySize) {
         super(id, title, description);
         this.storySize = storySize;
-        this.storyStatus = StoryStatus.NOT_DONE;
+        this.status = Status.NOT_DONE;
         this.activityHistory.add(new EventLog("Story with %d is created".formatted(id)));
     }
 
     @Override
-    public String getStatus() {
-        return this.storyStatus.toString();
+    public Status getStatus() {
+        return this.status;
     }
 
     @Override
@@ -43,16 +44,26 @@ public class StoryImpl extends AssignableTaskImpl implements Story {
         this.storySize = storySize;
     }
 
-    public void changeStoryStatus(StoryStatus status) {
+    public void changeStoryStatus(Status status) {
+        checkStatusForTask(status);
         activityHistory.add(new EventLog("The status of the story with ID %d switched from %s to %s."
-                .formatted(getId(), this.storyStatus, status)));
-        this.storyStatus = status;
+                .formatted(getId(), this.status, status)));
+        this.status = status;
+    }
+
+    @Override
+    protected void checkStatusForTask(Status status) {
+        switch (status) {
+            case NOT_DONE,IN_PROGRESS, DONE:
+                break;
+            default:
+                throw new IllegalArgumentException(CHECK_STATUS_MESSAGE);
+        }
     }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(super.toString());
         sb.append("Size: %s".formatted(getStorySize().toString())).append(System.lineSeparator());
-        sb.append("Status: %s".formatted(getStatus())).append(System.lineSeparator());
         sb.append("Comments:").append(System.lineSeparator());
         if (getComments().isEmpty()){
             sb.append("No comments has been added to this %s yet.".formatted(getTaskType().toString()));

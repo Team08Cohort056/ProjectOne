@@ -13,14 +13,19 @@ public interface TaskManagementRepository {
 
     List<Task> getAllTasks();
 
+    List<AssignabelTask> getAllAssignableTasks();
+
+    List<AssignabelTask> getAllAssignedTasks();
+
     List<Bug> getBugs();
 
     List<Story> getStories();
-    Story findStoryByFilter(StoryStatus status);
-    Story findStoryByFilter(StoryStatus status, String assignee);
-    Story findStoryByFilter(String assignee);
 
     List<Feedback> getFeedbacks();
+
+    Story findStoryByFilter(Status status);
+    Story findStoryByFilter(Status status, String assignee);
+    Story findStoryByFilter(String assignee);
 
     Team createTeam(String teamName);
 
@@ -41,7 +46,9 @@ public interface TaskManagementRepository {
     Task findTaskById(int id);
 
     Bug findBugById(int id);
+
     Story findStoryById(int id);
+
     Feedback findFeedbackById(int id);
 
     AssignabelTask findAssignableTaskById(int id);
@@ -57,6 +64,10 @@ public interface TaskManagementRepository {
     void addMember(Member member);
 
     void addTask(Task task);
+
+    void addAssignedTask(AssignabelTask task);
+
+    void removeAssignedTask(AssignabelTask task);
 
     String printTeams();
     String printMembers();

@@ -2,6 +2,7 @@ package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.models.contracts.Comment;
 import com.project.oop.tasksmanagement.models.contracts.Task;
+import com.project.oop.tasksmanagement.models.enums.Status;
 import com.project.oop.tasksmanagement.models.enums.TaskType;
 import com.project.oop.tasksmanagement.utils.EventLog;
 import com.project.oop.tasksmanagement.utils.ValidationHelpers;
@@ -20,6 +21,7 @@ public abstract class TaskImpl implements Task {
     private final int id;
     private String title;
     private String description;
+    private Status status;
     protected List<EventLog> activityHistory;
     private final List<Comment> comments;
     private TaskType taskType;
@@ -29,6 +31,7 @@ public abstract class TaskImpl implements Task {
         this.id = id;
         setTitle(title);
         setDescription(description);
+        status = getStatus();
         activityHistory=new ArrayList<>();
         comments=new ArrayList<>();
         activityHistory.add(new EventLog("New %s created.".formatted(getTaskType())));
@@ -53,7 +56,7 @@ public abstract class TaskImpl implements Task {
     public abstract TaskType getTaskType();
 
     @Override
-    public abstract String getStatus();
+    public abstract Status getStatus();
 
     @Override
     public List<EventLog> getActivityHistory() {
@@ -76,6 +79,8 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
+    protected abstract void checkStatusForTask(Status status);
+
     @Override
     public void addComment(Comment comment) {
         comments.add(comment);
@@ -93,6 +98,7 @@ public abstract class TaskImpl implements Task {
         sb.append("ID %d".formatted(getId())).append(System.lineSeparator());
         sb.append("Title: %s".formatted(getTitle())).append(System.lineSeparator());
         sb.append("Description: %s".formatted(getDescription())).append(System.lineSeparator());
+        sb.append("Status: %s".formatted(getStatus().toString())).append(System.lineSeparator());
         return sb.toString();
     }
 }

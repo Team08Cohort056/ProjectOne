@@ -1,12 +1,11 @@
 package com.project.oop.tasksmanagement.models.contracts;
 
-import com.project.oop.tasksmanagement.models.enums.FeedbackStatus;
+import com.project.oop.tasksmanagement.models.enums.Status;
 
 public interface Feedback extends Task{
     int getRating();
-    FeedbackStatus getFeedbackStatus();
 
     void changeFeedbackRating(int rating);
 
-    void changeFeedbackStatus(FeedbackStatus status);
+    void changeFeedbackStatus(Status status);
 }

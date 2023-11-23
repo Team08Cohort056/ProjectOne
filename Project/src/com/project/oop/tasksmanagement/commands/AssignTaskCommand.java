@@ -32,7 +32,7 @@ public class AssignTaskCommand implements BaseCommand {
             AssignabelTask assignableTask = taskManagementRepository.findAssignableTaskById(id);
             taskManagementRepository.findMemberByName(memberName).addTask(assignableTask);
             assignableTask.assignTaskTo(memberName);
-            //TODO put the task in the list with assigned tasks
+            taskManagementRepository.addAssignedTask(assignableTask);
         }
         return TASK_ASSIGNED_MESSAGE.formatted(id,memberName);
     }

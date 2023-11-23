@@ -51,7 +51,7 @@ public class ChangeTaskCommand implements BaseCommand {
                 switch (enumToBeChanged.toLowerCase()) {
                     case "priority" -> bug.changePriority(ParsingHelpers.tryParseEnum(newValue, Priority.class));
                     case "severity" -> bug.changeBugSeverity(ParsingHelpers.tryParseEnum(newValue, Severity.class));
-                    case "status" -> bug.changeBugStatus(ParsingHelpers.tryParseEnum(newValue, BugStatus.class));
+                    case "status" -> bug.changeBugStatus(ParsingHelpers.tryParseEnum(newValue, Status.class));
                     default -> throw new IllegalArgumentException(BUG_ERR_MESSAGE);
                 }
             }
@@ -60,7 +60,7 @@ public class ChangeTaskCommand implements BaseCommand {
                 switch (enumToBeChanged.toLowerCase()) {
                     case "priority" -> story.changePriority(ParsingHelpers.tryParseEnum(newValue, Priority.class));
                     case "size" -> story.changeStorySize(ParsingHelpers.tryParseEnum(newValue, StorySize.class));
-                    case "status" -> story.changeStoryStatus(ParsingHelpers.tryParseEnum(newValue, StoryStatus.class));
+                    case "status" -> story.changeStoryStatus(ParsingHelpers.tryParseEnum(newValue, Status.class));
                     default -> throw new IllegalArgumentException(STORY_ERR_MESSAGE);
                 }
             }
@@ -70,7 +70,7 @@ public class ChangeTaskCommand implements BaseCommand {
                     case "rating" ->
                             feedback.changeFeedbackRating(ParsingHelpers.tryParseInt(newValue, FEEDBACK_RATING_SHOULD_BE_INTEGER_ERR));
                     case "status" ->
-                            feedback.changeFeedbackStatus(ParsingHelpers.tryParseEnum(newValue, FeedbackStatus.class));
+                            feedback.changeFeedbackStatus(ParsingHelpers.tryParseEnum(newValue, Status.class));
                     default -> throw new IllegalArgumentException(FEEDBACK_ERR_MESSAGE);
                 }
             }

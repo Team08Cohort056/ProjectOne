@@ -8,8 +8,8 @@ import com.project.oop.tasksmanagement.models.MemberImpl;
 import com.project.oop.tasksmanagement.models.TeamImpl;
 import com.project.oop.tasksmanagement.models.contracts.*;
 import com.project.oop.tasksmanagement.models.enums.Severity;
+import com.project.oop.tasksmanagement.models.enums.Status;
 import com.project.oop.tasksmanagement.models.enums.StorySize;
-import com.project.oop.tasksmanagement.models.enums.StoryStatus;
 import com.project.oop.tasksmanagement.models.tasks.BugImpl;
 import com.project.oop.tasksmanagement.models.tasks.FeedbackImpl;
 import com.project.oop.tasksmanagement.models.tasks.StoryImpl;
@@ -35,6 +35,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     private final List<Member> members = new ArrayList<>();
     private final List<Task> allTasks = new ArrayList<>();
     private final List<AssignabelTask> allAssignableTasks = new ArrayList<>();
+    private final List<AssignabelTask> allAssignedTasks = new ArrayList<>();
     private final List<Bug> bugs = new ArrayList<>();
     private final List<Story> stories = new ArrayList<>();
     private final List<Feedback> feedbacks = new ArrayList<>();
@@ -44,10 +45,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
+    public int getId() {
+        return nextId;
+    }
+
+    @Override
     public List<Team> getTeams() {
         return new ArrayList<>(teams);
     }
-
 
     @Override
     public List<Member> getMembers() {
@@ -57,6 +62,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     @Override
     public List<Task> getAllTasks() {
         return new ArrayList<>(allTasks);
+    }
+
+    public List<AssignabelTask> getAllAssignableTasks() {
+        return allAssignableTasks;
+    }
+
+    public List<AssignabelTask> getAllAssignedTasks() {
+        return allAssignedTasks;
     }
 
     @Override
@@ -70,20 +83,26 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Story findStoryByFilter(StoryStatus status) {
+    public List<Feedback> getFeedbacks() {
+        return new ArrayList<>(feedbacks);
+    }
+
+
+    @Override
+    public Story findStoryByFilter(Status status) {
         Story story = stories
                 .stream()
-                .filter(u -> u.getStatus().equalsIgnoreCase(String.valueOf(status)))
+                .filter(u -> u.getStatus().equals(status))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format(NO_STORIES_WITH_THAT_STATUS, status)));
         return story;
     }
 
     @Override
-    public Story findStoryByFilter(StoryStatus status, String assignee) {
+    public Story findStoryByFilter(Status status, String assignee) {
         Story story = stories
                 .stream()
-                .filter(u -> u.getStatus().equalsIgnoreCase(String.valueOf(status)))
+                .filter(u -> u.getStatus().equals(status))
                 .filter(u -> u.getAssignee().equalsIgnoreCase(assignee))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(NO_STORIES_WITH_THAT_CRITERIA));
@@ -98,30 +117,17 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(String.format(NO_STORIES_WITH_THAT_ASSIGNEE, assignee)));
         return story;
-    }
 
-    @Override
-    public List<Feedback> getFeedbacks() {
-        return new ArrayList<>(feedbacks);
-    }
-
-    @Override
-    public int getId() {
-        return nextId;
     }
 
     @Override
     public boolean memberExists(String memberName) {
-        boolean exists = false;
-
         for (Member member : getMembers()) {
             if (member.getName().equalsIgnoreCase(memberName)) {
-                exists = true;
-                break;
+               return true;
             }
         }
-
-        return exists;
+        return false;
     }
 
     @Override
@@ -151,7 +157,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         allAssignableTasks.add(bug);
         return bug;
     }
-
 
     @Override
     public Story createStory(String title, String description, StorySize storySize) {
@@ -230,6 +235,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         }
         throw new IllegalArgumentException(String.format(NO_BOARD_WITH_NAME_ERR, boardName));
 
+    }
+
+    public void addAssignedTask(AssignabelTask task){
+        allAssignedTasks.add(task);
+    }
+
+    public void removeAssignedTask(AssignabelTask task){
+        allAssignedTasks.remove(task);
     }
 
     @Override

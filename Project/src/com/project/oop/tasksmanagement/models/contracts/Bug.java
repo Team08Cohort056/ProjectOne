@@ -1,6 +1,6 @@
 package com.project.oop.tasksmanagement.models.contracts;
-import com.project.oop.tasksmanagement.models.enums.BugStatus;
 import com.project.oop.tasksmanagement.models.enums.Severity;
+import com.project.oop.tasksmanagement.models.enums.Status;
 
 public interface Bug extends AssignabelTask{
 
@@ -12,6 +12,6 @@ public interface Bug extends AssignabelTask{
 
     void changeBugSeverity(Severity severity);
 
-    void changeBugStatus(BugStatus status);
+    void changeBugStatus(Status status);
 
 }
