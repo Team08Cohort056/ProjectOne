@@ -4,9 +4,7 @@ import com.project.oop.tasksmanagement.commands.*;
 import com.project.oop.tasksmanagement.commands.addcreatecommands.*;
 import com.project.oop.tasksmanagement.commands.contracts.BaseCommand;
 import com.project.oop.tasksmanagement.commands.enums.CommandType;
-import com.project.oop.tasksmanagement.commands.listing.ListAllAssignedTasksCommand;
-import com.project.oop.tasksmanagement.commands.listing.ListAllStoriesCommand;
-import com.project.oop.tasksmanagement.commands.listing.ListAllTasksCommand;
+import com.project.oop.tasksmanagement.commands.listing.*;
 import com.project.oop.tasksmanagement.commands.showcommands.ShowActivityCommand;
 import com.project.oop.tasksmanagement.commands.showcommands.ShowAllCommand;
 import com.project.oop.tasksmanagement.commands.showcommands.ShowTeamBoardsCommand;
@@ -57,6 +55,10 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ShowActivityCommand(taskManagementRepository);
             case HELP:
                 return new HelpCommand(taskManagementRepository);
+            case LISTALLFEEDBACKS:
+                return new ListAllFeedbacksCommand(taskManagementRepository);
+            case LISTALLBUGS:
+                return new ListAllBugsCommand(taskManagementRepository);
             case LISTALLSTORIES:
                 return new ListAllStoriesCommand(taskManagementRepository);
             case LISTALLTASKS:
