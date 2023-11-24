@@ -6,16 +6,22 @@ import com.project.oop.tasksmanagement.models.contracts.Feedback;
 import com.project.oop.tasksmanagement.models.contracts.Story;
 import com.project.oop.tasksmanagement.models.contracts.Task;
 import com.project.oop.tasksmanagement.models.enums.Status;
+import com.project.oop.tasksmanagement.utils.ParsingHelpers;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListAllFeedbacksCommand implements BaseCommand {
+    private static final String STATUS = "STATUS";
+    private static final String INVALID_PARAMETERS_ERR = "Invalid parameters for command LISTALLFEEDBACKS.";
+    private static final String NO_STATUS_ENTERED_ERR = "Please enter a valid status to filter.";
+    private static final String NO_ASSIGNED_FEEDBACKS_WITH_STATUS_ERR = "There is no assigned feedback tasks with status %s yet.";
+
     private final TaskManagementRepository repository;
     private final Comparator<Feedback> comparator = Comparator
             .comparing(Feedback::getTitle)
-            .thenComparing(Feedback::getRating);
+            .thenComparingInt(Feedback::getRating);
 
     public ListAllFeedbacksCommand(TaskManagementRepository taskManagementRepository) {
         this.repository = taskManagementRepository;
@@ -24,15 +30,14 @@ public class ListAllFeedbacksCommand implements BaseCommand {
         if (commands.size()==0 ){
             return listAllFeedbacksSorted();
         }
-        if (commands.size()==1 && commands.get(0).equalsIgnoreCase("FILTERBYSTATUS")){
-            return "Please enter a valid status to filter";
+        if (commands.size()==1 && commands.get(0).equalsIgnoreCase(STATUS)){
+            return NO_STATUS_ENTERED_ERR;
         }
-        else if (commands.size()==2 && commands.get(0).equalsIgnoreCase("FILTERBYSTATUS")){
-            Status status = Status.valueOf(commands.get(1));
+        else if (commands.size()==2 && commands.get(0).equalsIgnoreCase(STATUS)){
+            Status status = ParsingHelpers.tryParseEnum(commands.get(1).toUpperCase(),Status.class);
             return filterAllFeedbacksByStatus(status);
         }
-        else
-        throw new IllegalArgumentException("Invalid parameters for command LISTALLFEEDBACKS");
+        throw new IllegalArgumentException(INVALID_PARAMETERS_ERR);
     }
     public String listAllFeedbacksSorted(){
         return repository.getFeedbacks()
@@ -42,12 +47,18 @@ public class ListAllFeedbacksCommand implements BaseCommand {
                 .collect(Collectors.joining(System.lineSeparator()));
     }
     public String filterAllFeedbacksByStatus(Status status){
+        if (isListEmpty(status)){
+            return NO_ASSIGNED_FEEDBACKS_WITH_STATUS_ERR.formatted(status);
+        }
         return repository.getFeedbacks()
                 .stream()
                 .sorted(comparator)
                 .filter(u -> u.getStatus().equals(status))
                 .map(Object::toString)
                 .collect(Collectors.joining(System.lineSeparator()));
+    }
+    private boolean isListEmpty(Status status){
+        return repository.getFeedbacks().stream().noneMatch(task -> task.getStatus().equals(status));
     }
 
 }
