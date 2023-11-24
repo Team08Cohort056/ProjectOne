@@ -19,7 +19,8 @@ public enum CommandType {
     LISTALLTASKS,
     LISTASSIGNEDTASKS,
     LISTALLSTORIES,
-    HELP
+    HELP,
+    LISTALLFEEDBACKS
 
 
 }

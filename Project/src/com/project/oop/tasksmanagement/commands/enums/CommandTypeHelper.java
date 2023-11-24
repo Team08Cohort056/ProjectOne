@@ -18,6 +18,7 @@ public enum CommandTypeHelper {
     SHOWTEAMBOARDS,
     LISTALL,
     LISTASSIGNEDTASKS,
+    LISTALLFEEDBACKS,
     HELP;
 
     @Override
