@@ -87,14 +87,20 @@ public class HelpCommand implements BaseCommand {
             case "SHOWTEAMBOARDS":
                 result.append(CommandTypeHelper.SHOWTEAMBOARDS);
                 break;
-            case "LISTALL":
-                result.append(CommandTypeHelper.LISTALL);
+            case "LISTALLTASKS":
+                result.append(CommandTypeHelper.LISTALLTASKS);
                 break;
             case "LISTALLBUGS":
                 result.append(CommandTypeHelper.LISTALLBUGS);
                 break;
             case "LISTASSIGNEDTASKS":
                 result.append(CommandTypeHelper.LISTASSIGNEDTASKS);
+                break;
+            case "LISTALLFEEDBACKS":
+                result.append(CommandTypeHelper.LISTALLFEEDBACKS);
+                break;
+            case "LISTALLSTORIES":
+                result.append(CommandTypeHelper.LISTALLSTORIES);
                 break;
             case "HELP":
                 result.append(CommandTypeHelper.HELP);

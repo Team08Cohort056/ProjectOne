@@ -16,11 +16,12 @@ public enum CommandTypeHelper {
     SHOWACTIVITY,
     SHOWTEAMMEMBERS,
     SHOWTEAMBOARDS,
-    LISTALL,
+    LISTALLTASKS,
     LISTALLBUGS,
     LISTASSIGNEDTASKS,
-    LISTALLFEEDBACKS,
-    HELP;
+    LISTALLSTORIES,
+    HELP,
+    LISTALLFEEDBACKS;
 
     @Override
     public String toString() {
@@ -127,12 +128,18 @@ public enum CommandTypeHelper {
                         [1]Team name.
                         """;
 
-            case LISTALL:
-                return "Helper not implemented yet."; //TODO
+            case LISTALLTASKS:
+                return """
+                        Lists all tasks with important information.
+                        Command takes 0 parameters to list all tasks sorted by title or 2 parameter to filter them by a specific title:
+                        [1]Parameter "TITLE" to declare the filter.
+                        [2]Title that you wish to filter by.
+                        """;
 
             case LISTALLBUGS:
                 return """
-                        Show all tasks that are already assigned.Command takes 2 or 4 parameters:
+                        Show all bugs sorted by most important information.Command takes 0, 2 or 4 parameters:
+                        If no parameters, prints a full list of sorted bugs.
                         If one filter wanted:
                         [1]filter type - status or assignee
                         [2]status type or assignee name
@@ -142,10 +149,27 @@ public enum CommandTypeHelper {
                         [3] "assignee"
                         [4] assignee name
                         """;
+            case LISTALLFEEDBACKS:
+                return """
+                        Show all feedbacks sorted by most important information.Command takes 0 or 2 parameters:
+                        If no parameters, prints a full list of sorted bugs.
+                        To filter by status:
+                        [1]filter type - STATUS
+                        [2]status type
+                        """;
+            case LISTALLSTORIES:
+                return """
+                        Show all stories sorted by most important information.Command takes 0 or 2 parameters:
+                        If no parameters, prints a full list of sorted stories.
+                        To filter by status or assignee:
+                        [1]filter type - STATUS or ASSIGNEE
+                        [2]status type or assignee name
+                        """;
 
             case LISTASSIGNEDTASKS:
                 return """
-                        Show all tasks that are already assigned.Command takes 2 or 4 parameters:
+                        Show all tasks that are already assigned.Command takes 0, 2 or 4 parameters:
+                        If no parameters, prints a full list of sorted bugs.
                         If one filter wanted:
                         [1]filter type - status or assignee
                         [2]status type or assignee name
