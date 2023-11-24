@@ -90,6 +90,9 @@ public class HelpCommand implements BaseCommand {
             case "LISTALL":
                 result.append(CommandTypeHelper.LISTALL);
                 break;
+            case "LISTALLBUGS":
+                result.append(CommandTypeHelper.LISTALLBUGS);
+                break;
             case "LISTASSIGNEDTASKS":
                 result.append(CommandTypeHelper.LISTASSIGNEDTASKS);
                 break;

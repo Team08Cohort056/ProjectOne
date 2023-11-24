@@ -17,6 +17,7 @@ public enum CommandTypeHelper {
     SHOWTEAMMEMBERS,
     SHOWTEAMBOARDS,
     LISTALL,
+    LISTALLBUGS,
     LISTASSIGNEDTASKS,
     HELP;
 
@@ -128,8 +129,31 @@ public enum CommandTypeHelper {
             case LISTALL:
                 return "Helper not implemented yet."; //TODO
 
+            case LISTALLBUGS:
+                return """
+                        Show all tasks that are already assigned.Command takes 2 or 4 parameters:
+                        If one filter wanted:
+                        [1]filter type - status or assignee
+                        [2]status type or assignee name
+                        If two filters wanted:
+                        [1] "status"
+                        [2] status type
+                        [3] "assignee"
+                        [4] assignee name
+                        """;
+
             case LISTASSIGNEDTASKS:
-                return "Helper not implemented yet."; //TODO
+                return """
+                        Show all tasks that are already assigned.Command takes 2 or 4 parameters:
+                        If one filter wanted:
+                        [1]filter type - status or assignee
+                        [2]status type or assignee name
+                        If two filters wanted:
+                        [1] "status"
+                        [2] status type
+                        [3] "assignee"
+                        [4] assignee name
+                        """;
 
             case HELP:
                 return """
