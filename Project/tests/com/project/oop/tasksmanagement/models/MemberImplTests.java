@@ -1,8 +1,8 @@
 package com.project.oop.tasksmanagement.models;
 
 import com.project.oop.tasksmanagement.models.tasks.StoryImpl;
+import com.project.oop.tasksmanagement.models.tasks.StoryImplTests;
 import com.project.oop.tasksmanagement.utils.UtilsTests;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

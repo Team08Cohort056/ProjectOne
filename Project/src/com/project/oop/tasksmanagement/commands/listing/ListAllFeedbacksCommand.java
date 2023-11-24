@@ -15,7 +15,7 @@ public class ListAllFeedbacksCommand implements BaseCommand {
     private final TaskManagementRepository repository;
     private final Comparator<Feedback> comparator = Comparator
             .comparing(Feedback::getTitle)
-            .thenComparing(Feedback::getRating);
+            .thenComparingInt(Feedback::getRating);
 
     public ListAllFeedbacksCommand(TaskManagementRepository taskManagementRepository) {
         this.repository = taskManagementRepository;

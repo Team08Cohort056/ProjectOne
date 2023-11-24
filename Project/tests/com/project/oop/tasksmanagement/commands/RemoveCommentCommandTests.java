@@ -5,7 +5,7 @@ import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.models.CommentImplTests;
 import com.project.oop.tasksmanagement.models.MemberImpl;
 import com.project.oop.tasksmanagement.models.MemberImplTests;
-import com.project.oop.tasksmanagement.models.StoryImplTests;
+import com.project.oop.tasksmanagement.models.tasks.StoryImplTests;
 import com.project.oop.tasksmanagement.models.contracts.Comment;
 import com.project.oop.tasksmanagement.models.contracts.Member;
 import com.project.oop.tasksmanagement.models.contracts.Story;
