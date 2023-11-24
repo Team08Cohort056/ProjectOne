@@ -15,7 +15,7 @@ public class ListAllAssignedTasksCommand implements BaseCommand {
     private static final int MIN_ARGUMENTS = 2;
     private static final String NO_ASSIGNED_TASKS_WITH_STATUS_ERR = "There is no assigned tasks with status %s yet.";
     private static final String NO_ASSIGNED_TASKS_WITH_ASSIGNEE_ERR = "There is no assigned tasks to %s yet.";
-    private static final String NO_ASSIGNED_TASKS_WITH_STATUS_ASSIGNEE_ERR = "There is no assigned tasks with status %s to %s yet.";
+    private static final String NO_ASSIGNED_TASKS_WITH_STATUS_ASSIGNEE_ERR = "There is no tasks with status %s assigned to %s yet.";
     private static final String STATUS = "status";
     private static final String ASSIGNEE = "assignee";
     private final TaskManagementRepository taskManagementRepository;

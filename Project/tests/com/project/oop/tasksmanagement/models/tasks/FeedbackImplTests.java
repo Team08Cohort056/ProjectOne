@@ -1,4 +1,4 @@
-package com.project.oop.tasksmanagement.models;
+package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.commands.HelpCommand;
 import com.project.oop.tasksmanagement.core.TaskManagementRepositoryImpl;

@@ -13,7 +13,7 @@ public class ListAllBugsCommand implements BaseCommand {
     private static final String INVALID_NUMBER_OF_ARGUMENTS_ERR = "Invalid number of arguments.Expects 2(if only one filter is applied) or 4(if two filters are applied)arguments. Received %d.";
     private static final int MIN_ARGUMENTS = 2;
     private static final String NO_ASSIGNED_BUGS_WITH_STATUS_ERR = "There is no assigned bug tasks with status %s yet.";
-    private static final String NO_ASSIGNED_BUGS_WITH_ASSIGNEE_ERR = "There is no assigned bug tasks to %s yet.";
+    private static final String NO_ASSIGNED_BUGS_WITH_ASSIGNEE_ERR = "There is no bug tasks assigned to %s yet.";
     private static final String NO_ASSIGNED_BUGS_WITH_STATUS_ASSIGNEE_ERR = "There is no assigned bug tasks with status %s to %s yet.";
     private static final String STATUS = "status";
     private static final String ASSIGNEE = "assignee";
@@ -29,6 +29,10 @@ public class ListAllBugsCommand implements BaseCommand {
 
     @Override
     public String execute(List<String> commands) {
+        if (commands.size()==0 ){
+            return taskManagementRepository.getBugs().stream().sorted(BUG_COMPARATOR).map(Object::toString)
+                    .collect(Collectors.joining(System.lineSeparator()));
+        }
         if (commands.size()< MIN_ARGUMENTS){
             throw  new IllegalArgumentException(INVALID_NUMBER_OF_ARGUMENTS_ERR.formatted(commands.size()));
         }
