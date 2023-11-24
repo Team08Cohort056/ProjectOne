@@ -76,7 +76,8 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         sb.append("Rating: %d".formatted(getRating())).append(System.lineSeparator());
         sb.append("Comments:").append(System.lineSeparator());
         if (getComments().isEmpty()){
-            sb.append("No comments has been added to this %s yet.".formatted(getTaskType().toString()));
+            sb.append("No comments has been added to this %s yet."
+                    .formatted(getTaskType().toString())).append(System.lineSeparator());
         } else {
             int counter = 1;
             for (Comment comment:getComments()) {
@@ -84,6 +85,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
                 counter++;
             }
         }
+        sb.append("----------");
         return sb.toString();
     }
 }

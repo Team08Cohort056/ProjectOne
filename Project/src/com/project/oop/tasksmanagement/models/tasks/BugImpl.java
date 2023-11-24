@@ -2,7 +2,6 @@ package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.models.contracts.Bug;
 import com.project.oop.tasksmanagement.models.contracts.Comment;
-import com.project.oop.tasksmanagement.models.enums.BugStatus;
 import com.project.oop.tasksmanagement.models.enums.Severity;
 import com.project.oop.tasksmanagement.models.enums.Status;
 import com.project.oop.tasksmanagement.models.enums.TaskType;
@@ -12,9 +11,9 @@ public class BugImpl extends AssignableTaskImpl implements Bug {
 
     private static final String SEVERITY_SWITCHED_MESSAGE = "The severity of the bug with ID %d switched from %s to %s.";
     private static final String STATUS_SWITCHED_MESSAGE = "The status of the bug with ID %d switched from %s to %s.";
-    private static final String STEPS_REPRODUCE_THE_BUG_ADDED = "Steps to reproduce the bug added";
-    private static final String NO_STEPS_TO_REPRODUCE_BUG = "No steps added";
-    public static final String CHECK_STATUS_MESSAGE = "This status is not suitable for task type Bug";
+    private static final String STEPS_REPRODUCE_THE_BUG_ADDED = "Steps to reproduce the bug added.";
+    private static final String NO_STEPS_TO_REPRODUCE_BUG = "No steps to reproduce thee bug added yet.";
+    public static final String CHECK_STATUS_MESSAGE = "This status is not suitable for task type Bug.";
     private String stepsToReproduce;
     private Severity severity;
     private Status status;
@@ -81,10 +80,12 @@ public class BugImpl extends AssignableTaskImpl implements Bug {
     public String toString() {
         StringBuilder sb = new StringBuilder(super.toString());
         sb.append("Severity: %s".formatted(getSeverity().toString())).append(System.lineSeparator());
-        sb.append("Steps to reproduce the bug: %s".formatted(getStepsToReproduce())).append(System.lineSeparator());
+        sb.append("Steps to reproduce the bug:").append(System.lineSeparator());
+        sb.append(getStepsToReproduce()).append(System.lineSeparator());
         sb.append("Comments:").append(System.lineSeparator());
         if (getComments().isEmpty()){
-            sb.append("No comments has been added to this %s yet.".formatted(getTaskType().toString()));
+            sb.append("No comments has been added to this %s yet."
+                    .formatted(getTaskType().toString())).append(System.lineSeparator());
         } else {
             int counter = 1;
             for (Comment comment:getComments()) {
@@ -92,6 +93,7 @@ public class BugImpl extends AssignableTaskImpl implements Bug {
                 counter++;
             }
         }
+        sb.append("----------");
         return sb.toString();
     }
 }
