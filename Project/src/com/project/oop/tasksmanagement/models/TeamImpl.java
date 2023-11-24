@@ -38,19 +38,16 @@ public class TeamImpl implements Team {
     public String getName() {
         return this.teamName;
     }
-    //returns team name
 
     @Override
     public List<Member> getMembers() {
         return new ArrayList<>(members);
     }
-    //returns copy of all members in the team
 
     @Override
     public List<Board> getBoards() {
         return new ArrayList<>(boards);
     }
-    //returns copy of all boards in the team
 
 
     @Override
@@ -58,27 +55,23 @@ public class TeamImpl implements Team {
         members.add(member);
         activityHistory.add(new EventLog(String.format(MEMBER_ADDED_TO_TEAM_HEADER, member.getName())));
     }
-    //adds a member to the team and logs it into eventHistory
 
     @Override
     public void addBoard(Board board) {
         boards.add(board);
         activityHistory.add(new EventLog(String.format(BOARD_ADDED_TO_TEAM_HEADER, board.getName())));
     }
-    //adds a board to the team
 
     private void setTeamName(String teamName) {
         ValidationHelpers.validateStringLength(teamName,MIN_NAME_LENGTH,MAX_NAME_LENGTH,
                 NAME_LENGTH_ERR.formatted(MIN_NAME_LENGTH,MAX_NAME_LENGTH));
         this.teamName = teamName;
     }
-    //sets name of team if arguments are valid.
 
     @Override
     public List<EventLog> getActivityHistory() {
         return new ArrayList<>(activityHistory);
     }
-    //returns a copy of activityHistory
     public String printTeamMembers() {
         StringBuilder result = new StringBuilder();
         int counter = 1;
@@ -91,7 +84,6 @@ public class TeamImpl implements Team {
         }
         return result.toString();
     }
-    //returns a customized list of all members.
 
     public Board findTeamBoardByName(String boardName){
         for (Board board: boards) {
@@ -114,5 +106,4 @@ public class TeamImpl implements Team {
         }
         return result.toString();
     }
-    //returns a customized list of all boards.
 }
