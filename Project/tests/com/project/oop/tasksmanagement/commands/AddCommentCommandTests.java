@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class AddCommentCommandTests {
-    // TODO
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     private static final String INVALID_ID = "ID should be a positive number starting from one";
 
@@ -70,7 +69,7 @@ public class AddCommentCommandTests {
         Assertions.assertThrows(IllegalArgumentException.class, () -> addCommentCommand.execute(params));
     }
 
-    // TODO
+    //
    // @Test
    // public void should_CreateComment_When_InputIsValid() {
         // Arrange

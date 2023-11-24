@@ -1,7 +1,7 @@
 package com.project.oop.tasksmanagement.utils;
 
 public class TaskBaseConstants {
-    // TODO
+
     private static final int STORY_TITLE_MIN_LENGTH = 10;
     private static final int STORY_DESCRIPTION_MIN_LENGTH = 10;
     public static final int STORY_MIN_ID = 1;

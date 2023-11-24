@@ -32,8 +32,6 @@ public class UnAssignTaskCommand implements BaseCommand {
         ValidationHelpers.validateIntRange(taskId,1, member.getTasks().size(), NO_TASK_ON_THIS_INDEX_ERR);
         Task task = member.getTasks().get(taskId-1);
         repository.findMemberByName(memberName).removeTask(task);
-        //TODO: repository.removeAssignedTask(task); - task trqaa go napraim da e assignable task
-        //TODO: Assignee must be set to "not assigned"
         return String.format(TASK_REMOVED_SUCCESSFULLY,taskId,memberName);
     }
 

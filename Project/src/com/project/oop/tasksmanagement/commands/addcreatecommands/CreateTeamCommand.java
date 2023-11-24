@@ -9,9 +9,9 @@ import com.project.oop.tasksmanagement.utils.ValidationHelpers;
 import java.util.List;
 
 public class CreateTeamCommand implements BaseCommand {
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-    public static final String TEAM_CREATED = "Team %s created.";
-    public static final String TEAM_ALREADY_EXISTS_ERR = "Team %s already exists!";
+    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
+    private static final String TEAM_CREATED = "Team %s created.";
+    private static final String TEAM_ALREADY_EXISTS_ERR = "Team %s already exists!";
     private final TaskManagementRepository repository;
 
     public CreateTeamCommand(TaskManagementRepository taskManagementRepository) {

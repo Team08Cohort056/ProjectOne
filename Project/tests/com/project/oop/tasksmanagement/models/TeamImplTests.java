@@ -1,5 +1,8 @@
 package com.project.oop.tasksmanagement.models;
 
+import com.project.oop.tasksmanagement.commands.addcreatecommands.AddBoardCommand;
+import com.project.oop.tasksmanagement.core.TaskManagementRepositoryImpl;
+import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.models.contracts.Board;
 import com.project.oop.tasksmanagement.models.contracts.Member;
 import com.project.oop.tasksmanagement.models.contracts.Team;
@@ -48,6 +51,24 @@ public class TeamImplTests {
         Board board = initializeTestBoard();
         team.addBoard(board);
         Assertions.assertEquals(team.findTeamBoardByName(VALID_NAME),team.getBoards().get(0));
+    }
+    @Test
+    public void printTeamBoards_ShouldPrintBoards_WhenArgumentsAreValid(){
+        TaskManagementRepository repository = new TaskManagementRepositoryImpl();
+        Team testTeam = initializeTestTeam();
+        Board testBoard = initializeTestBoard();
+        repository.addTeam(testTeam);
+        testTeam.addBoard(testBoard);
+        Assertions.assertEquals(String.format("1.%s%n",VALID_NAME),testTeam.printTeamBoards());
+    }
+    @Test
+    public void printTeamMembers_ShouldPrintTeamMembers_WhenArgumentsAreValid(){
+        TaskManagementRepository repository = new TaskManagementRepositoryImpl();
+        Team testTeam = initializeTestTeam();
+        Member testMember = initializeTestMember();
+        repository.addTeam(testTeam);
+        testTeam.addMember(testMember);
+        Assertions.assertEquals(String.format("1.%s%n",VALID_NAME),testTeam.printTeamMembers());
     }
     @Test
     public void findTeamBoardByName_Should_ThrowException_When_BoardDoesNotExist(){

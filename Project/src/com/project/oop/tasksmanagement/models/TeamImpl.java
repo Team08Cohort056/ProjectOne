@@ -62,11 +62,7 @@ public class TeamImpl implements Team {
         activityHistory.add(new EventLog(String.format(BOARD_ADDED_TO_TEAM_HEADER, board.getName())));
     }
 
-    private void setTeamName(String teamName) {
-        ValidationHelpers.validateStringLength(teamName,MIN_NAME_LENGTH,MAX_NAME_LENGTH,
-                NAME_LENGTH_ERR.formatted(MIN_NAME_LENGTH,MAX_NAME_LENGTH));
-        this.teamName = teamName;
-    }
+
 
     @Override
     public List<EventLog> getActivityHistory() {
@@ -105,5 +101,10 @@ public class TeamImpl implements Team {
             counter++;
         }
         return result.toString();
+    }
+    private void setTeamName(String teamName) {
+        ValidationHelpers.validateStringLength(teamName,MIN_NAME_LENGTH,MAX_NAME_LENGTH,
+                NAME_LENGTH_ERR.formatted(MIN_NAME_LENGTH,MAX_NAME_LENGTH));
+        this.teamName = teamName;
     }
 }

@@ -198,14 +198,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         return findElementById(feedbacks, id);
     }
 
-    private <T extends Identifiable> T findElementById(List<T> elements, int id) {
-        for (T element : elements) {
-            if (element.getId() == id) {
-                return element;
-            }
-        }
-        throw new IllegalArgumentException(NO_TASK_WITH_ID_ERR.formatted(elements.getClass(), id));
-    }
+
 
     @Override
     public Team findTeamByName(String teamName) {
@@ -334,6 +327,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
             counter++;
         }
         return result.toString();
+    }
+    private <T extends Identifiable> T findElementById(List<T> elements, int id) {
+        for (T element : elements) {
+            if (element.getId() == id) {
+                return element;
+            }
+        }
+        throw new IllegalArgumentException(NO_TASK_WITH_ID_ERR.formatted(elements.getClass(), id));
     }
 
 

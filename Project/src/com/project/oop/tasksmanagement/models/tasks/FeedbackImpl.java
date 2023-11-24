@@ -12,25 +12,14 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     public static final String CHECK_STATUS_MESSAGE = "This status is not suitable for task type Feedback";
     private TaskType taskType;
     private int rating;
-    //will store the rating of the task.
     private Status status;
-    //will store the status of the task.
     public FeedbackImpl(int id, String title, String description, int rating) {
         super(id, title, description);
         setRating(rating);
         status = Status.NEW;
 
     }
-    //Constructor creates a task with the addition of a rating and a custom status being set.
-    private void setFeedbackStatus(Status status) {
-        this.status = status;
-    }
-    //sets status of the Feedback.
 
-    private void setRating(int rating) {
-        this.rating = rating;
-    }
-    //sets rating of the Feedback.
 
 
     @Override
@@ -48,7 +37,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     public Status getStatus() {
         return status;
     }
-    //returns the status as FeedbackStatus.
 
     public void changeFeedbackRating(int rating){
         activityHistory.add(new EventLog(FEEDBACK_RATING_CHANGED_SUCCESSFULLY.formatted(getId(),this.rating,rating)));
@@ -61,15 +49,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         setFeedbackStatus(status);
     }
 
-    @Override
-    protected void checkStatusForTask(Status status) {
-        switch (status) {
-            case NEW, UNSCHEDULED, SCHEDULED, DONE:
-                break;
-            default:
-                throw new IllegalArgumentException(CHECK_STATUS_MESSAGE);
-        }
-    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(super.toString());
@@ -87,5 +67,21 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         }
         sb.append("----------");
         return sb.toString();
+    }
+    @Override
+    protected void checkStatusForTask(Status status) {
+        switch (status) {
+            case NEW, UNSCHEDULED, SCHEDULED, DONE:
+                break;
+            default:
+                throw new IllegalArgumentException(CHECK_STATUS_MESSAGE);
+        }
+    }
+    private void setFeedbackStatus(Status status) {
+        this.status = status;
+    }
+
+    private void setRating(int rating) {
+        this.rating = rating;
     }
 }
