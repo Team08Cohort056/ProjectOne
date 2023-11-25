@@ -190,5 +190,4 @@ public enum CommandTypeHelper {
                 return "";
         }
     }
-    //TODO: Finish all helper strings.
 }
