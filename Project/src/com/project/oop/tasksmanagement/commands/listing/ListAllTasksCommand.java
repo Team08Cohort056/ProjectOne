@@ -48,9 +48,14 @@ public class ListAllTasksCommand implements BaseCommand {
                 .collect(Collectors.joining(System.lineSeparator()));
     }
     public String filterAllTasksByTitle(String targetTitleName){
-        if (isListEmpty(targetTitleName)){
-            return NO_ASSIGNED_TASKS_WITH_STATUS_ERR.formatted(targetTitleName);
-        }
+        //Validates if filtered list is empty and returns an error if it is.
+        repository.getAllTasks()
+                .stream()
+                .filter(t->t.getTitle().equalsIgnoreCase(targetTitleName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_ASSIGNED_TASKS_WITH_STATUS_ERR,targetTitleName)));
+
+
         return repository.getAllTasks()
                 .stream()
                 .sorted(Comparator.comparing(Task::getTitle))
@@ -58,7 +63,5 @@ public class ListAllTasksCommand implements BaseCommand {
                 .map(Object::toString)
                 .collect(Collectors.joining(System.lineSeparator()));
     }
-    private boolean isListEmpty(String title){
-        return repository.getAllTasks().stream().noneMatch(task -> task.getTitle().equals(title));
-    }
+
 }

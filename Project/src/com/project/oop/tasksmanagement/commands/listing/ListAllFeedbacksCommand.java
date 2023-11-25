@@ -6,6 +6,7 @@ import com.project.oop.tasksmanagement.models.contracts.Feedback;
 import com.project.oop.tasksmanagement.models.contracts.Story;
 import com.project.oop.tasksmanagement.models.contracts.Task;
 import com.project.oop.tasksmanagement.models.enums.Status;
+import com.project.oop.tasksmanagement.utils.ListingHelpers;
 import com.project.oop.tasksmanagement.utils.ParsingHelpers;
 
 import java.util.Comparator;
@@ -19,9 +20,6 @@ public class ListAllFeedbacksCommand implements BaseCommand {
     private static final String NO_ASSIGNED_FEEDBACKS_WITH_STATUS_ERR = "There is no assigned feedback tasks with status %s yet.";
 
     private final TaskManagementRepository repository;
-    private final Comparator<Feedback> comparator = Comparator
-            .comparing(Feedback::getTitle)
-            .thenComparingInt(Feedback::getRating);
 
     public ListAllFeedbacksCommand(TaskManagementRepository taskManagementRepository) {
         this.repository = taskManagementRepository;
@@ -42,23 +40,26 @@ public class ListAllFeedbacksCommand implements BaseCommand {
     public String listAllFeedbacksSorted(){
         return repository.getFeedbacks()
                 .stream()
-                .sorted(comparator)
+                .sorted(ListingHelpers.getfeedbackComparator())
                 .map(Object::toString)
                 .collect(Collectors.joining(System.lineSeparator()));
     }
     public String filterAllFeedbacksByStatus(Status status){
-        if (isListEmpty(status)){
-            return NO_ASSIGNED_FEEDBACKS_WITH_STATUS_ERR.formatted(status);
-        }
+        //Validates if filtered list is empty and returns an error if it is.
+        repository.getFeedbacks()
+                .stream()
+                .sorted(ListingHelpers.getfeedbackComparator())
+                .filter(u -> u.getStatus().equals(status))
+                .findAny()
+                .orElseThrow(()->new IllegalArgumentException(String.format(NO_ASSIGNED_FEEDBACKS_WITH_STATUS_ERR,status)));
+
+
         return repository.getFeedbacks()
                 .stream()
-                .sorted(comparator)
+                .sorted(ListingHelpers.getfeedbackComparator())
                 .filter(u -> u.getStatus().equals(status))
                 .map(Object::toString)
                 .collect(Collectors.joining(System.lineSeparator()));
-    }
-    private boolean isListEmpty(Status status){
-        return repository.getFeedbacks().stream().noneMatch(task -> task.getStatus().equals(status));
     }
 
 }
