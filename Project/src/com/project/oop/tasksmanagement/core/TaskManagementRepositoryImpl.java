@@ -88,43 +88,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         return new ArrayList<>(feedbacks);
     }
 
-
-    @Override
-    public Story findStoryByFilter(Status status) {
-        Story story = stories
-                .stream()
-                .filter(u -> u.getStatus().equals(status))
-                .sorted(comparator)
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_STORIES_WITH_THAT_STATUS, status)));
-        return story;
-    }
-
-    @Override
-    public Story findStoryByFilter(Status status, String assignee) {
-        Story story = stories
-                .stream()
-                .filter(u -> u.getStatus().equals(status))
-                .filter(u -> u.getAssignee().equalsIgnoreCase(assignee))
-                .sorted(comparator)
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(NO_STORIES_WITH_THAT_CRITERIA));
-        return story;
-    }
-
-    @Override
-    public Story findStoryByFilter(String assignee) {
-        Story story = stories
-                .stream()
-                .filter(u -> u.getAssignee().equalsIgnoreCase(assignee))
-                .sorted(comparator)
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(String.format(NO_STORIES_WITH_THAT_ASSIGNEE, assignee)));
-        return story;
-
-    }
-    Comparator<Story> comparator = Comparator.comparing(Story::getTitle).thenComparing(Story::getPriority)
-            .thenComparing(Story::getStorySize);
     @Override
     public boolean memberExists(String memberName) {
         for (Member member : getMembers()) {

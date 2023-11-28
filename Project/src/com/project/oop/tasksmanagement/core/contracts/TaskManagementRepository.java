@@ -23,10 +23,6 @@ public interface TaskManagementRepository {
 
     List<Feedback> getFeedbacks();
 
-    Story findStoryByFilter(Status status);
-    Story findStoryByFilter(Status status, String assignee);
-    Story findStoryByFilter(String assignee);
-
     Team createTeam(String teamName);
 
     Member createMember(String memberName);
@@ -70,8 +66,12 @@ public interface TaskManagementRepository {
     void removeAssignedTask(AssignabelTask task);
 
     String printTeams();
+
     String printMembers();
+
     String printBoards();
+
     String printTasks();
+
     int getId();
 }
