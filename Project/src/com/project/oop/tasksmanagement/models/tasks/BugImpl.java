@@ -13,7 +13,7 @@ public class BugImpl extends AssignableTaskImpl implements Bug {
     private static final String STATUS_SWITCHED_MESSAGE = "The status of the bug with ID %d switched from %s to %s.";
     private static final String STEPS_REPRODUCE_THE_BUG_ADDED = "Steps to reproduce the bug added.";
     private static final String NO_STEPS_TO_REPRODUCE_BUG = "No steps to reproduce thee bug added yet.";
-    public static final String CHECK_STATUS_MESSAGE = "This status is not suitable for task type Bug.";
+    private static final String CHECK_STATUS_MESSAGE = "This status is not suitable for task type Bug.";
     private String stepsToReproduce;
     private Severity severity;
     private Status status;
@@ -47,6 +47,14 @@ public class BugImpl extends AssignableTaskImpl implements Bug {
         return stepsToReproduce;
     }
 
+    private void setSeverity(Severity severity) {
+        this.severity = severity;
+    }
+
+    private void setStatus(Status status) {
+        checkStatusForTask(status);
+        this.status = status;
+    }
 
     public void addStepToReproduce(String step){
         stepsToReproduce = step;
@@ -56,13 +64,12 @@ public class BugImpl extends AssignableTaskImpl implements Bug {
 
     public void changeBugSeverity(Severity severity){
         activityHistory.add(new EventLog(SEVERITY_SWITCHED_MESSAGE.formatted(getId(),getSeverity(),severity)));
-        this.severity = severity;
+        setSeverity(severity);
     }
 
     public void changeBugStatus(Status status){
-        checkStatusForTask(status);
         activityHistory.add(new EventLog(STATUS_SWITCHED_MESSAGE.formatted(getId(),getStatus(),status)));
-        this.status = status;
+        setStatus(status);
     }
 
     @Override
@@ -74,7 +81,6 @@ public class BugImpl extends AssignableTaskImpl implements Bug {
                 throw new IllegalArgumentException(CHECK_STATUS_MESSAGE);
         }
     }
-
 
     @Override
     public String toString() {

@@ -27,13 +27,13 @@ public abstract class TaskImpl implements Task {
     private TaskType taskType;
 
 
-    public TaskImpl(int id,String title, String description) {
+    public TaskImpl(int id, String title, String description) {
         this.id = id;
         setTitle(title);
         setDescription(description);
         status = getStatus();
-        activityHistory=new ArrayList<>();
-        comments=new ArrayList<>();
+        activityHistory = new ArrayList<>();
+        comments = new ArrayList<>();
         activityHistory.add(new EventLog("New %s created.".formatted(getTaskType())));
 
     }
@@ -68,8 +68,18 @@ public abstract class TaskImpl implements Task {
         return new ArrayList<>(comments);
     }
 
+    private void setTitle(String title) {
+        ValidationHelpers.validateStringLength(title, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH,
+                String.format(TITLE_LENGTH_ERR, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH));
+        this.title = title;
+    }
 
+    private void setDescription(String description) {
+        ValidationHelpers.validateStringLength(description, MIN_DESC_LENGTH, MAX_DESC_LENGTH, DESC_LENGTH_ERR.formatted(MIN_DESC_LENGTH, MAX_DESC_LENGTH));
+        this.description = description;
+    }
 
+    protected abstract void checkStatusForTask(Status status);
 
     @Override
     public void addComment(Comment comment) {
@@ -90,18 +100,6 @@ public abstract class TaskImpl implements Task {
         sb.append("Description: %s".formatted(getDescription())).append(System.lineSeparator());
         sb.append("Status: %s".formatted(getStatus().toString())).append(System.lineSeparator());
         return sb.toString();
-    }
-    protected abstract void checkStatusForTask(Status status);
-
-    private void setTitle(String title) {
-        ValidationHelpers.validateStringLength(title, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH,
-                String.format(TITLE_LENGTH_ERR,MIN_TITLE_LENGTH,MAX_TITLE_LENGTH));
-        this.title = title;
-    }
-
-    private void setDescription(String description) {
-        ValidationHelpers.validateStringLength(description, MIN_DESC_LENGTH, MAX_DESC_LENGTH,DESC_LENGTH_ERR.formatted(MIN_DESC_LENGTH,MAX_DESC_LENGTH));
-        this.description = description;
     }
 }
 

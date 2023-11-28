@@ -2,8 +2,7 @@ package com.project.oop.tasksmanagement.models.tasks;
 
 import com.project.oop.tasksmanagement.models.contracts.Story;
 import com.project.oop.tasksmanagement.models.enums.StorySize;
-import com.project.oop.tasksmanagement.models.tasks.StoryImpl;
-import com.project.oop.tasksmanagement.utils.TaskBaseConstants;
+import com.project.oop.tasksmanagement.utils.BaseConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -31,9 +30,9 @@ public class StoryImplTests {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 new StoryImpl(
-                        TaskBaseConstants.STORY_MIN_ID,
-                        TaskBaseConstants.INVALID_TITLE,
-                        TaskBaseConstants.VALID_DESCRIPTION,
+                        BaseConstants.STORY_MIN_ID,
+                        BaseConstants.INVALID_TITLE,
+                        BaseConstants.VALID_DESCRIPTION,
                         StorySize.SMALL));
     }
 
@@ -42,9 +41,9 @@ public class StoryImplTests {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
                 new StoryImpl(
-                        TaskBaseConstants.STORY_MIN_ID,
-                        TaskBaseConstants.VALID_TITLE,
-                        TaskBaseConstants.INVALID_DESCRIPTION,
+                        BaseConstants.STORY_MIN_ID,
+                        BaseConstants.VALID_TITLE,
+                        BaseConstants.INVALID_DESCRIPTION,
                         StorySize.SMALL));
     }
 
@@ -54,14 +53,14 @@ public class StoryImplTests {
         StoryImpl story = initializeTestStory();
 
         // Assert
-        Assertions.assertEquals(TaskBaseConstants.VALID_TITLE, story.getTitle());
+        Assertions.assertEquals(BaseConstants.VALID_TITLE, story.getTitle());
     }
 
     public static StoryImpl initializeTestStory() {
         return new StoryImpl(
-                TaskBaseConstants.STORY_MIN_ID,
-                TaskBaseConstants.VALID_TITLE,
-                TaskBaseConstants.VALID_DESCRIPTION,
+                BaseConstants.STORY_MIN_ID,
+                BaseConstants.VALID_TITLE,
+                BaseConstants.VALID_DESCRIPTION,
                 StorySize.SMALL);
     }
 }

@@ -5,7 +5,7 @@ import com.project.oop.tasksmanagement.core.TaskManagementRepositoryImpl;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
 import com.project.oop.tasksmanagement.models.TeamImpl;
 import com.project.oop.tasksmanagement.models.contracts.Team;
-import com.project.oop.tasksmanagement.utils.TaskBaseConstants;
+import com.project.oop.tasksmanagement.utils.BaseConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ public class ShowActivityCommandTests {
     }
     @Test
     public void ShowActivityCommand_Should_ThrowException_When_CommandDoesNotExist() {
-        commands.add(TaskBaseConstants.VALID_DESCRIPTION);
+        commands.add(BaseConstants.VALID_DESCRIPTION);
         Assertions.assertThrows(IllegalArgumentException.class, () -> showActivityCommand.execute(commands));
     }
 

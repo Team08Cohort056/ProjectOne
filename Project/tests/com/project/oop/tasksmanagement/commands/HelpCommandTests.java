@@ -3,7 +3,7 @@ package com.project.oop.tasksmanagement.commands;
 import com.project.oop.tasksmanagement.commands.enums.CommandType;
 import com.project.oop.tasksmanagement.core.TaskManagementRepositoryImpl;
 import com.project.oop.tasksmanagement.core.contracts.TaskManagementRepository;
-import com.project.oop.tasksmanagement.utils.TaskBaseConstants;
+import com.project.oop.tasksmanagement.utils.BaseConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ public class HelpCommandTests {
     }
     @Test
     public void HelpCommand_Should_ThrowException_When_CommandDoesNotExist() {
-        commands.add(TaskBaseConstants.VALID_DESCRIPTION);
+        commands.add(BaseConstants.VALID_DESCRIPTION);
         Assertions.assertThrows(IllegalArgumentException.class, () -> helpCommand.execute(commands));
     }
     @Test
